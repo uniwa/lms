@@ -40,14 +40,9 @@ adminredirts:
         route: sonata_admin_dashboard
         permanent: true # this is for 301
 
-page_tree_up:
-    pattern: /admin/page_tree_up/{page_id}
-    defaults:  { _controller: KpAdminBundle:PageTreeSort:up }
-
-page_tree_down:
-    pattern: /admin/page_tree_down/{page_id}
-    defaults:  { _controller: KpAdminBundle:PageTreeSort:down }
-
-sitebundle:
-    resource: "@KpSiteBundle/Controller"
-    type:     annotation
+homeredirts:
+    pattern:	/
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: sonata_admin_dashboard
+        permanent: true # this is for 301

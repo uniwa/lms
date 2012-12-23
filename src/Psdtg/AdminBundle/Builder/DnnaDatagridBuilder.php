@@ -1,10 +1,10 @@
 <?php
-namespace Kp\AdminBundle\Builder;
+namespace Psdtg\AdminBundle\Builder;
 
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\Datagrid;
 
-use Kp\AdminBundle\Datagrid\DnnaPager;
+use Psdtg\AdminBundle\Datagrid\DnnaPager;
 use Sonata\DoctrineORMAdminBundle\Builder\DatagridBuilder;
 
 class DnnaDatagridBuilder extends DatagridBuilder

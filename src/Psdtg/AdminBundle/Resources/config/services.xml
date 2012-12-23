@@ -2,15 +2,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sonata.admin.dnna.model_manager" class="Kp\AdminBundle\Model\DnnaModelManager">
+        <service id="sonata.admin.dnna.model_manager" class="Psdtg\AdminBundle\Model\DnnaModelManager">
             <argument type="service" id="doctrine" />
         </service>
-        <service id="sonata.admin.dnna.datagridbuilder" class="Kp\AdminBundle\Builder\DnnaDatagridBuilder">
+        <service id="sonata.admin.dnna.datagridbuilder" class="Psdtg\AdminBundle\Builder\DnnaDatagridBuilder">
             <argument type="service" id="form.factory" />
             <argument type="service" id="sonata.admin.builder.filter.factory" />
             <argument type="service" id="sonata.admin.guesser.orm_datagrid_chain" />
         </service>
-        <service id="sonata.admin.users" class="Kp\AdminBundle\Admin\UserAdmin">
+        <service id="sonata.admin.users" class="Psdtg\AdminBundle\Admin\UserAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Users"
@@ -19,54 +19,14 @@
                 datagrid_builder="sonata.admin.dnna.datagridbuilder"
                 />
            <argument />
-           <argument>Kp\UserBundle\Entity\User</argument>
-           <argument>KpAdminBundle:User</argument>
+           <argument>Psdtg\UserBundle\Entity\User</argument>
+           <argument>SonataAdminBundle:CRUD</argument>
            <call method="setTranslationDomain">
-               <argument>KpAdminBundle</argument>
+               <argument>PsdtgAdminBundle</argument>
            </call>
            <call method="setUserManager">
                <argument type='service' id='fos_user.user_manager' />
            </call>
-       </service>
-        <service id="sonata.admin.menuitems" class="Kp\AdminBundle\Admin\MenuItemAdmin">
-           <tag name="sonata.admin"
-                manager_type="orm"
-                group="Content"
-                label="Menu Items"
-                />
-           <argument />
-           <argument>Kp\SiteBundle\Entity\MenuItem</argument>
-           <argument>SonataAdminBundle:CRUD</argument>
-       </service>
-        <service id="sonata.admin.pages" class="Kp\AdminBundle\Admin\PageAdmin">
-           <tag name="sonata.admin"
-                manager_type="orm"
-                group="Content"
-                label="Pages"
-                />
-           <argument />
-           <argument>Kp\SiteBundle\Entity\Page</argument>
-           <argument>SonataAdminBundle:CRUD</argument>
-       </service>
-        <service id="sonata.admin.emptypages" class="Kp\AdminBundle\Admin\EmptyPageAdmin">
-           <tag name="sonata.admin"
-                manager_type="orm"
-                group="Content"
-                label="Empty Pages"
-                />
-           <argument />
-           <argument>Kp\SiteBundle\Entity\Page</argument>
-           <argument>SonataAdminBundle:CRUD</argument>
-       </service>
-        <service id="sonata.admin.persons" class="Kp\AdminBundle\Admin\PersonAdmin">
-           <tag name="sonata.admin"
-                manager_type="orm"
-                group="Content"
-                label="People"
-                />
-           <argument />
-           <argument>Kp\SiteBundle\Entity\Person</argument>
-           <argument>SonataAdminBundle:CRUD</argument>
        </service>
    </services>
 </container>

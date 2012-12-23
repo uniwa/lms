@@ -8,9 +8,9 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
-            new Psdtg\SiteBundle\KpSiteBundle(),
-            new Psdtg\UserBundle\KpUserBundle(),
-            new Psdtg\AdminBundle\KpAdminBundle(),
+            new Psdtg\SiteBundle\PsdtgSiteBundle(),
+            new Psdtg\UserBundle\PsdtgUserBundle(),
+            new Psdtg\AdminBundle\PsdtgAdminBundle(),
 
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
@@ -27,6 +27,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             // JMS
             new JMS\SerializerBundle\JMSSerializerBundle($this),
+            // KNP
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             // Sonata
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),

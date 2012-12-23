@@ -1,6 +1,6 @@
 <?php
 
-namespace Kp\SiteBundle\Entity\Repositories;
+namespace Psdtg\SiteBundle\Entity\Repositories;
 
 use Doctrine\ORM\EntityRepository;
 use Pagerfanta\Pagerfanta,

@@ -1,5 +1,5 @@
 <?php
-namespace Kp\AdminBundle\Datagrid;
+namespace Psdtg\AdminBundle\Datagrid;
 
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery as ProxyQuery;
 

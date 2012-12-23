@@ -18,11 +18,13 @@
         "sensio/generator-bundle": "2.1.*",
         "jms/security-extra-bundle": "1.2.*",
         "jms/di-extra-bundle": "1.1.*",
+        "knplabs/knp-menu-bundle": "*",
         "friendsofsymfony/user-bundle": "*",
         "jms/serializer-bundle": "0.9.*",
         "sonata-project/doctrine-orm-admin-bundle": "*",
         "sonata-project/cache-bundle": "*",
         "stof/doctrine-extensions-bundle": "*",
+        "fr3d/ldap-bundle": "*"
     },
     "scripts": {
         "post-install-cmd": [

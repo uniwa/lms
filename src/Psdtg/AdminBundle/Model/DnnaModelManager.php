@@ -1,5 +1,5 @@
 <?php
-namespace Kp\AdminBundle\Model;
+namespace Psdtg\AdminBundle\Model;
 
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
@@ -27,7 +27,7 @@ class DnnaModelManager extends ModelManager
             return null;
         }
         $parents = class_parents($class);
-        if(count($parents) > 0 && reset($parents) === 'Kp\UserBundle\Entity\User') {
+        if(count($parents) > 0 && reset($parents) === 'Psdtg\UserBundle\Entity\User') {
             $obj = $this->getEntityManager($class)->getRepository($class)->findUsers(array('userid' => $id));
             $obj = $obj[0];
         } else {
