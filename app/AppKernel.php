@@ -37,6 +37,8 @@ class AppKernel extends Kernel
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             // Doctrine Extensions
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            // FR3D LDAP
+            new FR3D\LdapBundle\FR3DLdapBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

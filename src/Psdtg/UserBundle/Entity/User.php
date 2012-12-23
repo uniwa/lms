@@ -1,6 +1,7 @@
 <?php
 namespace Psdtg\UserBundle\Entity;
 
+use FR3D\LdapBundle\Model\LdapUserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OrderBy;
@@ -17,7 +18,7 @@ use JMS\SerializerBundle\Annotation\Accessor;
  * @ORM\Entity(repositoryClass="Psdtg\UserBundle\Entity\Repositories\UserRepository")
  * @ExclusionPolicy("all")
  */
-class User extends BaseUser
+class User extends BaseUser implements LdapUserInterface
 {
     /**
      * @ORM\Id
@@ -39,16 +40,10 @@ class User extends BaseUser
     protected $name;
 
     /**
-     * @var string $surname
-     *
-     * @ORM\Column(name="surname", type="string", nullable=true)
-     *
-     * @Assert\MinLength(limit="3", message="The surname is too short.")
-     * @Assert\MaxLength(limit="50", message="The surname is too long.")
-     * @Accessor(getter="getSurnameInitial")
-     * @Expose
+     * Ldap Object Distinguished Name
+     * @var string $dn
      */
-    protected $surname;
+    private $dn;
 
     public function getId() {
         return $this->id;
@@ -66,11 +61,13 @@ class User extends BaseUser
         $this->name = $name;
     }
 
-    public function getSurname() {
-        return $this->surname;
+    public function getDn() {
+        return $this->dn;
     }
 
-    public function setSurname($surname) {
-        $this->surname = $surname;
+    public function setDn($dn) {
+        $this->dn = $dn;
     }
+
+    public function void() {}
 }

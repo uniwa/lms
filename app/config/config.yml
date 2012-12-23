@@ -108,6 +108,9 @@ fos_user:
     user_class: Psdtg\UserBundle\Entity\User
 
 services:
+    psdtg.ldap.ldap_manager:
+        class: Psdtg\UserBundle\Extension\LdapManager
+        arguments: ["@fr3d_ldap.ldap_driver", "@fr3d_ldap.user_manager", %fr3d_ldap.ldap_manager.parameters%, "@service_container"]
 
 jms_serializer:
     metadata:
@@ -124,3 +127,29 @@ stof_doctrine_extensions:
         default:
             tree: true
             timestampable: true
+
+fr3d_ldap:
+    driver:
+        host:                elke.dnna.gr
+        port:                389    # Optional
+        username:            cn=admin,dc=teiath,dc=gr    # Optional
+        password:            "##bp94cP58#a"    # Optional
+        #bindRequiredDn:       true   # Optional
+        baseDn:              ou=users, dc=host, dc=foo   # Optional
+        accountFilterFormat: (&(uid=%s)) # Optional. sprintf format %s will be the username
+        optReferrals:        false  # Optional
+        useSsl:              false   # Enable SSL negotiation. Optional
+        useStartTls:         false   # Enable TLS negotiation. Optional
+    user:
+        baseDn: dc=teiath,dc=gr
+        filter: (&(ObjectClass=teiaServices))
+        attributes:          # Specify ldap attributes mapping [ldap attribute, user object method]
+           - { ldap_attr: uid,  user_method: setUsername } # Default
+           - { ldap_attr: cn,   user_method: setName }     # Optional
+           - { ldap_attr: mail,   user_method: setEmail }     # Optional
+           - { ldap_attr: objectclass,   user_method: void }     # Optional
+    service:
+        ldap_manager: psdtg.ldap.ldap_manager
+#   service:
+#       user_manager: fos_user.user_manager          # Overrides default user manager
+#       ldap_manager: fr3d_ldap.ldap_manager.default # Overrides default ldap manager

@@ -10,7 +10,7 @@
             <argument type="service" id="sonata.admin.builder.filter.factory" />
             <argument type="service" id="sonata.admin.guesser.orm_datagrid_chain" />
         </service>
-        <service id="sonata.admin.users" class="Psdtg\AdminBundle\Admin\UserAdmin">
+        <!--<service id="sonata.admin.users" class="Psdtg\AdminBundle\Admin\UserAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Users"
@@ -27,6 +27,6 @@
            <call method="setUserManager">
                <argument type='service' id='fos_user.user_manager' />
            </call>
-       </service>
+       </service>-->
    </services>
 </container>
