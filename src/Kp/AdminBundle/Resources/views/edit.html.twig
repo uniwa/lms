@@ -1,0 +1,6 @@
+{% extends 'SonataAdminBundle:CRUD:edit.html.twig' %}
+
+{% block footer %}
+    {{ parent() }}
+    {{ tinymce_init() }}
+{% endblock %}

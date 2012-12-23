@@ -1,0 +1,259 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: '@KpAdminBundle/Resources/config/services.xml' }
+    - { resource: '@KpAdminBundle/Resources/config/sonata.yml' }
+
+framework:
+    #esi:             ~
+    translator:      { fallback: %locale% }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: %kernel.debug%
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    default_locale:  %locale%
+    trust_proxy_headers: false # Whether or not the Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
+    session:         ~
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form:
+        resources:
+            - 'KpAdminBundle::fields.html.twig'
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        #closure:
+        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
+        #yui_css:
+        #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+        #unix_socket:	/var/mysql/mysql.sock
+        types:
+            point: Kp\UserBundle\Wantlet\ORM\PointType
+        mapping_types:
+            point: string
+    orm:
+        dql:
+            numeric_functions:
+                              ACOS: DoctrineExtensions\Query\Mysql\Acos
+                              SIN: DoctrineExtensions\Query\Mysql\Sin
+                              RADIANS: DoctrineExtensions\Query\Mysql\Radians
+                              COS: DoctrineExtensions\Query\Mysql\Cos
+                              DISTANCE: Kp\UserBundle\Wantlet\ORM\Distance
+                              POINT_STR: Kp\UserBundle\Wantlet\ORM\PointStr
+                              RAND: Kp\UserBundle\Wantlet\ORM\Rand
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+        mappings:
+            gedmo_translatable:
+                type: annotation
+                prefix: Gedmo\Translatable\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+                alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
+                is_bundle: false
+            gedmo_translator:
+                type: annotation
+                prefix: Gedmo\Translator\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
+                alias: GedmoTranslator # this one is optional and will default to the name set for the mapping
+                is_bundle: false
+            gedmo_loggable:
+                type: annotation
+                prefix: Gedmo\Loggable\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
+                is_bundle: false
+            gedmo_tree:
+                type: annotation
+                prefix: Gedmo\Tree\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+                alias: GedmoTree # this one is optional and will default to the name set for the mapping
+                is_bundle: false
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport:  %mailer_transport%
+    encryption: %mailer_encryption%
+    auth_mode:  %mailer_auth_mode%
+    host:       %mailer_host%
+    port:       %mailer_port%
+    username:   %mailer_user%
+    password:   %mailer_password%
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Kp\UserBundle\Entity\User
+
+services:
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
+    locale_listener:
+        class: Kp\SiteBundle\Extension\LocaleListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    kp_main.menu_builder:
+        class: Kp\SiteBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory", "@doctrine.orm.entity_manager"]
+    kp_main.menu.main:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory_service: kp_main.menu_builder
+        factory_method: createMainMenu
+        arguments: ["@request"]
+        scope: request # needed as we have the request as a dependency here
+        tags:
+            - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu
+    kp_main.menu_home_builder:
+        class: Kp\SiteBundle\Menu\HomeMenuBuilder
+        arguments: ["@knp_menu.factory", "@doctrine.orm.entity_manager"]
+    kp_main.menu.home:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory_service: kp_main.menu_home_builder
+        factory_method: createHomeMenu
+        arguments: ["@request"]
+        scope: request # needed as we have the request as a dependency here
+        tags:
+            - { name: knp_menu.menu, alias: home } # The alias is what is used to retrieve the menu
+    kp.twig.extension:
+        class: Kp\SiteBundle\Extension\MyTwigExtension
+        tags:
+            -  { name: twig.extension }
+        arguments:
+            - "@service_container"
+    kp.findroute:
+        class: Kp\SiteBundle\Extension\FindRoute
+        arguments:
+            - "@service_container"
+    kp.page.listener.prepersist:
+        class: Kp\SiteBundle\Extension\PageListener
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+        arguments:
+            - "@service_container"
+    kp.page.listener.preupdate:
+        class: Kp\SiteBundle\Extension\PageListener
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate }
+        arguments:
+            - "@service_container"
+    kp.page.listener.preremove:
+        class: Kp\SiteBundle\Extension\PageListener
+        tags:
+            - { name: doctrine.event_listener, event: preRemove }
+        arguments:
+            - "@service_container"
+
+jms_serializer:
+    metadata:
+        cache: apc
+        auto_detection: true
+        directories:
+            FOSUB:
+                namespace_prefix: FOS\UserBundle
+                path: %kernel.root_dir%/serializer/FOSUB
+
+stfalcon_tinymce:
+    include_jquery: true
+    tinymce_jquery: true
+    textarea_class: "tinymce"
+    theme:
+        simple:
+            mode: "textareas"
+            theme: "advanced"
+            theme_advanced_buttons1: "mylistbox,mysplitbutton,formatselect,fontselect,fontsizeselect,bold,italic,underline,separator,separator,image,strikethrough,justifyleft,justifycenter,justifyright,justifyfull,bullist,numlist,undo,redo,link,unlink,code"
+            theme_advanced_buttons2: ""
+            theme_advanced_buttons3: ""
+            theme_advanced_toolbar_location: "top"
+            theme_advanced_toolbar_align: "left"
+            theme_advanced_statusbar_location: "bottom"
+            plugins: "fullscreen,style"
+            theme_advanced_buttons1_add: "fullscreen"
+            valid_elements: "*[*]"
+            forced_root_block : false
+            force_p_newlines : 'false'
+            remove_linebreaks : false
+            force_br_newlines : true
+            remove_trailing_nbsp : false
+            verify_html : false
+        advanced:
+            theme: "advanced"
+            plugins: "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template"
+            theme_advanced_buttons1: "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect"
+            theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor"
+            theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen"
+            theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak"
+            theme_advanced_toolbar_location: "top"
+            theme_advanced_toolbar_align: "left"
+            theme_advanced_statusbar_location: "bottom"
+            theme_advanced_resizing: true
+        medium:
+            mode: "textareas"
+            theme: "advanced"
+            plugins: "table,advhr,advlink,paste,xhtmlxtras,spellchecker"
+            theme_advanced_buttons1: "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,forecolor,backcolor,|,hr,removeformat,|,sub,sup,|,spellchecker"
+            theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,bullist,numlist,|,undo,redo,|,link,unlink,anchor,cleanup,code,|,tablecontrols"
+            theme_advanced_buttons3: ""
+            theme_advanced_toolbar_location: "top"
+            theme_advanced_toolbar_align: "left"
+            theme_advanced_statusbar_location: ""
+            paste_auto_cleanup_on_paste: true
+            spellchecker_languages: "+English=en,Dutch=nl"
+        bbcode:
+            mode: "none"
+            theme: "advanced"
+            plugins: "bbcode"
+            theme_advanced_buttons1: "bold,italic,underline,undo,redo,link,unlink,image,forecolor,styleselect,removeformat,cleanup,code"
+            theme_advanced_buttons2: ""
+            theme_advanced_buttons3: ""
+            theme_advanced_toolbar_location: "bottom"
+            theme_advanced_toolbar_align: "center"
+            theme_advanced_styles: "Code=codeStyle;Quote=quoteStyle"
+            entity_encoding: "raw"
+            add_unload_trigger: false
+            remove_linebreaks: false
+            inline_styles: false
+            convert_fonts_to_spans: false
+
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            tree: true
+            timestampable: true
+
+ewz_search:
+    analyzer: Zend\Search\Lucene\Analysis\Analyzer\Common\TextNum\CaseInsensitive
+    path:     %kernel.root_dir%/cache/prod/lucene/index
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     %wkhtmltopdf%
+        options:
+          #no-outline: true
+          lowquality: false
+          outline-depth: 1

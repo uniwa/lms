@@ -1,0 +1,28 @@
+{% extends 'KpSiteBundle::base.html.twig' %}
+
+{% block pageid %}first{% endblock %}
+
+{% block content %}
+    <div class="main">
+        <div class="row">
+            {% include "KpSiteBundle::sidebar.html.twig" %}
+            <div class="six columns end"id="content">
+                <h3>{%if pagemenu is not null%}{{pagemenu.name}}{%else%}{{page.title}}{%endif%}</h3>
+
+                {% if page.id != 'PageNotFound' %}
+                    {% if not page|inBinder %}
+                        <a href="{{path('add_to_binder', {'pageid': page.id})}}" class="add-to-binder add">+ Add to binder </a>
+                    {% else %}
+                        <a href="{{path('remove_from_binder', {'pageid': page.id})}}" class="add-to-binder">- Remove from binder </a>
+                    {% endif %}
+                {% endif %}
+
+                <p class="caption">
+                <strong>{{page.caption}}</strong>
+                </p>
+                <p>{{ page.content|raw }} </p>
+                    {%if pagemenu is not null%}{{ knp_menu_render(pagemenu, {'template': 'KpSiteBundle:First:menu.html.twig'}) }}{%endif%}
+            </div>
+        </div>
+    </div>
+{% endblock %}

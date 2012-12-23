@@ -1,0 +1,82 @@
+{% extends 'KpSiteBundle::base.html.twig' %}
+
+{% block content %}
+  <div id="content">
+    <div class="row">
+    <div class="twelve columns">
+
+      <ul class="slider">
+        {% for slide in slides %}
+        <li>
+            <div class="slide">
+              <div class="date">{{slide.created|date('d M Y')}}</div>
+              <div class="category"><div class="red">Featured Topic</div>{{slide.title}}</div>
+              <h2>{{slide.caption}}</h2>
+                <div class="red">
+                  Related tags:
+                </div>
+                  <ul class="tags">
+                    {% for tag in slide|getPageTags %}
+                        <li><a href="{{path('search', {'search':tag.name})}}">{{tag.name}}</a> {% if not loop.last %}|{% endif %}</li>
+                    {% endfor %}
+                  </ul>
+                {% set authors = slide|getAuthors %}
+                {% if authors | length > 0 %}
+                    {% set author = authors[0] %}
+                    <div class="red">Contact:</div>
+                      <ul class='author'>
+                        <li class="name">{{author.name}} {{author.surname}}</li>
+                        <li class="job">{{author.title}}, {{author.position}}</li>
+                        {#<li class="more"><a href="{{path('search', {'search':author.name~' '~author.surname})}}">More from this author</a></li>#}
+                      </ul>
+                {% endif %}
+                {% set resultRoute = findRoute(slide) %}
+                <a href="{{path(resultRoute.route, resultRoute.routeParameters)}}" class="related">Read More</a>
+            </div>
+        </li>
+        {% endfor %}
+      </ul>
+
+    </div>
+    </div>
+  </div>
+  {% include "KpSiteBundle:Default:prefooter.html.twig" %}
+{% endblock %}
+
+{% block bodyend %}
+<div id="myModal" class="reveal-modal" style="width: 800px; height: 550px; margin-left: -400px;">
+    <div id="player"></div>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{parent()}}
+<script src="{{asset('javascripts/jquery.foundation.reveal.js')}}"></script>
+<script type="text/javascript">
+    var tag = document.createElement('script');
+    tag.src = "//www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '490',
+          width: '740',
+          videoId: 'h7qI68S0wYg',
+          playerVars: { 'controls': 1, 'theme': 'light', 'showinfo': 0, 'rel': 0 },
+          events: {
+            'onReady': onPlayerReady,
+          }
+        });
+        $('#myModal').reveal({
+            opened: function() { },
+            closed: function() { player.stopVideo(); }
+        });
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+    }
+</script>
+{% endblock %}

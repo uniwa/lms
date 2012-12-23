@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Welcome to KP</title>
+
+  <!-- Included CSS Files (Compressed) -->
+  {% block stylesheets %}
+  <link rel="stylesheet" href="{{asset('stylesheets/foundation.css')}}">
+  <link rel="stylesheet" href="{{asset('stylesheets/app.css')}}">
+  <link rel="stylesheet" href="{{asset('stylesheets/media.css')}}">
+
+  <link rel="stylesheet" media="print" href="{{asset('stylesheets/print.css')}}">
+
+  {% endblock %}
+
+  {% block topjavascripts %}
+  <script src="{{asset('javascripts/modernizr.foundation.js') }}"></script>
+  <script>
+      var prevBtn = "{{asset('images/prev.png')}}";
+      var nextBtn = "{{asset('images/next.png')}}";
+  </script>
+  {% endblock %}
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-37196747-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<body id="{% block pageid %}{{ app.request.attributes.get('_route') }}{% endblock pageid %}">
+    {% block header %}
+            {% include "KpSiteBundle::header.html.twig" %}
+    {% endblock header %}
+
+    <!-- First Band (Slider) -->
+    {% block content %}{% endblock content %}
+
+  {% include "KpSiteBundle::footer.html.twig" %}
+
+  {% block bodyend %}{% endblock %}
+
+  <!-- Included JS Files (Compressed) -->
+  {% block javascripts %}
+  <script src="{{asset('javascripts/jquery.js')}}"></script>
+  <script src="{{asset('javascripts/jquery.bxslider4.min.js')}}"></script>
+
+  <!-- Initialize JS Plugins -->
+  <script src="{{asset('javascripts/app.js')}}"></script>
+  {% endblock %}
+</body>
+</html>

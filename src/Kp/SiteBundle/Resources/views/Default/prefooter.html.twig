@@ -1,0 +1,37 @@
+
+  <div class="content-bottom">
+    <div class="prefooter-wrapper">
+    <div class="row prefooter">
+      <div class="two columns contact">
+        <h4>Contact</h4>
+      </div>
+      <div class="six columns overview">
+        <h4>{#Overview#}</h4>
+      </div>
+
+      <div class="four columns news">
+        <h4>Read more about</h4>
+      </div>
+    </div>    
+  </div>    
+
+  <div class="row">
+      <div class="two columns contact">
+          {{contact.content|raw}}
+      </div>
+
+      <div class="six columns overview">
+        <p>{{overview.content|raw}}</p>
+      </div>
+
+<ul class="news">
+      {% for curNews in news %}
+      <li class="four columns">
+        {% set resultRoute = findRoute(curNews) %}
+        <p class="entry"><a href="{{path(resultRoute.route, resultRoute.routeParameters)}}">{% if curNews.type == 'page' %}{{curNews.title}}{% else %}{{curNews.fullName}}{% endif %}</a></p>
+        <p class="caption">{#{{curNews.created|date('d M Y, H:i')}}#}{{curNews.caption}}</p>
+      </li>
+      {% endfor %}
+</ul>      
+  </div>
+</div>

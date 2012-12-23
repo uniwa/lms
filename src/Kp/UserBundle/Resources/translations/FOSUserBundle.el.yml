@@ -1,0 +1,144 @@
+# Form field labels
+fos_user_registration_form_name: "Όνομα"
+fos_user_registration_form_surname: "Επώνυμο"
+fos_user_registration_form_email: "Email"
+fos_user_registration_form_password: "Κωδικός"
+fos_user_registration_form_confirm: "Επαλήθευση Κωδικού"
+fos_user_registration_form_captcha: "Γράψε τους παρακάτω χαρακτήρες"
+
+fos_user_profile_form_user_username: "ΟΝΟΜΑ ΧΡΗΣΤΗ"
+fos_user_profile_form_user_email: "EMAIL"
+fos_user_profile_form_user_name: "ΟΝΟΜΑ"
+fos_user_profile_form_user_surname: "ΕΠΩΝΥΜΟ"
+fos_user_profile_form_user_gender: "ΦΥΛΛΟ"
+fos_user_profile_form_user_age: "ΗΛΙΚΙΑ"
+fos_user_profile_form_user_moto: "ΛΙΓΑ ΛΟΓΙΑ ΓΙΑ ΕΜΕΝΑ"
+fos_user_profile_form_user_profession: "ΕΠΑΓΓΕΛΜΑ"
+fos_user_profile_form_user_hobbies: "ΕΝΔΙΑΦΕΡΟΝΤΑ"
+fos_user_profile_form_user_specialty: "ΣΠΕΣΙΑΛΙΤΕ"
+fos_user_profile_form_user_isCook: "ΘΕΛΩ ΝΑ ΓΙΝΩ ΜΑΓΕΙΡΑΣ"
+fos_user_profile_form_user_address: "ΔΙΕΥΘΥΝΣΗ"
+fos_user_profile_form_user_addrNum: "ΑΡΙΘΜΟΣ"
+fos_user_profile_form_user_town: "ΠΕΡΙΟΧΗ/ΠΟΛΗ"
+fos_user_profile_form_user_zipCode: "Τ.Κ."
+fos_user_profile_form_user_delivery: "Παράδοση πιθανή εντός 1 χλμ."
+fos_user_profile_form_user_tel: "ΤΗΛΕΦΩΝΟ"
+fos_user_profile_form_current: "Τρέχων κωδικός"
+
+# Security
+Bad credentials: Λάθος email ή κωδικός.
+The presented password is invalid.: Λάθος κωδικός.
+
+layout:
+  login: Σύνδεση
+
+security:
+  login:
+    msg: "Συνδεθείτε στο Kp Law"
+    facebook: "Συνδεθείτε με το Facebook"
+    email: "Email"
+    username: "Όνομα Χρήστη"
+    password: "Κωδικός"
+    remember_me: "Να με θυμάσαι"
+    submit: "ΣΥΝΔΕΣΗ"
+    no_account: "Δεν έχω λογαριασμό."
+    forgot_password: "Ξέχασα τον κωδικό."
+    or: "ή"
+
+# Registration
+registration:
+  check_email: |
+        To link ενεργοποίησης εστάλει στο %email%.
+
+        Αν δεν το βρίσκεις έλεγξε τον φάκελο με τα ανεπιθύμητα.
+  
+  msg: "Εγγραφείτε στο Kp"
+  accept_terms_error: "Πρέπει να διαβάσετε και να αποδεχτείτε τους όρους χρήσης."
+  terms_of_use: "Έχω διαβάσει και αποδεχτεί τους"
+  terms_link: "όρους χρήσης"
+  submit: "ΕΓΓΡΑΦΗ"
+  already_member: "Είμαι ήδη μέλος."
+  confirmation_email: Email Επιβεβαίωσης
+  congratulations: Συγχαρητήρια
+  redirect: Ανακατεύθυνση
+  or_click: Αλλιώς πάτησε
+  here: εδώ
+  will_be_redirected: Θα ανακατευθυνθείς αυτόματα σε λίγα δευτερόλεπτα στη σελίδα του λογαριαμού σου!
+  confirmed: Συγχαρητήρια %username%, ο λογαριασμός σου έχει ενεργοποιηθεί.
+  email:
+        subject: Καλωσήρθες %username%!
+        message: |
+            Γειά σου %username%!
+
+            Για να ολοκληρώσεις την εγγραφή σου ακολούθησε το παρακάτω link %confirmationUrl%
+
+            Ευχαριστούμε,
+            
+            Η ομάδα του Kp.
+
+
+
+# Password change
+change_password:
+    msg: Αλλαγή Κωδικού
+    current: ΥΠΑΡΧΩΝ ΚΩΔΙΚΟΣ
+    first: ΝΕΟΣ ΚΩΔΙΚΟΣ
+    second: ΕΠΑΛΗΘΕΥΣΗ ΝΕΟΥ ΚΩΔΙΚΟΥ
+    submit: ΑΛΛΑΓΗ ΚΩΔΙΚΟΥ
+    flash:
+        success: Ο κωδικός σας έχει αλλάξει με επιτυχία.
+        failure: Λάθος κωδικός. Παρακαλώ προσπαθήστε ξανά.
+        facebook: Καλωσήρθες! Ο προσωρινός σου κωδικός είναι το email σου. Παρακαλώ άλλαξε τον από την Αλλαγή Κωδικού.
+
+
+# Password resetting
+resetting:
+    password_already_requested: Έχετε ήδη κάνει ένα αίτημα αλλαγής κωδικού για αυτόν τον χρήστη τις τελευταίες 24 ώρες.
+    check_email: Ένα email έχει σταλεί στο %email%. Περιέχει ένα link που πρέπει να ακολουθήσετε για να επιλέξετε νέο κωδικό.
+    request:
+        title: Ξέχασα τον κωδικό μου
+        msg: Ξέχασες τον κωδικό σου;
+        invalid_username: Το πεδίο "%username%" είναι άδειο ή μη-έγκυρο.
+        username: Διεύθυνση email
+        submit: ΑΠΟΣΤΟΛΗ
+    reset:
+        msg: Νέος Κωδικός
+        submit: ΑΛΛΑΓΗ ΚΩΔΙΚΟΥ
+        new:
+            first: Νέος Κωδικός
+            second: Επαλήθευση Κωδικού
+    flash:
+        success: Ο κωδικός άλλαξε με επιτυχία
+    email:
+        subject: Αλλαγή Κωδικού
+        message: |
+            Γεια σου %username%!
+
+            Για να αλλάξεις τον κωδικό σου ακολούθησε το link: %confirmationUrl%
+            
+            Ευχαριστούμε, η ομάδα του Kp.
+
+fos_user:
+    username:
+        already_used: The username is already used
+        blank: Please enter a username
+        short: The username is too short
+        long: The username is too long
+    email:
+        already_used: The email is already used
+        blank: Please enter an email
+        short: The email is too short
+        long: The email is too long
+        invalid: The email is not valid
+    password:
+        blank: Please enter a password
+        short: The password is too short
+    new_password:
+        blank: Please enter a new password
+        short: The new password is too short
+    current_password:
+        invalid: The entered password is invalid
+    group:
+        blank: Please enter a name
+        short: The name is too short
+        long: The name is too long

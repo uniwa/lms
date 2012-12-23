@@ -1,0 +1,124 @@
+{% extends 'KpSiteBundle::base.html.twig' %}
+
+{% block pageid %}third{% endblock %}
+
+{% block content %}
+<div class="main">
+    <div class="row">
+            {% include "KpSiteBundle::sidebar.html.twig" %}
+            <div class="six columns"id="content">
+ <div class="print-only">
+    &copy; K|P Law Firm
+    <hr>
+  </div>
+                <h3>{%if pagemenu is not null%}{{pagemenu.name}}{%else%}{{page.title}}{%endif%}</h3>
+
+                {% if page.id != 'PageNotFound' %}
+                    {% if not page|inBinder %}
+                        <a href="{{path('add_to_binder', {'pageid': page.id})}}" class="add-to-binder add">+ Add to binder </a>
+                    {% else %}
+                        <a href="{{path('remove_from_binder', {'pageid': page.id})}}" class="add-to-binder">- Remove from binder </a>
+                    {% endif %}
+                {% endif %}
+
+                <p class="caption">
+                <strong>{{page.caption}}</strong>
+                </p>
+                <p>{{ page.content|raw }}</p>
+                {% if page|getPageTags|length > 0 %}
+                    <p><strong>Related tags:</strong><br />
+                        {% for tag in page|getPageTags %}
+                            <a href="{{path('search', {'search':tag.name})}}">{{tag.name}}</a>{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
+                {% endif %}
+
+                {#{%if pagemenu is not null%}{{ knp_menu_render(pagemenu, {'template': 'KpSiteBundle:Second:menu.html.twig'}) }}{%endif%}#}
+
+            </div>
+            <aside class="four columns common">
+                <div class="widgets">
+                    {% if page|getAuthors|length > 0 %}
+                    <div class="entry">
+                        <h4>Key people</h4>
+
+                    <ul class='authors'>
+                    {% for author in page|getAuthors %}
+                    <li class="author">
+                        <img src="{{asset(author.photoWebPath)}}" alt="Profile" class="avatar">
+                        <div class="details">
+                            <h5>{{author.name}} {{author.surname}}</h5>
+                            <h6>{{author.title}}</h6>
+                            <h6>{{author.position}}</h6>
+                        </div>
+                        <div class="contact">
+                            <table cellspacing="0px">
+                                <tr>
+                                    <td>T:</td>
+                                    <td>{{author.phone}}</td>
+                                </tr>
+                                <tr>
+                                    <td>F:</td>
+                                    <td>{{author.fax}}</td>
+                                </tr>
+                                <tr>
+                                    <td>E:</td>
+                                    <td>{{author.email}}</td>
+                                </tr>
+                            </table>
+                            {% set resultRoute = findRoute(author) %}
+                            <a href="{{path(resultRoute.route, resultRoute.routeParameters)}}" class="full-profile">View full profile ></a>
+
+                        </li>
+                        
+                        {% endfor %}
+                    </ul>
+                        <div class="arrows">
+                            <a href="" class="prev">Previous</a>|
+                            <a href="" class="next">Next</a>
+                        </div>
+
+                    </div>
+                    {%endif%}
+
+                    {% if page.relatedPages|length > 0 %}
+                    <div class="entry tags">
+                        <h4>Read more about
+                             {% if page.relatedPages|length > 3 %}
+                                <span>                   
+                                    <a href="" class="up"><img src="{{asset('images/up.png')}}" alt=""></a>
+                                    <a href="" class="down"><img src="{{asset('images/down.png')}}" alt=""></a>
+                                </span>  
+                                </h4>
+                                <ul id="tag-accordion">
+                                    {% for curPage in page.relatedPages %}
+                                        {% set resultRoute = findRoute(curPage) %}
+                                        <li><a href="{{path(resultRoute.route, resultRoute.routeParameters)}}">{{curPage.title}}</a></li>
+                                    {% endfor %}
+                            {% else %}
+                                </h4>
+                                <ul>
+                                    {% for curPage in page.relatedPages %}
+                                        {% set resultRoute = findRoute(curPage) %}
+                                        <li><a href="{{path(resultRoute.route, resultRoute.routeParameters)}}">{{curPage.title}}</a></li>
+                                    {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    {% if news|length > 0 %}
+                        <div class="entry news">
+                            <h4>Perspectives</h4>
+                            {% for curNews in news %}
+                                {% set resultRoute = findRoute(curNews) %}
+                                <p><a href="{{path(resultRoute.route, resultRoute.routeParameters)}}">{% if curNews.type == 'page' %}{{curNews.title}}{% else %}{{curNews.fullName}}{% endif %}</a></p>
+                                <span>{{curNews.created|date('d, M Y')}}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </aside>
+</div>
+</div>
+{% endblock %}

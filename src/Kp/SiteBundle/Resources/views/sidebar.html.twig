@@ -1,0 +1,7 @@
+<div class="sidebar two columns">
+    {% if pagemenu is not null %}
+        {{ knp_menu_render(pagemenu, {'template': 'KpSiteBundle::sidemenu.html.twig'}) }}
+    {% else %}
+        {{ knp_menu_render('home', {'template': 'KpSiteBundle::sidemenu.html.twig'}) }}
+    {% endif %}
+</div>

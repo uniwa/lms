@@ -1,0 +1,56 @@
+<div class="page inner">
+    <div class="head">
+        <img src="{{asset('images/binder/header.jpg')}}" alt="">
+    </div>
+    <div class='category'>{{category.name}}</div>
+
+    <div class="content left">
+        <aside>
+            {% if author is defined %}
+            <div class="main">
+                <img src="{{photoPath}}" alt="{{curPage}}">
+                <table>
+                    <tbody><tr>
+                            <td>T:</td>
+                            <td>{{author.phone}}</td>
+                        </tr>
+                        <tr>
+                            <td>F:</td>
+                            <td>{{author.fax}}</td>
+                        </tr>
+                        <tr>
+                            <td>E:</td>
+                            <td><a href="mailto:{{author.email}}">{{author.email}}</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="secondary">
+                <dl>
+                    <dt>Languages:</dt>
+                    <dd>{{author.languages}}</dd>
+                    <dt>Education:</dt>
+                    <dd>{{author.education}}</dd>
+                </dl>
+            </div>
+
+            {% endif %}
+        </aside>
+
+        <article>
+            <h2>{{curPage}}</h2>
+            <h3>{{curPage.fullCaption}} </h3>
+            <hr>
+            <div class="text">
+                {% if curPage.summary|length > 0 %}
+                    {{curPage.summary|raw}}
+                {% else %}
+                    {{curPage.content|raw}}
+                {% endif %}
+            </div>
+        </article>
+
+    </div>
+
+</div>

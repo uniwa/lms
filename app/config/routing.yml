@@ -1,0 +1,53 @@
+# Internal routing configuration to handle ESI
+#_internal:
+#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#    prefix:   /_internal
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+    defaults:  { _locale: en }
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+    defaults:  { _locale: en }
+
+adminredirts:
+    pattern:	/admin/
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: sonata_admin_dashboard
+        permanent: true # this is for 301
+
+page_tree_up:
+    pattern: /admin/page_tree_up/{page_id}
+    defaults:  { _controller: KpAdminBundle:PageTreeSort:up }
+
+page_tree_down:
+    pattern: /admin/page_tree_down/{page_id}
+    defaults:  { _controller: KpAdminBundle:PageTreeSort:down }
+
+sitebundle:
+    resource: "@KpSiteBundle/Controller"
+    type:     annotation

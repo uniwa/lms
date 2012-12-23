@@ -1,0 +1,52 @@
+sonata_cache:
+    caches:
+        esi:
+            servers:
+                - varnishadm -T 127.0.0.1:2000 {{ COMMAND }} "{{ EXPRESSION }}"
+        apc:
+            token:  s3cur3   # token used to clear the related cache
+            prefix: test     # prefix to ensure there is no clash between instances
+            servers:
+                - { domain: kooqit.local, ip: 127.0.0.1, port: 80}
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+        sonata.block.service.text:
+        sonata.block.service.action:
+        sonata.block.service.rss:
+          
+sonata_admin:
+    title:      Kp Law
+    title_logo: /public/kp_logo.png
+    templates:
+        # default global templates
+        layout:  KpAdminBundle::layout.html.twig
+        ajax:    SonataAdminBundle::ajax_layout.html.twig
+
+        # default actions templates, should extend a global templates
+        list:    SonataAdminBundle:CRUD:list.html.twig
+        show:    SonataAdminBundle:CRUD:show.html.twig
+        edit:    KpAdminBundle::edit.html.twig
+    dashboard:
+        blocks:
+            # display a dashboard block
+            - { position: left, type: sonata.admin.block.admin_list }
+
+        groups:
+            #default: ~
+
+sonata_doctrine_orm_admin:
+    templates:
+      types:
+        list:
+          image: KpAdminBundle::list_image.html.twig
+          colcount: KpAdminBundle::list_collection_count.html.twig
+          truncated: KpAdminBundle::list_truncated.html.twig
+          raw: KpAdminBundle::list_raw.html.twig
+          selectraw: KpAdminBundle::list_selectraw.html.twig
+        show:
+          image: KpAdminBundle::show_image.html.twig

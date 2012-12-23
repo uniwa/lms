@@ -1,0 +1,26 @@
+fos_user:
+    username:
+        already_used: The username is already used
+        blank: Please enter a username
+        short: The username is too short
+        long: The username is too long
+    name:
+        short: Το όνομα και το επώνυμο πρέπει να ξεπερνούν τους 3 χαρακτήρες
+    email:
+        already_used: Aυτό το email χρησιμοποιείται ήδη
+        blank: Παρακαλώ δώστε ένα email
+        short: Το email είναι πολύ μικρό
+        long: Το email είναι πολύ μεγάλο
+        invalid: Το email δεν είναι έγκυρο
+    password:
+        blank: Παρακαλώ δώστε εναν κωδικό
+        short: Ο κωδικός είναι πολύ μικρός
+    new_password:
+        blank: Παρακαλώ δώστε έναν νέο κωδικό
+        short: Ο ωέος κωδικός είναι πολύ μικρός
+    current_password:
+        invalid: Ο κωδικός δεν είναι έγκυρος
+    group:
+        blank: Please enter a name
+        short: The name is too short
+        long: The name is too long

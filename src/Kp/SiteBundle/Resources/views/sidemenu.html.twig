@@ -1,0 +1,65 @@
+{% block compressed_root %}
+{% spaceless %}
+{% endspaceless %}
+{% endblock %}
+
+{% block root %}
+{% set listAttributes = item.childrenAttributes %}
+<ul class="nav one columns">
+    {% set rootItem = getRootItem(item) %}
+    {% if rootItem.extras.hideHome is not defined or rootItem.extras.hideHome == false %}
+    <li class="home">
+            <a href="{{path('home')}}">HOME</a>
+    </li>
+    {% endif %}
+    {% if getDepth(item) > 0 %}
+        {% set l1parent = getL1Parent(item) %}
+        <li class="{{l1parent.attributes.class}} {% if l1parent.current %} current{% endif %}">
+            <a href="{{l1parent.uri}}">{{l1parent.name}}</a>
+            {% if getDepth(item) > 1 %}
+                {% set l2parent = getL2Parent(item) %}
+                <li {% if l2parent.current %} class="current"{% endif %}>
+                    <a href="{{l2parent.uri}}">{{l2parent.name}}</a>
+                    {% if getDepth(item) > 2 %}
+                        {% set l3parent = getL3Parent(item) %}
+                        <li {% if l3parent.current %} class="current"{% endif %}>
+                            <a href="{{l3parent.uri}}">{{l3parent.name}}</a>
+                            {% if l3parent|length > 0 %}
+                                <ul class="nav3">
+                                {% for curItem in l3parent %}
+                                    {% if curItem|getPage.content|length < 50 %}
+                                        <li class="inactivea">{{curItem.name}}</li>
+                                    {% else %}
+                                        <li{% if curItem.current %} class="current"{% endif %}><a href="{{curItem.uri}}">{{curItem.name}}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+                            {#{% if getDepth(item) > 3 %}
+                                <li class="current"><a herf="{{item.uri}}">{{item.name}}</a></li>
+                            {% endif %}#}
+                        </li>
+                    {% endif %}
+                </li>
+            {% endif %}
+            {# ------------ The below is intentionally always false ofr now ------------ #}
+            {% if getDepth(item) > 1 and l1parent.extras.page != 'people' and false %}
+                <ul class="nav2">
+                {% for curItem in l1parent %}
+                    {#<li{% if curItem.current %} class="current"{% endif %}><a href="{{curItem.uri}}">{{curItem.name}}</a>#}
+                    <li{% if curItem.current or getL2Parent(item) == curItem %} class="current"{% endif %}><a href="{{curItem.uri}}">{{curItem.name}}</a>
+                        {% if curItem.current or getL2Parent(item) == curItem %}
+                            <ul class="nav3">
+                            {#{% for curItem2 in curItem %}
+                                <li {% if curItem2.current %} class="current"{% endif %}><a href="{{curItem2.uri}}"> {{curItem2.name}}</a></li>
+                            {% endfor %}#}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endif %}
+</ul>
+{% endblock %}

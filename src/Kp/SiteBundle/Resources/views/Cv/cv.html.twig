@@ -1,0 +1,83 @@
+{% extends 'KpSiteBundle::base.html.twig' %}
+{% block content %}
+    <div class="main cv">
+        <div class="row">
+
+            {% include "KpSiteBundle::sidebar.html.twig" %}
+            <div class="six columns"id="content">
+
+                <h3>{{page.name}} {{page.surname}}</h3>
+                {% if not page|inBinder %}
+                    <a href="{{path('add_to_binder', {'pageid': page.id})}}" class="add-to-binder add">+ Add to binder </a>
+                {% else %}
+                    <a href="{{path('remove_from_binder', {'pageid': page.id})}}" class="add-to-binder">- Remove from binder </a>
+                {% endif %}
+                <h4>{{page.title}}</h4>
+                <h4>{{page.position}}</h4>
+                <p>{{page.content|raw}}</p>
+                <dl>
+                      <dt>Languages:</dt>
+                  <dd>{{page.languages}}</dd>
+
+                  <dt>Education:</dt>
+                  {% for ed in page.education|split(',') %}
+                    <dd>{{ed|trim}}</dd>
+                  {% endfor %}
+                </dl>
+            </div>
+
+                    <aside class="four columns">
+                        <div class="widgets">
+                            <div class="entry">
+                                <img src="{{asset(page.photoWebPath)}}" alt="" class="avatar">
+                                <div class="contact">
+                                    <table>
+                                        <tr>
+                                            <td>D:</td>
+                                            <td>{{page.phone}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>F:</td>
+                                            <td>{{page.fax}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>E:</td>
+                                            <td><a href="mailto:{{page.email}}">{{page.email}}</a></td>
+                                        </tr>                                      
+                                        <tr>
+                                            <td class="lync"></td>
+                                            <td><a href="sip:{{page.lync}}">Lync</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="vcard"></td>
+                                            <td><a href="{{asset(page.vcardWebPath)}}">Vcard</a></td>
+                                        </tr>
+                                    </table>
+                                {% if page|getPageTags|length > 0 %}
+                                <dl>
+                                  <dt>Specializes in:</dt>
+                                  <dd>
+                                    {% for tag in page|getPageTags %}
+                                        <a href="{{path('search', {'search':tag.name})}}">{{tag.name}}</a>{% if not loop.last %}, {% endif %}
+                                    {% endfor %}
+                                  </dd>
+                                </dl>
+                                {% endif %}
+                                </div>
+
+                            </div>
+
+                            {#{% if page|getPageTags|length > 0 %}
+                            <div class="entry tags">
+                                <h4>Related tags</h4>
+                                {% for tag in page|getPageTags %}
+                                    <div><a href="{{path('search', {'search':tag.name})}}">{{tag.name}}</a></div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}#}
+                        </div>
+            </aside>
+
+        </div>
+    </div>
+{% endblock %}
