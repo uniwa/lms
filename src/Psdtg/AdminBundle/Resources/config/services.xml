@@ -10,23 +10,28 @@
             <argument type="service" id="sonata.admin.builder.filter.factory" />
             <argument type="service" id="sonata.admin.guesser.orm_datagrid_chain" />
         </service>
-        <!--<service id="sonata.admin.users" class="Psdtg\AdminBundle\Admin\UserAdmin">
+        <service id="sonata.admin.telephonelines" class="Psdtg\AdminBundle\Admin\TelephoneLineAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
-                group="Users"
-                label="Users"
-                model_manager="sonata.admin.dnna.model_manager"
-                datagrid_builder="sonata.admin.dnna.datagridbuilder"
+                group="Telephone Lines"
+                label="Telephone Lines"
                 />
            <argument />
-           <argument>Psdtg\UserBundle\Entity\User</argument>
+           <argument>Psdtg\SiteBundle\Entity\TelephoneLine</argument>
            <argument>SonataAdminBundle:CRUD</argument>
-           <call method="setTranslationDomain">
-               <argument>PsdtgAdminBundle</argument>
+       </service>
+        <service id="sonata.admin.newlinerequests" class="Psdtg\AdminBundle\Admin\NewLineRequestAdmin">
+           <tag name="sonata.admin"
+                manager_type="orm"
+                group="Requests"
+                label="New Line Request"
+                />
+           <argument />
+           <argument>Psdtg\SiteBundle\Entity\Requests\NewLineRequest</argument>
+           <argument>SonataAdminBundle:CRUD</argument>
+           <call method="setSecurityContext">
+               <argument type='service' id='security.context' />
            </call>
-           <call method="setUserManager">
-               <argument type='service' id='fos_user.user_manager' />
-           </call>
-       </service>-->
+       </service>
    </services>
 </container>

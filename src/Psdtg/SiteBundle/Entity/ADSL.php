@@ -1,6 +1,6 @@
 <?php
 
-namespace Cookisto\SiteBundle\Entity;
+namespace Psdtg\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Criteria;
@@ -19,7 +19,7 @@ use JMS\SerializerBundle\Annotation\ReadOnly;
  * @ExclusionPolicy("all")
  * @AccessType("public_method")
  */
-class Dish
+class ADSL
 {
     /**
      * @ORM\Column(name="id", type="integer")

@@ -24,6 +24,6 @@ class LdapManager extends BaseLdapManager
         $em = $this->container->get('doctrine')->getEntityManager();
         $em->getConnection()->executeQuery('DELETE FROM Users WHERE username = "'.$entry['uid'][0].'"');
         // If the user is has the eduPerson objectClass then they get ROLE_USER
-        $user->setRoles(array('ROLE_USER'));
+        $user->setRoles(array('ROLE_KEDO'));
     }
 }
