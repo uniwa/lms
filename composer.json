@@ -21,13 +21,8 @@
         "friendsofsymfony/user-bundle": "*",
         "jms/serializer-bundle": "0.9.*",
         "sonata-project/doctrine-orm-admin-bundle": "*",
-        "knplabs/knp-menu-bundle": "*",
-        "knplabs/knp-snappy-bundle": "dev-master",
-        "stfalcon/tinymce-bundle": "*",
         "sonata-project/cache-bundle": "*",
         "stof/doctrine-extensions-bundle": "*",
-        "white-october/pagerfanta-bundle": "*",
-        "excelwebzone/search-bundle": "*"
     },
     "scripts": {
         "post-install-cmd": [
