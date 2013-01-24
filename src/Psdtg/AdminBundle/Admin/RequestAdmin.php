@@ -10,6 +10,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+use Psdtg\UserBundle\Entity\User;
+
 abstract class RequestAdmin extends Admin
 {
     protected $datagridValues = array(
@@ -21,6 +23,9 @@ abstract class RequestAdmin extends Admin
     {
         if($this->getSecurityContext()->getToken() != null) {
             $user = $this->getSecurityContext()->getToken()->getUser();
+            if(!is_object($user)) {
+                $user = new User();
+            }
             if($user->hasRole('ROLE_KEDO')) {
             $collection
                 ->remove('create')

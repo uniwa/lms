@@ -46,3 +46,7 @@ homeredirts:
         _controller: FrameworkBundle:Redirect:redirect
         route: sonata_admin_dashboard
         permanent: true # this is for 301
+
+adminbundle:
+    resource: "@PsdtgAdminBundle/Controller"
+    type:     annotation
