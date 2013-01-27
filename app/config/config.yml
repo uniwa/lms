@@ -129,24 +129,26 @@ stof_doctrine_extensions:
 
 fr3d_ldap:
     driver:
-        host:                elke.dnna.gr
-        port:                389    # Optional
-        username:            cn=admin,dc=teiath,dc=gr    # Optional
-        password:            "##bp94cP58#a"    # Optional
+        host:                %ldap_host%
+        port:                %ldap_port%    # Optional
+        #username:            uid=wfmtest2,ou=people,dc=sch,dc=gr    # WFM
+        username:            %ldap_username%    # LM
+        #password:            "dk4-@pgc"    # WFM
+        password:            %ldap_password%    # LM
         #bindRequiredDn:       true   # Optional
-        baseDn:              ou=users, dc=host, dc=foo   # Optional
+        baseDn:              %ldap_basedn%   # Optional
         accountFilterFormat: (&(uid=%s)) # Optional. sprintf format %s will be the username
         optReferrals:        false  # Optional
         useSsl:              false   # Enable SSL negotiation. Optional
         useStartTls:         false   # Enable TLS negotiation. Optional
     user:
-        baseDn: dc=teiath,dc=gr
-        filter: (&(ObjectClass=teiaServices))
+        baseDn: %ldap_basedn%
+        filter: (&(ObjectClass=person))
         attributes:          # Specify ldap attributes mapping [ldap attribute, user object method]
            - { ldap_attr: uid,  user_method: setUsername } # Default
            - { ldap_attr: cn,   user_method: setName }     # Optional
            - { ldap_attr: mail,   user_method: setEmail }     # Optional
-           - { ldap_attr: objectclass,   user_method: void }     # Optional
+           - { ldap_attr: memberof,   user_method: void }     # Optional
     service:
         ldap_manager: psdtg.ldap.ldap_manager
 #   service:

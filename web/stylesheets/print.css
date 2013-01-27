@@ -1,9 +1,0 @@
-/* print.css */
-
-.sidebar,aside,footer,header{
-	display:none;
-}
-
-.print-only{
-	display: block;
-}

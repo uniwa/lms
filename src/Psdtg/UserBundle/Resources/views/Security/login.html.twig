@@ -1,0 +1,19 @@
+{% extends 'PsdtgUserBundle::base.html.twig' %}
+
+{% block content %}
+{% if error %}
+    <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+{% endif %}
+
+<form action="{{ path("fos_user_security_check") }}" method="post" class="custom">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}" />
+
+    <input type="password" id="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}" />
+
+    <label for="remember_me"><input type="checkbox" style="display: none;" id="remember_me" name="_remember_me" value="on" /><span class="custom checkbox"></span> {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+
+    <input type="submit" id="_submit" name="_submit" class="button" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+</form>
+{% endblock content %}

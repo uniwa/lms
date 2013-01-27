@@ -1,6 +1,0 @@
-@media (min-height: 700px) {
-	.news li:nth-child(n+2){
-		display:none;
-	}
-}
-
