@@ -1,5 +1,5 @@
 {
-    "hash": "b6f3d457df68455ad03742b2c02301e5",
+    "hash": "ae04176276c952a091c0b964868e5838",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1351,6 +1351,39 @@
             "time": "2012-08-29 11:53:20"
         },
         {
+            "name": "ruudk/capifony-tools",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ruudk/capifony-tools.git",
+                "reference": "fcf482c77177af297b498fbc3833f6260068e82f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ruudk/capifony-tools/zipball/fcf482c77177af297b498fbc3833f6260068e82f",
+                "reference": "fcf482c77177af297b498fbc3833f6260068e82f",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ruud Kamphuis",
+                    "email": "ruudk@mphuis.com"
+                }
+            ],
+            "description": "Handy tools for Capifony",
+            "homepage": "http://github.com/ruudk/capifony-tools",
+            "keywords": [
+                "capifony",
+                "deploy"
+            ],
+            "time": "2012-11-02 15:34:48"
+        },
+        {
             "name": "sensio/distribution-bundle",
             "version": "2.1.x-dev",
             "target-dir": "Sensio/Bundle/DistributionBundle",
@@ -2444,9 +2477,9 @@
 
     ],
     "minimum-stability": "dev",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "ruudk/capifony-tools": 20
+    },
     "platform": {
         "php": ">=5.3.3"
     },

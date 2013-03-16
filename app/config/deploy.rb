@@ -22,5 +22,8 @@ set  :dump_assetic_assets, true
 set  :interactive_mode, false
 set  :keep_releases,  3
 
+set :shared_files, ["app/config/parameters.ini"]
+set :shared_children, [app_path + "/logs", web_path + "/upload", web_path + "/cache"]
+
 # Be more verbose by uncommenting the following line
 # logger.level = Logger::MAX_LEVEL
