@@ -3,6 +3,9 @@
 namespace Psdtg\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+
+
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\SerializerBundle\Annotation\ExclusionPolicy;
@@ -21,6 +24,8 @@ use JMS\SerializerBundle\Annotation\ReadOnly;
  */
 class ADSL
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -30,7 +35,7 @@ class ADSL
     protected $id;
 
     // ManyToOne
-    protected $line;
+    protected $line; // ΜΠΟΡΕΙ ΝΑ ΕΙΝΑΙ NULL ΑΝ Η ΓΡΑΜΜΗ ΔΕΝ ΕΙΝΑΙ ΙΔΙΟΚΤΗΣΙΑΣ ΠΣΔ
 
     /**
      * @ORM\Column(name="status", type="string", length=100)
@@ -38,18 +43,11 @@ class ADSL
      */
     protected $status;
 
-    /**
-     * @ORM\Column(name="installDate", type="datetime")
-     * @Expose
-     */
-    protected $installDate;
-
-    // OneToMany
-    protected $adslInstallRequests;
-
     protected $profile;
     const PROFILE_2MBPS = '2mbps';
     const PROFILE_24MBPS = '24mbps';
+
+    protected $realspeed; // Ταχύτητα που κλείδωσε
 
     public function getId() {
         return $this->id;
@@ -75,22 +73,6 @@ class ADSL
         $this->status = $status;
     }
 
-    public function getInstallDate() {
-        return $this->installDate;
-    }
-
-    public function setInstallDate($installDate) {
-        $this->installDate = $installDate;
-    }
-
-    public function getAdslInstallRequests() {
-        return $this->adslInstallRequests;
-    }
-
-    public function setAdslInstallRequests($adslInstallRequests) {
-        $this->adslInstallRequests = $adslInstallRequests;
-    }
-
     public function getProfile() {
         return $this->profile;
     }
@@ -98,4 +80,13 @@ class ADSL
     public function setProfile($profile) {
         $this->profile = $profile;
     }
+
+    public function getRealspeed() {
+        return $this->realspeed;
+    }
+
+    public function setRealspeed($realspeed) {
+        $this->realspeed = $realspeed;
+    }
+
 }

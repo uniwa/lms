@@ -10,24 +10,24 @@
             <argument type="service" id="sonata.admin.builder.filter.factory" />
             <argument type="service" id="sonata.admin.guesser.orm_datagrid_chain" />
         </service>
-        <service id="sonata.admin.telephonelines" class="Psdtg\AdminBundle\Admin\TelephoneLineAdmin">
+        <service id="sonata.admin.circuits" class="Psdtg\AdminBundle\Admin\CircuitAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
-                group="Telephone Lines"
-                label="Telephone Lines"
+                group="Cicruits"
+                label="Circuits"
                 />
            <argument />
-           <argument>Psdtg\SiteBundle\Entity\TelephoneLine</argument>
+           <argument>Psdtg\SiteBundle\Entity\Circuit</argument>
            <argument>SonataAdminBundle:CRUD</argument>
        </service>
-        <service id="sonata.admin.newlinerequests" class="Psdtg\AdminBundle\Admin\NewLineRequestAdmin">
+        <service id="sonata.admin.newcircuitrequests" class="Psdtg\AdminBundle\Admin\User\NewCircuitRequestAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Requests"
-                label="New Line Request"
+                label="New Circuit Request (User)"
                 />
            <argument />
-           <argument>Psdtg\SiteBundle\Entity\Requests\NewLineRequest</argument>
+           <argument>Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest</argument>
            <argument>SonataAdminBundle:CRUD</argument>
            <call method="setSecurityContext">
                <argument type='service' id='security.context' />

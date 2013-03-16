@@ -19,21 +19,6 @@ abstract class RequestAdmin extends Admin
         '_sort_by' => 'id' // name of the ordered field (default = the model id
     );
 
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        if($this->getSecurityContext()->getToken() != null) {
-            $user = $this->getSecurityContext()->getToken()->getUser();
-            if(!is_object($user)) {
-                $user = new User();
-            }
-            if($user->hasRole('ROLE_KEDO')) {
-            $collection
-                ->remove('create')
-                ;
-            }
-        }
-    }
-
     /**
      * @param \Sonata\AdminBundle\Show\ShowMapper $showMapper
      *
@@ -58,13 +43,9 @@ abstract class RequestAdmin extends Admin
     {
         $user = $this->getSecurityContext()->getToken()->getUser();
         $subject = $this->getSubject();
-        if($subject->getId() == null && $this->getSecurityContext()->isGranted('ROLE_KEDO')) {
-            throw new AccessDeniedException('KEDO user cannot create new requests');
-        }
         $formMapper
-            ->add('ypepthId', null, array('disabled' => $subject->getYpepthId() != null ? true: false))
-            ->add('submitterId', null, array('disabled' => true, 'data' => $subject->getSubmitterId() != '' ? $subject->getSubmitterId() : $user->getUsername()))
-            ->add('status', 'choice', array('choices' => Request::getStatuses(), 'disabled' => ($user->hasRole('ROLE_KEDO') && $subject->getLine() == null) ? false : true))
+            ->add('ypepthId', null, array())
+            ->add('submitterId', null, array('disabled' => true, 'data' => $subject->getSubmitterId() != '' ? $subject->getSubmitterId() : $user->getUsername(), 'label' => 'Υποβάλλων'))
         ;
     }
 

@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"newLineRequest" = "NewLineRequest"})
+ * @ORM\DiscriminatorMap({"new_circuit" = "NewCircuitRequest"})
  */
 class Request
 {
@@ -23,8 +23,8 @@ class Request
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\TelephoneLine", inversedBy="newLineRequest")
-     * @ORM\JoinColumn(name="lineId", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuit")
+     * @ORM\JoinColumn(name="circuitId", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $line;
 
@@ -37,6 +37,11 @@ class Request
      * @ORM\Column(name="submitter_id", type="string", length=100)
      */
     protected $submitterId;
+
+    /**
+     * @ORM\Column(name="tech_factsheet_no", type="string", length=100)
+     */
+    protected $techFactsheetNo;
 
     /**
      * @ORM\Column(name="creationdate", type="datetime")
@@ -53,9 +58,9 @@ class Request
     /**
      * @ORM\Column(name="status", type="string", length=100)
      */
-    protected $status = self::STATUS_NA;
+    protected $status = self::STATUS_PENDING;
 
-    const STATUS_NA = 'NA';
+    const STATUS_PENDING = 'PENDING';
     const STATUS_APPROVED = 'APPROVED';
     const STATUS_REJECTED = 'REJECTED';
 
@@ -96,6 +101,14 @@ class Request
         $this->submitterId = $submitterId;
     }
 
+    public function getTechFactsheetNo() {
+        return $this->techFactsheetNo;
+    }
+
+    public function setTechFactsheetNo($techFactsheetNo) {
+        $this->techFactsheetNo = $techFactsheetNo;
+    }
+
     public function getCreationdate() {
         return $this->creationdate;
     }
@@ -123,7 +136,7 @@ class Request
 
     public static function getStatuses() {
         return array(
-            self::STATUS_NA => self::STATUS_NA,
+            self::STATUS_PENDING => self::STATUS_PENDING,
             self::STATUS_APPROVED => self::STATUS_APPROVED,
             self::STATUS_REJECTED => self::STATUS_REJECTED,
         );
