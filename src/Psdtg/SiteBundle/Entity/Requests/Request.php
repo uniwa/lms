@@ -3,6 +3,8 @@
 namespace Psdtg\SiteBundle\Entity\Requests;
 
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -12,9 +14,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  * @ORM\DiscriminatorMap({"new_circuit" = "NewCircuitRequest"})
+ * @Gedmo\Loggable
  */
 class Request
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -34,6 +39,7 @@ class Request
     protected $ypepthId;
 
     /**
+     * @Gedmo\Blameable(on="create")
      * @ORM\Column(name="submitter_id", type="string", length=100)
      */
     protected $submitterId;
@@ -44,18 +50,7 @@ class Request
     protected $techFactsheetNo;
 
     /**
-     * @ORM\Column(name="creationdate", type="datetime")
-     * @Gedmo\Timestampable(on="create")
-     */
-    protected $creationdate;
-
-    /**
-     * @ORM\Column(name="lastupdatedate", type="datetime")
-     * @Gedmo\Timestampable(on="update")
-     */
-    protected $lastupdatedate;
-
-    /**
+     * @Gedmo\Versioned
      * @ORM\Column(name="status", type="string", length=100)
      */
     protected $status = self::STATUS_PENDING;
@@ -63,11 +58,6 @@ class Request
     const STATUS_PENDING = 'PENDING';
     const STATUS_APPROVED = 'APPROVED';
     const STATUS_REJECTED = 'REJECTED';
-
-    /**
-     * @ORM\Column(name="laststatusupdatedate", type="datetime")
-     */
-    protected $laststatusupdatedate;
 
     public function getId() {
         return $this->id;
@@ -109,22 +99,6 @@ class Request
         $this->techFactsheetNo = $techFactsheetNo;
     }
 
-    public function getCreationdate() {
-        return $this->creationdate;
-    }
-
-    public function setCreationdate($creationdate) {
-        $this->creationdate = $creationdate;
-    }
-
-    public function getLastupdatedate() {
-        return $this->lastupdatedate;
-    }
-
-    public function setLastupdatedate($lastupdatedate) {
-        $this->lastupdatedate = $lastupdatedate;
-    }
-
     public function getStatus() {
         return $this->status;
     }
@@ -140,13 +114,5 @@ class Request
             self::STATUS_APPROVED => self::STATUS_APPROVED,
             self::STATUS_REJECTED => self::STATUS_REJECTED,
         );
-    }
-
-    public function getLaststatusupdatedate() {
-        return $this->laststatusupdatedate;
-    }
-
-    public function setLaststatusupdatedate($laststatusupdatedate) {
-        $this->laststatusupdatedate = $laststatusupdatedate;
     }
 }

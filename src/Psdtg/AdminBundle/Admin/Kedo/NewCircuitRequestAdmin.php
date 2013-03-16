@@ -16,8 +16,10 @@ class NewCircuitRequestAdmin extends BaseNewCircuitRequestAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
+        $subject = $this->getSubject();
         $formMapper
             ->add('status', 'choice', array('choices' => Request::getStatuses(), 'disabled' => true))
+            ->add('submitterId', null, array('disabled' => true, 'data' => $subject->getSubmitterId()))
         ;
     }
 }

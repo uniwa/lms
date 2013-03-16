@@ -2,10 +2,10 @@
 
 namespace Psdtg\SiteBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
-
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\SerializerBundle\Annotation\ExclusionPolicy;

@@ -126,6 +126,8 @@ stof_doctrine_extensions:
     orm:
         default:
             timestampable: true
+            blameable: true
+            loggable: true
 
 fr3d_ldap:
     driver:

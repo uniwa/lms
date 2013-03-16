@@ -8,7 +8,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use Psdtg\UserBundle\Entity\User;
 
@@ -41,11 +40,8 @@ abstract class RequestAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $user = $this->getSecurityContext()->getToken()->getUser();
-        $subject = $this->getSubject();
         $formMapper
             ->add('ypepthId', null, array())
-            ->add('submitterId', null, array('disabled' => true, 'data' => $subject->getSubmitterId() != '' ? $subject->getSubmitterId() : $user->getUsername(), 'label' => 'Υποβάλλων'))
         ;
     }
 
@@ -79,19 +75,5 @@ abstract class RequestAdmin extends Admin
         $datagridMapper
             ->add('id')
         ;
-    }
-
-    public function prePersist($object)
-    {
-        $user = $this->getSecurityContext()->getToken()->getUser();
-        $object->setSubmitterId($user->getUsername());
-    }
-
-    public function setSecurityContext($securityContext) {
-        $this->securityContext = $securityContext;
-    }
-
-    public function getSecurityContext() {
-        return $this->securityContext;
     }
 }
