@@ -2,6 +2,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="security.acl.voter.admin_permissions" class="Psdtg\AdminBundle\Voter\AdminAclVoter" public="false">
+            <tag name="monolog.logger" channel="security" />
+            <argument type="service" id="security.acl.provider" />
+            <argument type="service" id="security.acl.object_identity_retrieval_strategy" />
+            <argument type="service" id="security.acl.security_identity_retrieval_strategy" />
+            <argument type="service" id="security.acl.permission.map" />
+            <argument type="service" id="logger" on-invalid="null" />
+            <tag name="security.voter" priority="255" />
+        </service>
         <service id="sonata.admin.dnna.model_manager" class="Psdtg\AdminBundle\Model\DnnaModelManager">
             <argument type="service" id="doctrine" />
         </service>
@@ -20,11 +29,21 @@
            <argument>Psdtg\SiteBundle\Entity\Circuit</argument>
            <argument>SonataAdminBundle:CRUD</argument>
        </service>
-        <service id="sonata.admin.newcircuitrequests" class="Psdtg\AdminBundle\Admin\User\NewCircuitRequestAdmin">
+        <service id="sonata.admin.newcircuitrequests.user" class="Psdtg\AdminBundle\Admin\User\NewCircuitRequestAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Requests"
                 label="New Circuit Request (User)"
+                />
+           <argument />
+           <argument>Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest</argument>
+           <argument>SonataAdminBundle:CRUD</argument>
+       </service>
+        <service id="sonata.admin.newcircuitrequests.kedo" class="Psdtg\AdminBundle\Admin\Kedo\NewCircuitRequestAdmin">
+           <tag name="sonata.admin"
+                manager_type="orm"
+                group="Requests"
+                label="New Circuit Request (KEDO)"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest</argument>

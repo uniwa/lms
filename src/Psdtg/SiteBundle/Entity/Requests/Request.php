@@ -115,4 +115,8 @@ class Request
             self::STATUS_REJECTED => self::STATUS_REJECTED,
         );
     }
+
+    public function __toString() {
+        return (string)'Αίτηση '.$this->getTechFactsheetNo();
+    }
 }

@@ -3,12 +3,20 @@ jms_security_extra:
     expressions: true
 
 security:
+    acl:
+        connection: default
+
+    access_decision_manager:
+        # Strategy can be: affirmative, unanimous or consensus
+        strategy: affirmative
+
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
         Psdtg\UserBundle\Entity\User: plaintext
 
     role_hierarchy:
-        ROLE_USER:       ROLE_USER
+        ROLE_USER:      ROLE_USER
+        ROLE_HELPDESK:  ROLE_HELPDESK
         ROLE_KEDO:      ROLE_KEDO
 
     providers:
@@ -32,3 +40,8 @@ security:
         - { path: ^/register, role: ROLE_USER }
         - { path: ^/resetting, role: ROLE_USER }
         - { path: ^/admin/, role: ROLE_USER }
+
+parameters:
+    security.acl.permission.map.class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap
+    # optionally use a custom MaskBuilder
+    #sonata.admin.security.mask.builder.class: Sonata\AdminBundle\Security\Acl\Permission\MaskBuilder

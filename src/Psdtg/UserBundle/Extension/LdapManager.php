@@ -34,7 +34,7 @@ class LdapManager extends BaseLdapManager
         if($kedo == true) {
             $user->setRoles(array('ROLE_KEDO'));
         } else {
-            $user->setRoles(array('ROLE_USER'));
+            $user->setRoles(array('ROLE_HELPDESK'));
         }
     }
 }
