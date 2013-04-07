@@ -80,7 +80,7 @@
             </trans-unit>
             <trans-unit id="title_dashboard">
                 <source>title_dashboard</source>
-                <target>Πίνακας Ελέγχου</target>
+                <target>Διαχείριση</target>
             </trans-unit>
             <trans-unit id="title_edit">
                 <source>title_edit</source>
