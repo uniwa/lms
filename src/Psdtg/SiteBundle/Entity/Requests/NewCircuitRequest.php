@@ -15,6 +15,11 @@ class NewCircuitRequest extends Request
      */
     protected $circuitType;
 
+    const STATUS_OTEPENDING = 'OTEPENDING';
+    const STATUS_LOCALOTE = 'LOCALOTE';
+    const STATUS_CREWLEVEL = 'CREWLEVEL';
+    const STATUS_INSTALLED = 'INSTALLED';
+
     public function getCircuitType() {
         return $this->circuitType;
     }
@@ -34,6 +39,20 @@ class NewCircuitRequest extends Request
             'vdsl_ll' => 'VDSL LL(LRE)',
             'll' => 'LL(M1020)',
             'eline_me' => 'e-line ME',
+        );
+    }
+
+    public static function getStatuses() {
+        return array(
+            'PSD_CONTROL' => parent::getStatuses(),
+            'OTE_CONTROL' => array(
+                self::STATUS_OTEPENDING => self::STATUS_OTEPENDING,
+                self::STATUS_LOCALOTE => self::STATUS_LOCALOTE,
+                self::STATUS_CREWLEVEL => self::STATUS_CREWLEVEL,
+            ),
+            'ΟΤΕ_PSD_CONTROL' => array(
+                self::STATUS_INSTALLED => self::STATUS_INSTALLED,
+            ),
         );
     }
 }

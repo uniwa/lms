@@ -6,6 +6,7 @@ number: Αριθμός
 
 # Request
 Circuit: Κύκλωμα
+Submitter Id: Υποβάλλων
 Status: Κατάσταση
 PENDING: Σε εκκρεμότητα
 APPROVED: Εγκρίθηκε
@@ -15,3 +16,10 @@ REJECTED: Απορρίφθηκε
 New Circuit Request List: Λίστα Αιτημάτων Νέου Κυκλώματος
 Circuit Type: Τύπος Κυκλώματος
 Tech Factsheet No: Αριθμός Τεχνικού Δελτίου
+PSD_CONTROL: Ελέγχεται από ΠΣΔ
+OTE_CONTROL: Ελέγχεται από ΟΤΕ
+ΟΤΕ_PSD_CONTROL: Ελέγχεται από ΟΤΕ&Σχολική Μονάδα
+OTEPENDING: Εκκρεμεί στον ΟΤΕ
+LOCALOTE: Μεταφέρθηκε στον τοπικό ΟΤΕ
+CREWLEVEL: Μεταφέρθηκε σε επίπεδο συνεργείου
+INSTALLED: Εγκαταστάθηκε

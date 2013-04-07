@@ -27,7 +27,7 @@ abstract class RequestAdmin extends Admin
             ->add('id')
             ->add('ypepthId')
             ->add('submitterId')
-            ->add('status')
+            ->add('status', 'trans')
         ;
     }
 
