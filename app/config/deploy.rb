@@ -25,16 +25,15 @@ set  :keep_releases,  3
 set :shared_files, ["app/config/parameters.yml"]
 set :shared_children, [app_path + "/logs", web_path + "/upload", web_path + "/cache"]
 
-set :writable_dirs, [app_path + "/logs", app_path + "/spool", app_path + "/cache"]
+set :writable_dirs, [app_path + "/logs", app_path + "/cache"]
 set :webserver_user,    "www-data"
-set :permission_method, :chown
+set :permission_method, :acl
 set :use_set_permissions, true
 
 # Be more verbose by uncommenting the following line
 # logger.level = Logger::MAX_LEVEL
 
 # Hooks
-before "deploy:restart", "deploy:set_permissions"
 after  "symfony:assetic:dump", "symfony:doctrine:schema:update" # Update doctrine schema
 after  "symfony:assetic:dump", "symfony:update_admin_acl"
 
