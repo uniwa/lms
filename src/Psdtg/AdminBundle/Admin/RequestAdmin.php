@@ -1,13 +1,15 @@
 <?php
 namespace Psdtg\AdminBundle\Admin;
 
+use Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest;
+
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-use Psdtg\UserBundle\Entity\User;
+
 
 abstract class RequestAdmin extends Admin
 {
@@ -26,7 +28,7 @@ abstract class RequestAdmin extends Admin
         $showMapper
             ->add('id')
             ->add('ypepthId')
-            ->add('submitterId')
+            ->add('createdBy')
             ->add('status', 'trans')
         ;
     }
@@ -58,7 +60,7 @@ abstract class RequestAdmin extends Admin
             )))
             ->addIdentifier('id')
             ->add('ypepthId')
-            ->add('submitterId')
+            ->add('createdBy')
             ->add('status', 'trans')
         ;
     }
@@ -72,6 +74,9 @@ abstract class RequestAdmin extends Admin
     {
         $datagridMapper
             ->add('id')
+            ->add('ypepthId')
+            ->add('createdBy')
+            ->add('status', null, array(), 'choice', array('choices' => NewCircuitRequest::getStatuses()))
         ;
     }
 }

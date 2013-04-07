@@ -3,6 +3,8 @@ namespace Psdtg\AdminBundle\Admin;
 
 use Psdtg\SiteBundle\Entity\Requests\Request;
 use Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest;
+
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class NewCircuitRequestAdmin extends RequestAdmin
@@ -22,5 +24,13 @@ class NewCircuitRequestAdmin extends RequestAdmin
                 }
             }
         }
+    }
+
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        parent::configureDatagridFilters($datagridMapper);
+        $datagridMapper
+            
+        ;
     }
 }

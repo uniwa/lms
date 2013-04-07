@@ -1,4 +1,6 @@
 Logout: Αποσύνδεση
+Created By: Δημιουργήθηκε απο
+Updated By: Ανανεώθηκε απο
 
 # Circuit
 Ypepth Id: Κωδικός Μονάδας (ypepth id)
@@ -6,7 +8,6 @@ number: Αριθμός
 
 # Request
 Circuit: Κύκλωμα
-Submitter Id: Υποβάλλων
 Status: Κατάσταση
 PENDING: Σε εκκρεμότητα
 APPROVED: Εγκρίθηκε

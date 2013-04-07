@@ -34,6 +34,7 @@ set :use_set_permissions, true
 # logger.level = Logger::MAX_LEVEL
 
 # Hooks
+before "deploy:restart", "deploy:set_permissions"
 after  "symfony:assetic:dump", "symfony:doctrine:schema:update" # Update doctrine schema
 after  "symfony:assetic:dump", "symfony:update_admin_acl"
 
