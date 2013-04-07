@@ -59,7 +59,7 @@ abstract class RequestAdmin extends Admin
             ->addIdentifier('id')
             ->add('ypepthId')
             ->add('submitterId')
-            ->add('status')
+            ->add('status', 'trans')
         ;
     }
 

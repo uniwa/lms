@@ -11,8 +11,8 @@ class NewCircuitRequestAdmin extends RequestAdmin
     {
         parent::configureFormFields($formMapper);
         $formMapper
-            ->add('techFactsheetNo', null, array('label' => 'Αριθμός Τεχνικού Δελτίου'))
-            ->add('circuitType', 'choice', array('choices' => NewCircuitRequest::getNewCircuitRequestTypes(), 'label' => 'Τύπος Κυκλώματος'))
+            ->add('techFactsheetNo')
+            ->add('circuitType', 'choice', array('choices' => NewCircuitRequest::getNewCircuitRequestTypes()))
         ;
         $subject = $this->getSubject();
         if($subject->getStatus() === Request::STATUS_APPROVED) {

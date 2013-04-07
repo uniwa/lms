@@ -4,6 +4,7 @@ namespace Psdtg\SiteBundle\Entity\Requests;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Blameable\Traits\BlameableEntity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Request
 {
     use TimestampableEntity;
+    use BlameableEntity;
 
     /**
      * @ORM\Column(name="id", type="integer")
@@ -31,18 +33,12 @@ class Request
      * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuit")
      * @ORM\JoinColumn(name="circuitId", referencedColumnName="id", onDelete="SET NULL")
      */
-    protected $line;
+    protected $circuit;
 
     /**
      * @ORM\Column(name="ypepth_id", type="string", length=100)
      */
     protected $ypepthId;
-
-    /**
-     * @Gedmo\Blameable(on="create")
-     * @ORM\Column(name="submitter_id", type="string", length=100)
-     */
-    protected $submitterId;
 
     /**
      * @ORM\Column(name="tech_factsheet_no", type="string", length=100)
@@ -67,12 +63,12 @@ class Request
         $this->id = $id;
     }
 
-    public function getLine() {
-        return $this->line;
+    public function getCircuit() {
+        return $this->circuit;
     }
 
-    public function setLine($line) {
-        $this->line = $line;
+    public function setCircuit($circuit) {
+        $this->circuit = $circuit;
     }
 
     public function getYpepthId() {
@@ -81,14 +77,6 @@ class Request
 
     public function setYpepthId($ypepthId) {
         $this->ypepthId = $ypepthId;
-    }
-
-    public function getSubmitterId() {
-        return $this->submitterId;
-    }
-
-    public function setSubmitterId($submitterId) {
-        $this->submitterId = $submitterId;
     }
 
     public function getTechFactsheetNo() {

@@ -1,0 +1,17 @@
+Logout: Αποσύνδεση
+
+# Circuit
+Ypepth Id: Κωδικός Μονάδας (ypepth id)
+number: Αριθμός
+
+# Request
+Circuit: Κύκλωμα
+Status: Κατάσταση
+PENDING: Σε εκκρεμότητα
+APPROVED: Εγκρίθηκε
+REJECTED: Απορρίφθηκε
+
+# New Line Request
+New Circuit Request List: Λίστα Αιτημάτων Νέου Κυκλώματος
+Circuit Type: Τύπος Κυκλώματος
+Tech Factsheet No: Αριθμός Τεχνικού Δελτίου

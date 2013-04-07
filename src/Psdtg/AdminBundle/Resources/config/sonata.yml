@@ -20,8 +20,8 @@ sonata_block:
         sonata.block.service.rss:
           
 sonata_admin:
-    title:      ΕΔΤΓΠΣΔ
-    title_logo: /public/psd_logo.png
+    title:      Εφαρμογή Διαχείρισης Τηλεφωνικών Γραμμών ΠΣΔ
+    title_logo: /images/psd_logo.png
     templates:
         # default global templates
         layout:  PsdtgAdminBundle::layout.html.twig

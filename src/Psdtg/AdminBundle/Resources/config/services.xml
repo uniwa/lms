@@ -22,8 +22,8 @@
         <service id="sonata.admin.circuits" class="Psdtg\AdminBundle\Admin\CircuitAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
-                group="Cicruits"
-                label="Circuits"
+                group="Κυκλώματα"
+                label="Κυκλώματα"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Circuit</argument>
@@ -32,8 +32,8 @@
         <service id="sonata.admin.newcircuitrequests.user" class="Psdtg\AdminBundle\Admin\User\NewCircuitRequestAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
-                group="Requests"
-                label="New Circuit Request (User)"
+                group="Αιτήματα"
+                label="Αίτημα Νέου Κυκλώματος"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest</argument>
@@ -42,8 +42,8 @@
         <service id="sonata.admin.newcircuitrequests.kedo" class="Psdtg\AdminBundle\Admin\Kedo\NewCircuitRequestAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
-                group="Requests"
-                label="New Circuit Request (KEDO)"
+                group="Αιτήματα"
+                label="Αίτημα Νέου Κυκλώματος"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest</argument>
