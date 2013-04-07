@@ -13,7 +13,7 @@ class AdminAclVoter extends AclVoter
             if($user->hasRole('ROLE_HELPDESK')) {
                 foreach ($attributes as $attribute) {
                     $class = get_class($object);
-                    if(strpos($class, 'Admin') === false || strpos($class, 'User') !== false) {
+                    if(strpos($class, 'Admin') === false || strpos($class, 'Helpdesk') !== false) {
                         return self::ACCESS_GRANTED;
                     }
                 }

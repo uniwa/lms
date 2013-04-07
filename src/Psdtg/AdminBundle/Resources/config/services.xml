@@ -29,7 +29,7 @@
            <argument>Psdtg\SiteBundle\Entity\Circuit</argument>
            <argument>SonataAdminBundle:CRUD</argument>
        </service>
-        <service id="sonata.admin.newcircuitrequests.user" class="Psdtg\AdminBundle\Admin\User\NewCircuitRequestAdmin">
+        <service id="sonata.admin.newcircuitrequests.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\NewCircuitRequestAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Αιτήματα"
