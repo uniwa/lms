@@ -32,14 +32,15 @@ class CircuitAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('ypepthId')
+            ->add('unit.mmId')
+            ->add('unit.name')
             ->add('number')
             ->add('status')
             ->add('installDate')
             //->add('newLineRequest')
             ->add('address')
             ->add('lineType')
-            //->add('adsl')
+            //->add('services')
         ;
     }
 
@@ -51,14 +52,14 @@ class CircuitAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('ypepthId', null, array('disabled' => true))
+            ->add('unit', 'mmunit')
             ->add('number')
             ->add('status', 'choice', array('choices' => Circuit::getStatuses()))
             ->add('installDate')
             //->add('newLineRequest')
             ->add('address', null, array('disabled' => true))
             ->add('lineType', 'choice', array('choices' => Circuit::getLineTypes(), 'disabled' => true))
-            //->add('adsl')
+            //->add('services')
         ;
     }
 
@@ -76,7 +77,8 @@ class CircuitAdmin extends Admin
                     'edit' => array(),
             )))
             ->addIdentifier('id')
-            ->add('ypepthId')
+            ->add('unit.mmId')
+            ->add('unit.name')
             ->add('number')
             ->add('status')
             ->add('installDate')

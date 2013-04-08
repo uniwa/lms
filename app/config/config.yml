@@ -111,6 +111,33 @@ services:
     psdtg.ldap.ldap_manager:
         class: Psdtg\UserBundle\Extension\LdapManager
         arguments: ["@fr3d_ldap.ldap_driver", "@fr3d_ldap.user_manager", %fr3d_ldap.ldap_manager.parameters%, "@service_container"]
+    psdtg.mm.service:
+        class: Psdtg\SiteBundle\Extension\MMService
+    psdtg.form.type.unit_to_mmid_transformer:
+        class: Psdtg\SiteBundle\Form\DataTransformer\UnitToMmIdTransformer
+        public: false
+        arguments:
+            - "@psdtg.mm.service"
+    psdtg.form.type.mmunit:
+        class: Psdtg\SiteBundle\Form\Type\UnitType
+        tags:
+            - { name: form.type, alias: mmunit }
+        arguments:
+            - "@psdtg.form.type.unit_to_mmid_transformer"
+    psdtg.unit.listener:
+        class: Psdtg\SiteBundle\Extension\UnitListener
+        tags:
+            - { name: doctrine.event_listener, event: postLoad }
+        arguments:
+            - "@psdtg.mm.service"
+    psdtg.newlinerequest.listener:
+        class: Psdtg\SiteBundle\Extension\NewLineRequestListener
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: preRemove }
+        #arguments:
+            #- "@service_container"
 
 jms_serializer:
     metadata:
@@ -156,3 +183,6 @@ fr3d_ldap:
 #   service:
 #       user_manager: fos_user.user_manager          # Overrides default user manager
 #       ldap_manager: fr3d_ldap.ldap_manager.default # Overrides default ldap manager
+
+genemu_form:
+    select2: ~

@@ -27,7 +27,7 @@ abstract class RequestAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('ypepthId')
+            ->add('mmId')
             ->add('createdBy')
             ->add('status', 'trans')
         ;
@@ -41,7 +41,7 @@ abstract class RequestAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('ypepthId', null, array())
+            ->add('unit', 'mmunit', array())
         ;
     }
 
@@ -59,7 +59,8 @@ abstract class RequestAdmin extends Admin
                     'edit' => array(),
             )))
             ->addIdentifier('id')
-            ->add('ypepthId')
+            ->add('unit.mmId')
+            ->add('unit.name')
             ->add('createdBy')
             ->add('status', 'trans')
         ;
@@ -73,8 +74,7 @@ abstract class RequestAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('ypepthId')
+            ->add('unit', null, array(), 'mmunit')
             ->add('createdBy')
             ->add('status', null, array(), 'choice', array('choices' => NewCircuitRequest::getStatuses()))
         ;

@@ -15,8 +15,6 @@ use JMS\SerializerBundle\Annotation\Accessor;
 use JMS\SerializerBundle\Annotation\ReadOnly;
 
 /**
- * Cookisto\SiteBundle\Entity\Dish
- *
  * @ORM\Table()
  * @ORM\Entity
  * @ExclusionPolicy("all")
@@ -27,7 +25,7 @@ class Circuit
     use TimestampableEntity;
 
     /**
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @Expose
@@ -35,16 +33,19 @@ class Circuit
     protected $id;
 
     /**
-     * @ORM\Column(name="ypepth_id", type="string", length=100)
-     * @Expose
+     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Unit")
+     * @ORM\JoinColumn(name="mmId", referencedColumnName="mmId", onDelete="SET NULL")
      */
-    protected $ypepthId;
+    protected $unit;
 
     /**
-     * @ORM\Column(name="number", type="string", length=16, nullable=true)
+     * @ORM\Column(type="string", length=16, nullable=true)
      * @Expose
      */
     protected $number;
+
+    // OneToMany
+    protected $services;
 
     public function getId() {
         return $this->id;
@@ -54,12 +55,12 @@ class Circuit
         $this->id = $id;
     }
 
-    public function getYpepthId() {
-        return $this->ypepthId;
+    public function getUnit() {
+        return $this->unit;
     }
 
-    public function setYpepthId($ypepthId) {
-        $this->ypepthId = $ypepthId;
+    public function setUnit($unit) {
+        $this->unit = $unit;
     }
 
     public function getNumber() {
@@ -68,5 +69,13 @@ class Circuit
 
     public function setNumber($number) {
         $this->number = $number;
+    }
+
+    public function getServices() {
+        return $this->services;
+    }
+
+    public function setServices($services) {
+        $this->services = $services;
     }
 }

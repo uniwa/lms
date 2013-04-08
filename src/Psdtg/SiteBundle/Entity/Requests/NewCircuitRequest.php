@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class NewCircuitRequest extends Request
 {
     /**
-     * @ORM\Column(name="circuitType", type="string", length=50)
+     * @ORM\Column(type="string", length=50)
      */
     protected $circuitType;
 

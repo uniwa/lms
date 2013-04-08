@@ -36,9 +36,10 @@ class Request
     protected $circuit;
 
     /**
-     * @ORM\Column(name="ypepth_id", type="string", length=100)
+     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Unit")
+     * @ORM\JoinColumn(name="mmId", referencedColumnName="mmId", onDelete="SET NULL")
      */
-    protected $ypepthId;
+    protected $unit;
 
     /**
      * @ORM\Column(name="tech_factsheet_no", type="string", length=100)
@@ -71,12 +72,12 @@ class Request
         $this->circuit = $circuit;
     }
 
-    public function getYpepthId() {
-        return $this->ypepthId;
+    public function getUnit() {
+        return $this->unit;
     }
 
-    public function setYpepthId($ypepthId) {
-        $this->ypepthId = $ypepthId;
+    public function setUnit($unit) {
+        $this->unit = $unit;
     }
 
     public function getTechFactsheetNo() {

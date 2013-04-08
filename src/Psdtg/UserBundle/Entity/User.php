@@ -45,6 +45,12 @@ class User extends BaseUser implements LdapUserInterface
      */
     private $dn;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Unit")
+     * @ORM\JoinColumn(name="mmId", referencedColumnName="mmId", onDelete="SET NULL")
+     */
+    protected $unit;
+
     public function getId() {
         return $this->id;
     }
@@ -67,6 +73,14 @@ class User extends BaseUser implements LdapUserInterface
 
     public function setDn($dn) {
         $this->dn = $dn;
+    }
+
+    public function getUnit() {
+        return $this->unit;
+    }
+
+    public function setUnit($unit) {
+        $this->unit = $unit;
     }
 
     public function void() {}

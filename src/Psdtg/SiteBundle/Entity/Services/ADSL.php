@@ -27,7 +27,7 @@ class ADSL
     use TimestampableEntity;
 
     /**
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @Expose
@@ -38,7 +38,7 @@ class ADSL
     protected $line; // ΜΠΟΡΕΙ ΝΑ ΕΙΝΑΙ NULL ΑΝ Η ΓΡΑΜΜΗ ΔΕΝ ΕΙΝΑΙ ΙΔΙΟΚΤΗΣΙΑΣ ΠΣΔ
 
     /**
-     * @ORM\Column(name="status", type="string", length=100)
+     * @ORM\Column(type="string", length=100)
      * @Expose
      */
     protected $status;
