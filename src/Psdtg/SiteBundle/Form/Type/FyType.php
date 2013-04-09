@@ -11,31 +11,17 @@
 
 namespace Psdtg\SiteBundle\Form\Type;
 
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\AbstractType;
 
-use Psdtg\SiteBundle\Form\DataTransformer\UnitToMmIdTransformer;
-
-class UnitType extends AbstractType
+class FyType extends AbstractType
 {
-    protected $unitToMmIdTransformer;
-
-    public function __construct(UnitToMmIdTransformer $unitToMmIdTransformer) {
-        $this->unitToMmIdTransformer = $unitToMmIdTransformer;
-    }
-
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder->addViewTransformer($this->unitToMmIdTransformer);
-    }
-
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'configs' => array(
-                'path' => 'get_units',
-                'field_id' => 'mm_id',
+                'path' => 'get_fys',
+                'field_id' => 'name',
                 'field_name' => 'name',
             ),
             'class' => null,
@@ -48,6 +34,6 @@ class UnitType extends AbstractType
 
     public function getName()
     {
-        return 'mmunit';
+        return 'mmfy';
     }
 }

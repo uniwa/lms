@@ -61,6 +61,7 @@ abstract class RequestAdmin extends Admin
             ->addIdentifier('id')
             ->add('unit.mmId')
             ->add('unit.name')
+            ->add('unit.fy')
             ->add('createdBy')
             ->add('status', 'trans')
         ;
@@ -75,14 +76,8 @@ abstract class RequestAdmin extends Admin
     {
         $datagridMapper
             ->add('unit', null, array(), 'mmunit')
-            ->add('unit.fyName', null, array(), 'genemu_jqueryselect2_hidden', array(
-                'required' => true,
-                'configs' => array(
-                    'path' => 'get_fys',
-                    'field_id' => 'name',
-                    'field_name' => 'name',
-                ),
-            ))
+            ->add('unit.categoryName', null, array(), 'mmcategory')
+            ->add('unit.fyName', null, array(), 'mmfy')
             ->add('createdBy', null, array(), null, array('attr' => array('placeholder' => 'LDAP Username')))
             ->add('status', null, array(), 'choice', array('choices' => NewCircuitRequest::getStatuses()))
         ;

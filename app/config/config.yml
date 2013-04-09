@@ -127,6 +127,14 @@ services:
             - { name: form.type, alias: mmunit }
         arguments:
             - "@psdtg.form.type.unit_to_mmid_transformer"
+    psdtg.form.type.mmfy:
+        class: Psdtg\SiteBundle\Form\Type\FyType
+        tags:
+            - { name: form.type, alias: mmfy }
+    psdtg.form.type.mmcategory:
+        class: Psdtg\SiteBundle\Form\Type\CategoryType
+        tags:
+            - { name: form.type, alias: mmcategory }
     psdtg.unit.listener:
         class: Psdtg\SiteBundle\Extension\UnitListener
         tags:

@@ -56,23 +56,6 @@ class MMService {
         return $results;
     }
 
-    public function findFysBy(array $filters = array()) {
-        $results = array();
-        $params = array();
-        if(isset($filters['name']) && $filters['name'] != '') {
-            $params['fy_name'] = $filters['name'];
-        }
-        /*$mmUnitEntries = $this->queryUnits($params);
-        foreach($mmUnitEntries as $curMmUnitEntry) {
-            $results[] = $this->hydrateUnit($curMmUnitEntry);
-        }*/
-        $fy = new Fy();
-        $fy->setName('ΙΝΣΤΙΤΟΥΤΟ ΤΕΧΝΟΛΟΓΙΑΣ ΥΠΟΛΟΓΙΣΤΩΝ');
-        $fy->setInitials('Ι.Τ.Υ.');
-        $results[] = $fy;
-        return $results;
-    }
-
     protected function hydrateUnit($entry) {
         // Unit not found or its too old. Query the WS for fresh data.
         $em = $this->container->get('doctrine')->getEntityManager();
@@ -88,6 +71,7 @@ class MMService {
         $unit->setPostalCode($entry->postal_code);
         $unit->setRegistryNo($entry->registry_no);
         $unit->setStreetAddress($entry->street_address);
+        $unit->setCategoryName($entry->category);
         $unit->setCreatedAt(new \DateTime('now'));
         $unit->setUpdatedAt(new \DateTime('now'));
 
@@ -107,18 +91,10 @@ class MMService {
         if(!isset($params['startat']) || $params['startat'] == '') {
             $params['startat'] = 0;
         }
-        /*$params = array(
+        /*if(!isset($params['category']) || $params['category'] == '') {
             "category" => "ΣΧΟΛΙΚΕΣ ΚΑΙ ΔΙΟΙΚΗΤΙΚΕΣ ΜΟΝΑΔΕΣ",
-        );*/
+        }*/
         return $this->queryMM('units', $params);
-    }
-
-    protected function queryLDAP($params = array()) {
-        return array(
-            'uid' => $params['uid'],
-            'unit_id' => '03',
-        );
-        //return $this->queryMM('ldap', $params);
     }
 
     protected function queryMM($resource, $params = array()) {

@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation\ReadOnly;
 
 /**
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Psdtg\SiteBundle\Entity\Repositories\UnitsRepository")
  * @ExclusionPolicy("all")
  * @AccessType("public_method")
  */
@@ -75,6 +75,16 @@ class Unit
      * @Expose
      */
     protected $postalCode;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $categoryName;
+
+    /**
+     * @Expose
+     */
+    protected $category;
 
     public function getMmId() {
         return $this->mmId;
@@ -150,6 +160,24 @@ class Unit
 
     public function setPostalCode($postalCode) {
         $this->postalCode = $postalCode;
+    }
+
+    public function getCategoryName() {
+        return $this->categoryName;
+    }
+
+    public function setCategoryName($categoryName) {
+        $this->categoryName = $categoryName;
+    }
+
+    public function getCategory() {
+        $category = new Category();
+        $category->setName($this->categoryName);
+        return $category;
+    }
+
+    public function setCategory($category) {
+        $this->categoryName = $category->getName();
     }
 
     public function __toString() {

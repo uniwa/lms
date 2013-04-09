@@ -51,6 +51,9 @@ units:
     type:     rest
 
 fys:
-    #resource: "@PsdtgAdminBundle/Controller"
     resource: Psdtg\AdminBundle\Controller\FyController
+    type:     rest
+
+categories:
+    resource: Psdtg\AdminBundle\Controller\CategoryController
     type:     rest

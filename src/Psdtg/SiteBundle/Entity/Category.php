@@ -14,15 +14,11 @@ use JMS\Serializer\Annotation\ReadOnly;
  * @ExclusionPolicy("all")
  * @AccessType("public_method")
  */
-class Fy {
+class Category {
     /**
      * @Expose
      */
     protected $name;
-    /**
-     * @Expose
-     */
-    protected $initials;
 
     public function getName() {
         return $this->name;
@@ -30,14 +26,6 @@ class Fy {
 
     public function setName($name) {
         $this->name = $name;
-    }
-
-    public function getInitials() {
-        return $this->initials;
-    }
-
-    public function setInitials($initials) {
-        $this->initials = $initials;
     }
 
     public function __toString() {

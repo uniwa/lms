@@ -10,16 +10,16 @@ use Symfony\Component\HttpFoundation\Response;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use FOS\RestBundle\View\View;
 
-class FyController extends Controller {
+class CategoryController extends Controller {
     /**
      * @Secure("ROLE_USER")
      */
-    public function getFysAction() {
+    public function getCategoriesAction() {
         $repo = $this->container->get('doctrine')->getEntityManager()->getRepository('Psdtg\SiteBundle\Entity\Unit');
-        $fys = $repo->findFys(array(
+        $categories = $repo->findCategories(array(
             'name' => $this->getRequest()->get('name')
         ));
-        $view = View::create()->setStatusCode(200)->setData($fys);
+        $view = View::create()->setStatusCode(200)->setData($categories);
         return $this->get('fos_rest.view_handler')->handle($view);
     }
 }
