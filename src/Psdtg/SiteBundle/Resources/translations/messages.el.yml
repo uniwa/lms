@@ -5,6 +5,10 @@ LDAP Username: LDAP Username
 Updated By: Ανανεώθηκε απο
 Select a value: Επιλέξτε μια τιμή
 
+ROLE_KEDO: ΚΕΔΟ
+ROLE_HELPDESK: ΦΥ
+ROLE_USER: Μονάδα
+
 # Circuit
 Ypepth Id: Κωδικός Μονάδας (ypepth id)
 Activated At: Ημ/νία Ενεργοποίησης

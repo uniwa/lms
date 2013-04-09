@@ -17,9 +17,16 @@
         <img src="{{ asset(admin_pool.titlelogo) }}"  alt="{{ admin_pool.title }}" />
         {{ admin_pool.title }}
     </a>
-    <a href="{{ url('fos_user_security_logout') }}" style="float: right;" class="brand">
-        {{'Logout'|trans()}}
-    </a>
+    <div style="float: right; text-align: center;">
+        <div>
+            {{app.user.username}} | {% if is_granted('ROLE_KEDO') %}{{'ROLE_KEDO'|trans({})}}{% elseif is_granted('ROLE_HELPDESK') %}{{'ROLE_HELPDESK'|trans({})}}{% else %}{{'ROLE_USER'|trans({})}}{% endif %}
+        </div>
+        <div>
+            <a href="{{ url('fos_user_security_logout') }}" style="float: right;">
+                {{'Logout'|trans()}}
+            </a>
+        </div>
+    </div>
 {% endblock %}
 
 {% block footer %}
