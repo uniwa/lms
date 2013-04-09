@@ -61,6 +61,7 @@ abstract class RequestAdmin extends Admin
             ->addIdentifier('id')
             ->add('unit.mmId')
             ->add('unit.name')
+            ->add('unit.categoryName')
             ->add('unit.fy')
             ->add('createdBy')
             ->add('status', 'trans')
