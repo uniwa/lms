@@ -1,12 +1,13 @@
 Logout: Αποσύνδεση
 Created By: Δημιουργήθηκε απο
+Created At: Ημ/νία Καταχώρισης
 LDAP Username: LDAP Username
 Updated By: Ανανεώθηκε απο
 Select a value: Επιλέξτε μια τιμή
 
 # Circuit
 Ypepth Id: Κωδικός Μονάδας (ypepth id)
-number: Αριθμός
+Number: Αριθμός
 
 # Request
 Circuit: Κύκλωμα

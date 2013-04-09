@@ -94,7 +94,9 @@ class LdapManager extends BaseLdapManager
             'ldapuid' => $entry['uid'][0],
         ));
         if(count($units) > 0) {
-            //$user->setUnit($units[0]);
+            $user->setUnit($units[0]);
+        } else {
+            throw new \Exception('Δεν βρέθηκε η μονάδα (mm_id) του χρήστη');
         }
     }
 }

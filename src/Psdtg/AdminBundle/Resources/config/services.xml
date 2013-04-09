@@ -19,7 +19,21 @@
             <argument type="service" id="sonata.admin.builder.filter.factory" />
             <argument type="service" id="sonata.admin.guesser.orm_datagrid_chain" />
         </service>
-        <service id="sonata.admin.circuits" class="Psdtg\AdminBundle\Admin\CircuitAdmin">
+        <!-- Circuit -->
+        <service id="sonata.admin.circuits.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\CircuitAdmin">
+           <tag name="sonata.admin"
+                manager_type="orm"
+                group="Κυκλώματα"
+                label="Κυκλώματα"
+                />
+           <argument />
+           <argument>Psdtg\SiteBundle\Entity\Circuit</argument>
+           <argument>SonataAdminBundle:CRUD</argument>
+            <call method="setSecurityContext">
+                <argument type="service" id="security.context" />
+            </call>
+       </service>
+        <service id="sonata.admin.circuits.kedo" class="Psdtg\AdminBundle\Admin\Kedo\CircuitAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Κυκλώματα"
@@ -29,6 +43,7 @@
            <argument>Psdtg\SiteBundle\Entity\Circuit</argument>
            <argument>SonataAdminBundle:CRUD</argument>
        </service>
+        <!-- Newcircuit request -->
         <service id="sonata.admin.newcircuitrequests.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\NewCircuitRequestAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"

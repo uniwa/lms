@@ -7,7 +7,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 
 class CircuitAdmin extends Admin
 {
@@ -15,13 +14,6 @@ class CircuitAdmin extends Admin
         '_sort_order' => 'ASC', // Descendant ordering (default = 'ASC')
         '_sort_by' => 'id' // name of the ordered field (default = the model id
     );
-
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection
-            ->remove('create')
-            ;
-    }
 
     /**
      * @param \Sonata\AdminBundle\Show\ShowMapper $showMapper
@@ -54,11 +46,7 @@ class CircuitAdmin extends Admin
         $formMapper
             ->add('unit', 'mmunit')
             ->add('number')
-            ->add('status', 'choice', array('choices' => Circuit::getStatuses()))
-            ->add('installDate')
-            //->add('newLineRequest')
-            ->add('address', null, array('disabled' => true))
-            ->add('lineType', 'choice', array('choices' => Circuit::getLineTypes(), 'disabled' => true))
+            ->add('createdAt', 'genemu_jquerydate', array('widget' => 'single_text'))
             //->add('services')
         ;
     }
@@ -80,12 +68,6 @@ class CircuitAdmin extends Admin
             ->add('unit.mmId')
             ->add('unit.name')
             ->add('number')
-            ->add('status')
-            ->add('installDate')
-            //->add('newLineRequest')
-            ->add('address')
-            ->add('lineType')
-            //->add('adsl')
         ;
     }
 
@@ -97,7 +79,10 @@ class CircuitAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
+            ->add('unit', null, array(), 'mmunit')
+            ->add('unit.categoryName', null, array(), 'mmcategory')
+            ->add('unit.fyName', null, array(), 'mmfy')
+            ->add('createdAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'required' => false, 'attr' => array('class' => 'datepicker')))
         ;
     }
 }

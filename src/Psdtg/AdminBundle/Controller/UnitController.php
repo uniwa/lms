@@ -16,9 +16,15 @@ class UnitController extends Controller {
      */
     public function getUnitsAction() {
         $mmservice = $this->container->get('psdtg.mm.service');
-        $units = $mmservice->findUnitsBy(array(
+        $params = array(
             'name' => $this->getRequest()->get('name')
-        ));
+        );
+        $securityContext = $this->container->get('security.context');
+        if(!$securityContext->isGranted('ROLE_KEDO')) {
+            $fyName = $securityContext->getToken()->getUser()->getUnit()->getFy()->getName();
+            $params['fy'] = $fyName;
+        }
+        $units = $mmservice->findUnitsBy($params);
         $view = View::create()->setStatusCode(200)->setData($units);
         return $this->get('fos_rest.view_handler')->handle($view);
     }
