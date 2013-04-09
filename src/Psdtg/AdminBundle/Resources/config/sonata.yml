@@ -54,11 +54,5 @@ sonata_admin:
 sonata_doctrine_orm_admin:
     templates:
       types:
-        list:
-          image: PsdtgAdminBundle::list_image.html.twig
-          colcount: PsdtgAdminBundle::list_collection_count.html.twig
-          truncated: PsdtgAdminBundle::list_truncated.html.twig
-          raw: PsdtgAdminBundle::list_raw.html.twig
-          selectraw: PsdtgAdminBundle::list_selectraw.html.twig
-        show:
-          image: PsdtgAdminBundle::show_image.html.twig
+        list: ~
+        show: ~

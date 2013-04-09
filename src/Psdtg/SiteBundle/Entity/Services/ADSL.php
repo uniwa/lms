@@ -8,11 +8,11 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\SerializerBundle\Annotation\ExclusionPolicy;
-use JMS\SerializerBundle\Annotation\Expose;
-use JMS\SerializerBundle\Annotation\AccessType;
-use JMS\SerializerBundle\Annotation\Accessor;
-use JMS\SerializerBundle\Annotation\ReadOnly;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\AccessType;
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ReadOnly;
 
 /**
  * Cookisto\SiteBundle\Entity\Dish

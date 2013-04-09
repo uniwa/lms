@@ -1,0 +1,39 @@
+{% form_theme form _self %}
+
+{% block genemu_jqueryselect2_hidden_widget %}
+<div class="controls sonata-ba-field sonata-ba-field-standard-natural ">
+    {{ form_widget(form) }}
+</div>
+{% endblock %}
+
+{% block genemu_jqueryselect2_hidden_javascript %}
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            var $field = $('#{{ id }}');
+
+            var $configs = {{ configs|json_encode|raw }};
+
+            // custom configs
+            $configs = $.extend($configs, {
+                query: function (query) {
+                    $.getJSON('{{path('get_units')}}?name='+query.term, function(data) {
+                        var ret = {results: []};
+                        $.each(data, function() {
+                            ret.results.push({id: this.mm_id, text: this.name});
+                        });
+                        query.callback(ret);
+                    });
+                }
+            });
+            // end of custom configs
+
+            $field.select2($configs);
+        });
+    </script>
+{% endblock %}
+
+{% block mmunit_widget %}
+    <div class="control-group">
+    {{ form_widget(form.mmId) }}
+    </div>
+{% endblock %}

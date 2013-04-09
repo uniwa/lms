@@ -28,9 +28,7 @@ class UnitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mmId', 'genemu_jqueryselect2_entity', array(
-                'class' => 'Psdtg\SiteBundle\Entity\Unit',
-                'property' => 'mmId',
+            ->add('mmId', 'genemu_jqueryselect2_hidden', array(
                 'required' => true,
             ))
         ;

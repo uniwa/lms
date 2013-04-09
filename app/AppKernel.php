@@ -27,6 +27,8 @@ class AppKernel extends Kernel
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             // User Bundle
             new FOS\UserBundle\FOSUserBundle(),
+            // Rest Bundle
+            new FOS\RestBundle\FOSRestBundle(),
             // JMS
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             // KNP

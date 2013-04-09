@@ -26,6 +26,7 @@ twig:
     form:
         resources:
             - 'PsdtgAdminBundle::fields.html.twig'
+            - 'PsdtgAdminBundle::field_mmunit.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -138,6 +139,28 @@ services:
             - { name: doctrine.event_listener, event: preRemove }
         #arguments:
             #- "@service_container"
+
+fos_rest:
+    view:
+        view_response_listener: false
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: php
+        formats:
+            html: true
+            json: true
+            xml: true
+            rss: false
+    format_listener:
+        default_priorities: ['html', 'json', xml, '*/*']
+        fallback_format: json
+        prefer_extension: true
+    body_listener:
+        decoders:
+            json: fos_rest.decoder.json
+            xml: fos_rest.decoder.xml
+    routing_loader:
+        default_format: json
+    param_fetcher_listener: true
 
 jms_serializer:
     metadata:

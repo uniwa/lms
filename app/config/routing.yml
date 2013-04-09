@@ -46,5 +46,6 @@ homeredirts:
         permanent: true # this is for 301
 
 adminbundle:
-    resource: "@PsdtgAdminBundle/Controller"
-    type:     annotation
+    #resource: "@PsdtgAdminBundle/Controller"
+    resource: Psdtg\AdminBundle\Controller\UnitController
+    type:     rest
