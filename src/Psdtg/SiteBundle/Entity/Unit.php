@@ -32,25 +32,31 @@ class Unit
     protected $mmId;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     * @Expose
+     */
+    protected $unitId;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
      * @Expose
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Expose
      */
     protected $registryNo;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Expose
      */
     protected $streetAddress;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Expose
      */
     protected $postalCode;
@@ -61,6 +67,14 @@ class Unit
 
     public function setMmId($mmId) {
         $this->mmId = $mmId;
+    }
+
+    public function getUnitId() {
+        return $this->unitId;
+    }
+
+    public function setUnitId($unitId) {
+        $this->unitId = $unitId;
     }
 
     public function getName() {

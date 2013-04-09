@@ -36,5 +36,13 @@ class LdapManager extends BaseLdapManager
         } else {
             $user->setRoles(array('ROLE_HELPDESK'));
         }
+        // Set the unit
+        $mmservice = $this->container->get('psdtg.mm.service');
+        $units = $mmservice->findBy(array(
+            'ldapuid' => $entry['uid'][0],
+        ));
+        if(count($units) > 0) {
+            $user->setUnit($units[0]);
+        }
     }
 }

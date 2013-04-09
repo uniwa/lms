@@ -1,6 +1,7 @@
 <?php
 namespace Psdtg\SiteBundle\Extension;
 
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Psdtg\SiteBundle\Entity\Circuit;
 
