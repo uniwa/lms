@@ -1,6 +1,6 @@
 <?php
 
-namespace Psdtg\SiteBundle\Entity;
+namespace Psdtg\SiteBundle\Entity\Services;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -24,8 +24,6 @@ use JMS\Serializer\Annotation\ReadOnly;
  */
 class ADSL
 {
-    use TimestampableEntity;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -34,19 +32,22 @@ class ADSL
      */
     protected $id;
 
-    // ManyToOne
-    protected $line; // ΜΠΟΡΕΙ ΝΑ ΕΙΝΑΙ NULL ΑΝ Η ΓΡΑΜΜΗ ΔΕΝ ΕΙΝΑΙ ΙΔΙΟΚΤΗΣΙΑΣ ΠΣΔ
+    /**
+     * @ORM\ManyToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit", inversedBy="adsl")
+     * @ORM\JoinColumn(name="circuit_id", referencedColumnName="id")
+     */
+    protected $phoneCircuit;
 
     /**
-     * @ORM\Column(type="string", length=100)
-     * @Expose
+     * @ORM\Column(type="string", length=50)
      */
-    protected $status;
-
-    protected $profile;
+    protected $profile = self::PROFILE_2MBPS;
     const PROFILE_2MBPS = '2mbps';
     const PROFILE_24MBPS = '24mbps';
 
+    /**
+     * @ORM\Column(type="integer")
+     */
     protected $realspeed; // Ταχύτητα που κλείδωσε
 
     public function getId() {
@@ -57,20 +58,12 @@ class ADSL
         $this->id = $id;
     }
 
-    public function getLine() {
-        return $this->line;
+    public function getPhoneCircuit() {
+        return $this->phoneCircuit;
     }
 
-    public function setLine($line) {
-        $this->line = $line;
-    }
-
-    public function getStatus() {
-        return $this->status;
-    }
-
-    public function setStatus($status) {
-        $this->status = $status;
+    public function setPhoneCircuit($phoneCircuit) {
+        $this->phoneCircuit = $phoneCircuit;
     }
 
     public function getProfile() {
@@ -79,6 +72,13 @@ class ADSL
 
     public function setProfile($profile) {
         $this->profile = $profile;
+    }
+
+    public static function getProfiles() {
+        return array(
+            self::PROFILE_24MBPS => '24mbps',
+            self::PROFILE_2MBPS => '2mbps',
+        );
     }
 
     public function getRealspeed() {

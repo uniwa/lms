@@ -30,8 +30,14 @@ class PhoneCircuit extends Circuit
      */
     protected $number;
 
-    // OneToOne
+    /**
+     * @ORM\OneToMany(targetEntity="Psdtg\SiteBundle\Entity\Services\ADSL", mappedBy="phoneCircuit")
+     */
     protected $adsl;
+
+    public function __construct() {
+        $this->adsl = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public function getType() {
         return $this->type;

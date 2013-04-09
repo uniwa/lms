@@ -15,13 +15,21 @@ class PhoneCircuitAdmin extends CircuitAdmin
         $formMapper
             ->add('type', 'choice', array('choices' => PhoneCircuit::getTypes()))
             ->add('number')
+            /*->add('adsl', 'sonata_type_collection', array(), array(
+                'edit' => 'inline',
+                'inline' => 'table',
+            ))*/
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper) {
         parent::configureListFields($listMapper);
-        $listMapper->add('type', 'trans')
-                   ->add('number')
+        $listMapper
+            ->add('type', 'trans')
+            ->add('number')
+            ->add('adsl.id', 'boolean')
+            ->add('adsl.profile', 'trans')
+            ->add('adsl.realspeed', 'trans')
         ;
     }
 

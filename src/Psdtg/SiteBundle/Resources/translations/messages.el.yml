@@ -14,6 +14,11 @@ Phone Circuit List: Λίστα Τηλεφωνικών Κυκλωμάτων
 Type: Τύπος
 Number: Αριθμός
 
+Adsl: ADSL
+Adsl Id: Έχει ADSL
+Adsl Profile: ADSL Προφίλ
+Adsl Realspeed: ADSL Πραγματική Ταχύτητα
+
 # Request
 Circuit: Κύκλωμα
 Status: Κατάσταση
