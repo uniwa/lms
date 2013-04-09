@@ -19,31 +19,31 @@
             <argument type="service" id="sonata.admin.builder.filter.factory" />
             <argument type="service" id="sonata.admin.guesser.orm_datagrid_chain" />
         </service>
-        <!-- Circuit -->
-        <service id="sonata.admin.circuits.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\CircuitAdmin">
+        <!-- PhoneCircuit -->
+        <service id="sonata.admin.phonecircuits.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\PhoneCircuitAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
-                group="Κυκλώματα"
-                label="Κυκλώματα"
+                group="Τηλεφωνικά Κυκλώματα"
+                label="Τηλεφωνικά Κυκλώματα"
                 />
            <argument />
-           <argument>Psdtg\SiteBundle\Entity\Circuit</argument>
+           <argument>Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit</argument>
            <argument>SonataAdminBundle:CRUD</argument>
             <call method="setSecurityContext">
                 <argument type="service" id="security.context" />
             </call>
        </service>
-        <service id="sonata.admin.circuits.kedo" class="Psdtg\AdminBundle\Admin\Kedo\CircuitAdmin">
+        <service id="sonata.admin.phonecircuits.kedo" class="Psdtg\AdminBundle\Admin\Kedo\PhoneCircuitAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
-                group="Κυκλώματα"
-                label="Κυκλώματα"
+                group="Τηλεφωνικά Κυκλώματα"
+                label="Τηλεφωνικά Κυκλώματα"
                 />
            <argument />
-           <argument>Psdtg\SiteBundle\Entity\Circuit</argument>
+           <argument>Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit</argument>
            <argument>SonataAdminBundle:CRUD</argument>
        </service>
-        <!-- Newcircuit request -->
+        <!-- NewCircuitRequest -->
         <service id="sonata.admin.newcircuitrequests.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\NewCircuitRequestAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"

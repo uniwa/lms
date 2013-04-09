@@ -30,7 +30,7 @@ class Request
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuit")
+     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\Circuit")
      * @ORM\JoinColumn(name="circuitId", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $circuit;

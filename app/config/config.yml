@@ -143,8 +143,8 @@ services:
             - { name: doctrine.event_listener, event: postLoad }
         arguments:
             - "@psdtg.mm.service"
-    psdtg.newlinerequest.listener:
-        class: Psdtg\SiteBundle\Extension\NewLineRequestListener
+    psdtg.newcircuitrequest.listener:
+        class: Psdtg\SiteBundle\Extension\NewCircuitRequestListener
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }

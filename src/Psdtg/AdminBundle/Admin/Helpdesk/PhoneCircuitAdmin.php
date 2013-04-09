@@ -1,15 +1,16 @@
 <?php
 namespace Psdtg\AdminBundle\Admin\Helpdesk;
 
-use Psdtg\AdminBundle\Admin\CircuitAdmin as BaseCircuitAdmin;
+use Psdtg\AdminBundle\Admin\PhoneCircuitAdmin as BasePhoneCircuitAdmin;
 
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class CircuitAdmin extends BaseCircuitAdmin
+class PhoneCircuitAdmin extends BasePhoneCircuitAdmin
 {
     protected $baseRouteName = 'admin_lms_circuit_user';
     protected $baseRoutePattern = 'circuit_user';
@@ -29,6 +30,11 @@ class CircuitAdmin extends BaseCircuitAdmin
     {
         parent::configureFormFields($formMapper);
         // No Editing
+    }
+
+    protected function configureListFields(ListMapper $listMapper) {
+        parent::configureListFields($listMapper);
+        $listMapper->remove('unit.fy');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

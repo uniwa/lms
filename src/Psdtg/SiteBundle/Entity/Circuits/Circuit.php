@@ -1,6 +1,6 @@
 <?php
 
-namespace Psdtg\SiteBundle\Entity;
+namespace Psdtg\SiteBundle\Entity\Circuits;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -15,12 +15,15 @@ use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\ReadOnly;
 
 /**
- * @ORM\Table()
+ * @ORM\Table
  * @ORM\Entity
- * @ExclusionPolicy("all")
- * @AccessType("public_method")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({
+ * "phone_circuit" = "PhoneCircuit"
+ * })
  */
-class Circuit
+abstract class Circuit
 {
     use TimestampableEntity;
 
@@ -39,13 +42,10 @@ class Circuit
     protected $unit;
 
     /**
-     * @ORM\Column(type="string", length=16, nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      * @Expose
      */
-    protected $number;
-
-    // OneToMany
-    protected $services;
+    protected $activatedAt;
 
     public function getId() {
         return $this->id;
@@ -63,19 +63,19 @@ class Circuit
         $this->unit = $unit;
     }
 
-    public function getNumber() {
-        return $this->number;
+    public function getActivatedAt() {
+        return $this->activatedAt;
     }
 
-    public function setNumber($number) {
-        $this->number = $number;
+    public function setActivatedAt($activatedAt) {
+        $this->activatedAt = $activatedAt;
     }
 
-    public function getServices() {
-        return $this->services;
-    }
-
-    public function setServices($services) {
-        $this->services = $services;
+    public function __toString() {
+        if(isset($this->unit)) {
+            return $this->unit->getName();
+        } else {
+            return 'Νέο Κύκλωμα';
+        }
     }
 }

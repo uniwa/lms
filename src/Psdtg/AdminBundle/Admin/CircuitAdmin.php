@@ -1,7 +1,7 @@
 <?php
 namespace Psdtg\AdminBundle\Admin;
 
-use Psdtg\SiteBundle\Entity\Circuit;
+use Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -26,13 +26,6 @@ class CircuitAdmin extends Admin
             ->add('id')
             ->add('unit.mmId')
             ->add('unit.name')
-            ->add('number')
-            ->add('status')
-            ->add('installDate')
-            //->add('newLineRequest')
-            ->add('address')
-            ->add('lineType')
-            //->add('services')
         ;
     }
 
@@ -45,8 +38,7 @@ class CircuitAdmin extends Admin
     {
         $formMapper
             ->add('unit', 'mmunit')
-            ->add('number')
-            ->add('createdAt', 'genemu_jquerydate', array('widget' => 'single_text'))
+            ->add('activatedAt', 'genemu_jquerydate', array('widget' => 'single_text'))
             //->add('services')
         ;
     }
@@ -67,7 +59,9 @@ class CircuitAdmin extends Admin
             ->addIdentifier('id')
             ->add('unit.mmId')
             ->add('unit.name')
-            ->add('number')
+            ->add('unit.categoryName')
+            ->add('unit.fy')
+            ->add('activatedAt')
         ;
     }
 
@@ -82,7 +76,7 @@ class CircuitAdmin extends Admin
             ->add('unit', null, array(), 'mmunit')
             ->add('unit.categoryName', null, array(), 'mmcategory')
             ->add('unit.fyName', null, array(), 'mmfy')
-            ->add('createdAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'required' => false, 'attr' => array('class' => 'datepicker')))
+            ->add('activatedAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'required' => false, 'attr' => array('class' => 'datepicker')))
         ;
     }
 }

@@ -7,6 +7,11 @@ Select a value: Επιλέξτε μια τιμή
 
 # Circuit
 Ypepth Id: Κωδικός Μονάδας (ypepth id)
+Activated At: Ημ/νία Ενεργοποίησης
+
+# Phone Circuit
+Phone Circuit List: Λίστα Τηλεφωνικών Κυκλωμάτων
+Type: Τύπος
 Number: Αριθμός
 
 # Request

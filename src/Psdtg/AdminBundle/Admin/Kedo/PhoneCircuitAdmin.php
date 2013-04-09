@@ -1,10 +1,10 @@
 <?php
 namespace Psdtg\AdminBundle\Admin\Kedo;
 
-use Psdtg\AdminBundle\Admin\CircuitAdmin as BaseCircuitAdmin;
+use Psdtg\AdminBundle\Admin\PhoneCircuitAdmin as BasePhoneCircuitAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class CircuitAdmin extends BaseCircuitAdmin
+class PhoneCircuitAdmin extends BasePhoneCircuitAdmin
 {
     protected $baseRouteName = 'admin_lms_circuit_kedo';
     protected $baseRoutePattern = 'circuit_kedo';
