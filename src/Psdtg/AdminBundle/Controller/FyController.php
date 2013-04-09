@@ -12,7 +12,7 @@ use FOS\RestBundle\View\View;
 
 class FyController extends Controller {
     /**
-     * @Secure("ROLE_USER")
+     * @Secure("ROLE_HELPDESK,ROLE_KEDO")
      */
     public function getFysAction() {
         $repo = $this->container->get('doctrine')->getEntityManager()->getRepository('Psdtg\SiteBundle\Entity\Unit');

@@ -12,7 +12,7 @@ use FOS\RestBundle\View\View;
 
 class UnitController extends Controller {
     /**
-     * @Secure("ROLE_USER")
+     * @Secure("ROLE_HELPDESK,ROLE_KEDO")
      */
     public function getUnitsAction() {
         $mmservice = $this->container->get('psdtg.mm.service');
