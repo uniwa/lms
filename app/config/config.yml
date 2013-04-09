@@ -109,6 +109,8 @@ fos_user:
     user_class: Psdtg\UserBundle\Entity\User
 
 services:
+    cache:
+        class: Doctrine\Common\Cache\ApcCache
     psdtg.ldap.ldap_manager:
         class: Psdtg\UserBundle\Extension\LdapManager
         arguments: ["@fr3d_ldap.ldap_driver", "@fr3d_ldap.user_manager", %fr3d_ldap.ldap_manager.parameters%, "@service_container"]
