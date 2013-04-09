@@ -10,16 +10,16 @@ use Symfony\Component\HttpFoundation\Response;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use FOS\RestBundle\View\View;
 
-class UnitController extends Controller {
+class FyController extends Controller {
     /**
      * @Secure("ROLE_USER")
      */
-    public function getUnitsAction() {
+    public function getFysAction() {
         $mmservice = $this->container->get('psdtg.mm.service');
-        $units = $mmservice->findUnitsBy(array(
+        $fys = $mmservice->findFysBy(array(
             'name' => $this->getRequest()->get('name')
         ));
-        $view = View::create()->setStatusCode(200)->setData($units);
+        $view = View::create()->setStatusCode(200)->setData($fys);
         return $this->get('fos_rest.view_handler')->handle($view);
     }
 }

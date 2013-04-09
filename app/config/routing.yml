@@ -45,7 +45,12 @@ homeredirts:
         route: sonata_admin_dashboard
         permanent: true # this is for 301
 
-adminbundle:
+units:
     #resource: "@PsdtgAdminBundle/Controller"
     resource: Psdtg\AdminBundle\Controller\UnitController
+    type:     rest
+
+fys:
+    #resource: "@PsdtgAdminBundle/Controller"
+    resource: Psdtg\AdminBundle\Controller\FyController
     type:     rest

@@ -39,6 +39,21 @@ class Unit
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     */
+    protected $fyName;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $fyInitials;
+
+    /**
+     * @Expose
+     */
+    protected $fy;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
      * @Expose
      */
     protected $name;
@@ -77,6 +92,34 @@ class Unit
         $this->unitId = $unitId;
     }
 
+    public function getFyName() {
+        return $this->fyName;
+    }
+
+    public function setFyName($fyName) {
+        $this->fyName = $fyName;
+    }
+
+    public function getFyInitials() {
+        return $this->fyInitials;
+    }
+
+    public function setFyInitials($fyInitials) {
+        $this->fyInitials = $fyInitials;
+    }
+
+    public function getFy() {
+        $fy = new Fy();
+        $fy->setName($this->fyName);
+        $fy->setInitials($this->fyInitials);
+        return $fy;
+    }
+
+    public function setFy($fy) {
+        $this->fyName = $fy->getName();
+        $this->fyInitials = $fy->getInitials();
+    }
+
     public function getName() {
         return $this->name;
     }
@@ -107,5 +150,9 @@ class Unit
 
     public function setPostalCode($postalCode) {
         $this->postalCode = $postalCode;
+    }
+
+    public function __toString() {
+        return $this->getName();
     }
 }

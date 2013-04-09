@@ -33,14 +33,11 @@ class UnitToMmIdTransformer implements DataTransformerInterface
             return null;
         }
 
-        /*if ($value instanceof Unit) {
-            return $value->getMmId();
-        } else if (is_int($value)) {
-            return $this->mmservice->find($value);
+        if ($value instanceof Unit) {
+            return $value->getMmId().'__'.$value->getName();
         } else {
             throw new UnexpectedTypeException($value, 'Psdtg\SiteBundle\Entity\Unit');
-        }*/
-        return $value;
+        }
     }
 
     /**
@@ -52,10 +49,8 @@ class UnitToMmIdTransformer implements DataTransformerInterface
             return null;
         }
 
-        if ($value instanceof Unit) {
-            return $this->mmservice->find($value->getMmId());
-        } else if (is_string($value)) {
-            return $this->mmservice->find($value);
+        if (is_scalar($value)) {
+            return $this->mmservice->findUnit($value);
         } else {
             throw new UnexpectedTypeException($value, 'string');
         }

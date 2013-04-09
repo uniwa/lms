@@ -27,23 +27,24 @@ class UnitType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('mmId', 'genemu_jqueryselect2_hidden', array(
-                'required' => true,
-            ))
-            ->add('name', 'hidden', array(
-                'disabled' => true,
-            ));
-        ;
-        $builder->addModelTransformer($this->unitToMmIdTransformer);
+        $builder->addViewTransformer($this->unitToMmIdTransformer);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Psdtg\SiteBundle\Entity\Unit',
-            'class' => 'Psdtg\SiteBundle\Entity\Unit',
+            'required' => true,
+            'configs' => array(
+                'path' => 'get_units',
+                'field_id' => 'mm_id',
+                'field_name' => 'name',
+            ),
+            'class' => null,
         ));
+    }
+
+    public function getParent() {
+        return 'genemu_jqueryselect2_hidden';
     }
 
     public function getName()

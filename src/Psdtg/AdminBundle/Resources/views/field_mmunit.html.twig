@@ -16,19 +16,19 @@
             // custom configs
             $configs = $.extend($configs, {
                 initSelection: function(element, callback) {
-                    var text = '';
-                    if($field.parent().parent().children('input[type="hidden"]').val().length > 0) {
-                        text = $field.parent().parent().children('input[type="hidden"]').val()
+                    if($field.val().indexOf('__') != -1) {
+                        var split = $field.val().split('__');
+                        $field.val(split[0]);
+                        callback({id: split[0], text: split[1] });
                     } else {
-                        text = $field.val();
+                        callback({id: $field.val(), text: $field.val() });
                     }
-                    callback({id: $field.val(), text: text });
                 },
                 query: function (query) {
-                    $.getJSON('{{path('get_units')}}?name='+query.term, function(data) {
+                    $.getJSON('{{path(configs.path)}}?name='+query.term, function(data) {
                         var ret = {results: []};
                         $.each(data, function() {
-                            ret.results.push({id: this.mm_id, text: this.name});
+                            ret.results.push({id: this.{{configs.field_id}}, text: this.{{configs.field_name}}});
                         });
                         query.callback(ret);
                     });
@@ -43,7 +43,6 @@
 
 {% block mmunit_widget %}
     <div class="control-group">
-    {{ form_widget(form.mmId) }}
-    {{ form_widget(form.name) }}
+    {{ form_widget(form) }}
     </div>
 {% endblock %}

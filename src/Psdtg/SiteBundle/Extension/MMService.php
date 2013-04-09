@@ -2,6 +2,7 @@
 
 namespace Psdtg\SiteBundle\Extension;
 
+use Psdtg\SiteBundle\Entity\Fy;
 use Psdtg\SiteBundle\Entity\Unit;
 
 class MMService {
@@ -11,7 +12,7 @@ class MMService {
         $this->container = $container;
     }
 
-    public function find($mmid) {
+    public function findUnit($mmid) {
         $em = $this->container->get('doctrine')->getEntityManager();
         $repo = $em->getRepository('Psdtg\SiteBundle\Entity\Unit');
         $unit = $repo->find($mmid);
@@ -23,7 +24,7 @@ class MMService {
                 'count' => 1,
             ));
             if(count($mmUnitEntries) > 0) {
-                $unit = $this->hydrate($mmUnitEntries[0]);
+                $unit = $this->hydrateUnit($mmUnitEntries[0]);
             } else {
                 $unit = null;
             }
@@ -31,39 +32,65 @@ class MMService {
         return $unit;
     }
 
-    public function findBy(array $filters = array()) {
+    public function findUnitsBy(array $filters = array()) {
         $results = array();
+        $params = array();
         if(isset($filters['name']) && $filters['name'] != '') {
-            $mmUnitEntries = $this->queryUnits(array(
-                'unit_name' => $filters['name'],
-            ));
-            foreach($mmUnitEntries as $curMmUnitEntry) {
-                $results[] = $this->hydrate($curMmUnitEntry);
-            }
-        } else if(isset($filters['ldapuid']) && $filters['ldapuid'] != '') {
+            $params['unit_name'] = $filters['name'];
+        }
+        if(isset($filters['fy']) && $filters['fy'] != '') {
+            $params['fy'] = $filters['fy'];
+        }
+        if(isset($filters['ldapuid']) && $filters['ldapuid'] != '') {
             /* ldap – Πίνακας λογαριασμών ldap
             Πεδίο	Τύπος	Όνομα Πεδίου	Περιγραφή
             ldap_id	int(11)		Ο κωδικός του λογαριασμού ldap
             uid	varchar(255)		To uid του λογαριασμού ldap
             unit_id	int(11)		Η μοναδα που ανήκει ο λογαριασμός ldap */
-            $results[] = $this->find('3');
+            $results[] = $this->findUnit('1000003');
+        }
+        $mmUnitEntries = $this->queryUnits($params);
+        foreach($mmUnitEntries as $curMmUnitEntry) {
+            $results[] = $this->hydrateUnit($curMmUnitEntry);
         }
         return $results;
     }
 
-    protected function hydrate($entry) {
+    public function findFysBy(array $filters = array()) {
+        $results = array();
+        $params = array();
+        if(isset($filters['name']) && $filters['name'] != '') {
+            $params['fy_name'] = $filters['name'];
+        }
+        /*$mmUnitEntries = $this->queryUnits($params);
+        foreach($mmUnitEntries as $curMmUnitEntry) {
+            $results[] = $this->hydrateUnit($curMmUnitEntry);
+        }*/
+        $fy = new Fy();
+        $fy->setName('ΙΝΣΤΙΤΟΥΤΟ ΤΕΧΝΟΛΟΓΙΑΣ ΥΠΟΛΟΓΙΣΤΩΝ');
+        $fy->setInitials('Ι.Τ.Υ.');
+        $results[] = $fy;
+        return $results;
+    }
+
+    protected function hydrateUnit($entry) {
         // Unit not found or its too old. Query the WS for fresh data.
         $em = $this->container->get('doctrine')->getEntityManager();
 
         $unit = new Unit;
         $unit->setMmId($entry->mm_id);
         $unit->setUnitId($entry->mm_id);
+        if(is_object($entry->fy)) {
+            $unit->setFyName($entry->fy->name);
+            $unit->setFyInitials($entry->fy->initials);
+        }
         $unit->setName($entry->unit_name);
         $unit->setPostalCode($entry->postal_code);
         $unit->setRegistryNo($entry->registry_no);
         $unit->setStreetAddress($entry->street_address);
         $unit->setCreatedAt(new \DateTime('now'));
         $unit->setUpdatedAt(new \DateTime('now'));
+
         $em->merge($unit);
         $em->flush();
 

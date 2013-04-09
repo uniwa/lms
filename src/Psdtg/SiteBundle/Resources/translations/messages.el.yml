@@ -20,6 +20,7 @@ Unit: Μονάδα
 Mm Id: Κωδικός ΜΜ Μονάδας
 Unit Mm Id: Κωδικός ΜΜ Μονάδας # Για φίλτρα
 Unit Name: Όνομα Μονάδας
+Unit Fy Name: Φορέας Υλοποίησης
 
 # New Line Request
 New Circuit Request List: Λίστα Αιτημάτων Νέου Κυκλώματος
