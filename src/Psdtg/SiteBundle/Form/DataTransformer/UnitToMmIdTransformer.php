@@ -29,11 +29,11 @@ class UnitToMmIdTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        /*if (null === $value) {
+        if (null === $value) {
             return null;
         }
 
-        if ($value instanceof Unit) {
+        /*if ($value instanceof Unit) {
             return $value->getMmId();
         } else if (is_int($value)) {
             return $this->mmservice->find($value);
@@ -53,7 +53,7 @@ class UnitToMmIdTransformer implements DataTransformerInterface
         }
 
         if ($value instanceof Unit) {
-            return $this->mmservice->refresh($value);
+            return $this->mmservice->find($value->getMmId());
         } else if (is_string($value)) {
             return $this->mmservice->find($value);
         } else {

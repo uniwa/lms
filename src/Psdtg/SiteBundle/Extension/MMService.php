@@ -38,10 +38,5 @@ class MMService {
         }
         return $results;
     }
-
-    public function refresh(Unit $unit) {
-        $unit = $this->find($unit->getMmId());
-        return $unit;
-    }
 }
 ?>
