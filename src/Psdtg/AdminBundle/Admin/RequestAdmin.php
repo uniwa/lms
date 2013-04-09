@@ -42,7 +42,6 @@ abstract class RequestAdmin extends Admin
     {
         $formMapper
             ->add('unit', 'mmunit', array())
-            ->add('id', 'genemu_jqueryselect2_choice', array())
         ;
     }
 

@@ -19,9 +19,9 @@ class UnitListener {
         }
 
         // Refresh the unit if its older than 1 day
-        $yesterday = new \DateTime('yesterday');
+        /*$yesterday = new \DateTime('yesterday');
         if($unit->getUpdatedAt() <= $yesterday) {
             $this->mmservice->refresh($unit);
-        }
+        }*/
     }
 }

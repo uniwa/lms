@@ -31,6 +31,9 @@ class UnitType extends AbstractType
             ->add('mmId', 'genemu_jqueryselect2_hidden', array(
                 'required' => true,
             ))
+            ->add('name', 'hidden', array(
+                'disabled' => true,
+            ));
         ;
         $builder->addModelTransformer($this->unitToMmIdTransformer);
     }

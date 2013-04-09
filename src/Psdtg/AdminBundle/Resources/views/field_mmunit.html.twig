@@ -15,6 +15,9 @@
 
             // custom configs
             $configs = $.extend($configs, {
+                initSelection: function(element, callback) {
+                    callback({id: $field.val(), text: $field.parent().parent().children('input[type="hidden"]').val() });
+                },
                 query: function (query) {
                     $.getJSON('{{path('get_units')}}?name='+query.term, function(data) {
                         var ret = {results: []};
@@ -35,5 +38,6 @@
 {% block mmunit_widget %}
     <div class="control-group">
     {{ form_widget(form.mmId) }}
+    {{ form_widget(form.name) }}
     </div>
 {% endblock %}
