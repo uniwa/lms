@@ -13,24 +13,8 @@ class LdapManager extends BaseLdapManager
 {
     protected $container;
 
-    private $driver;
-    private $userManager;
-    private $params = array();
-    private $ldapAttributes = array();
-    private $ldapUsernameAttr;
-
     public function __construct(LdapDriverInterface $driver, $userManager, array $params, $container)
     {
-        $this->driver = $driver;
-        $this->userManager = $userManager;
-        $this->params = $params;
-
-        foreach ($this->params['attributes'] as $attr) {
-            $this->ldapAttributes[] = $attr['ldap_attr'];
-        }
-
-        $this->ldapUsernameAttr = $this->ldapAttributes[0];
-
         $this->container = $container;
         parent::__construct($driver, $userManager, $params);
     }
@@ -55,18 +39,6 @@ class LdapManager extends BaseLdapManager
         $this->hydrate($user, $entries[0]);
 
         return $user;
-    }
-
-    private function buildFilter(array $criteria, $condition = '&')
-    {
-        $criteria = self::escapeValue($criteria);
-        $filters = array();
-        $filters[] = $this->params['filter'];
-        foreach ($criteria as $key => $value) {
-            $filters[] = sprintf('(%s=%s)', $key, $value);
-        }
-
-        return sprintf('(%s%s)', $condition, implode($filters));
     }
 
     protected function hydrate(UserInterface $user, array $entry)

@@ -16,7 +16,6 @@ framework:
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     default_locale:  %locale%
-    trust_proxy_headers: false # Whether or not the Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
     session:         ~
 
 # Twig Configuration
@@ -114,6 +113,12 @@ services:
     psdtg.ldap.ldap_manager:
         class: Psdtg\UserBundle\Extension\LdapManager
         arguments: ["@fr3d_ldap.ldap_driver", "@fr3d_ldap.user_manager", %fr3d_ldap.ldap_manager.parameters%, "@service_container"]
+    psdtg.twig.extension:
+        class: Psdtg\SiteBundle\Extension\TwigExtension
+        tags:
+            -  { name: twig.extension }
+        arguments:
+            - "@service_container"
     psdtg.mm.service:
         class: Psdtg\SiteBundle\Extension\MMService
         arguments:

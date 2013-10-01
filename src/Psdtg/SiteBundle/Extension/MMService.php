@@ -100,7 +100,7 @@ class MMService {
     protected function queryMM($resource, $params = array()) {
         $username = "mmsch";
         $password = "mmsch";
-        $server = 'http://mmsch.teiath.gr/server/'.$resource.'_json.php';
+        $server = 'http://mmsch.teiath.gr/api/'.$resource;
 
         $curl = curl_init ($server);
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC ) ;
