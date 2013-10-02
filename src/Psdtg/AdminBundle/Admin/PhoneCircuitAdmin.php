@@ -24,10 +24,10 @@ class PhoneCircuitAdmin extends CircuitAdmin
     protected function configureListFields(ListMapper $listMapper) {
         parent::configureListFields($listMapper);
         $listMapper
-            ->add('circuitType')
+            ->add('circuitType.name', 'trans')
             ->add('number')
             ->add('paidByPsd')
-            ->add('profile', 'trans')
+            ->add('bandwidth', 'trans')
             ->add('realspeed', 'trans')
         ;
     }
