@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OrderBy;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
-use Oh\GoogleMapFormTypeBundle\Validator\Constraints as OhAssert;
 
 /**
  * @ORM\Entity
@@ -28,8 +27,6 @@ class User extends BaseUser implements LdapUserInterface
      *
      * @ORM\Column(name="name", type="string", nullable=true)
      *
-     * @Assert\MinLength(limit="3", message="The name is too short.")
-     * @Assert\MaxLength(limit="50", message="The name is too long.")
      */
     protected $name;
 
