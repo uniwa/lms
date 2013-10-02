@@ -4,6 +4,7 @@ namespace Psdtg\SiteBundle\Entity\Circuits;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Blameable\Traits\BlameableEntity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Criteria;
@@ -17,6 +18,7 @@ use JMS\Serializer\Annotation\ReadOnly;
 /**
  * @ORM\Table
  * @ORM\Entity
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  * @ORM\DiscriminatorMap({
@@ -26,6 +28,7 @@ use JMS\Serializer\Annotation\ReadOnly;
 abstract class Circuit
 {
     use TimestampableEntity;
+    use BlameableEntity;
 
     /**
      * @ORM\Column(type="integer")
@@ -46,6 +49,12 @@ abstract class Circuit
      * @Expose
      */
     protected $activatedAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Expose
+     */
+    protected $deletedAt;
 
     public function getId() {
         return $this->id;
@@ -69,6 +78,14 @@ abstract class Circuit
 
     public function setActivatedAt($activatedAt) {
         $this->activatedAt = $activatedAt;
+    }
+
+    public function getDeletedAt() {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt($deletedAt) {
+        $this->deletedAt = $deletedAt;
     }
 
     public function __toString() {

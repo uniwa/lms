@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation\ReadOnly;
  * @ExclusionPolicy("all")
  * @AccessType("public_method")
  */
-class Category {
+class UnitCategory {
     /**
      * @Expose
      */

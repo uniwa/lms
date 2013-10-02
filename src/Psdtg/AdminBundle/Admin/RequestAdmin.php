@@ -55,7 +55,7 @@ abstract class RequestAdmin extends Admin
         $listMapper
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'view' => array(),
+                    'show' => array(),
                     'edit' => array(),
             )))
             ->addIdentifier('id')
