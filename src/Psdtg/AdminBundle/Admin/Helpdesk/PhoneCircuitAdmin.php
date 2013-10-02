@@ -48,7 +48,7 @@ class PhoneCircuitAdmin extends BasePhoneCircuitAdmin
         if($context === 'list') {
             // User should only see the lines belong to their FY
             $fyName = $this->securityContext->getToken()->getUser()->getUnit()->getFy()->getName();
-            $repository = $this->getModelManager()->getEntityManager($this->getClass())->getRepository($this->getClass());
+            $repository = $this->getModelManager()->getManager($this->getClass())->getRepository($this->getClass());
 
             $qb = $repository->createQueryBuilder('c')
                     ->join('c.unit', 'u')

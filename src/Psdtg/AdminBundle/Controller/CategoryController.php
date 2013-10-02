@@ -15,7 +15,7 @@ class CategoryController extends Controller {
      * @Secure("ROLE_HELPDESK,ROLE_KEDO")
      */
     public function getCategoriesAction() {
-        $repo = $this->container->get('doctrine')->getEntityManager()->getRepository('Psdtg\SiteBundle\Entity\Unit');
+        $repo = $this->container->get('doctrine')->getManager()->getRepository('Psdtg\SiteBundle\Entity\Unit');
         $categories = $repo->findCategories(array(
             'name' => $this->getRequest()->get('name')
         ));

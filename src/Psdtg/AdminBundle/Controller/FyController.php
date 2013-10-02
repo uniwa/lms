@@ -15,7 +15,7 @@ class FyController extends Controller {
      * @Secure("ROLE_HELPDESK,ROLE_KEDO")
      */
     public function getFysAction() {
-        $repo = $this->container->get('doctrine')->getEntityManager()->getRepository('Psdtg\SiteBundle\Entity\Unit');
+        $repo = $this->container->get('doctrine')->getManager()->getRepository('Psdtg\SiteBundle\Entity\Unit');
         $fys = $repo->findFys(array(
             'name' => $this->getRequest()->get('name')
         ));

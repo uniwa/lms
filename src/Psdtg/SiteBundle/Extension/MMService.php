@@ -12,7 +12,7 @@ class MMService {
     }
 
     public function findUnit($mmid) {
-        $em = $this->container->get('doctrine')->getEntityManager();
+        $em = $this->container->get('doctrine')->getManager();
         $repo = $em->getRepository('Psdtg\SiteBundle\Entity\Unit');
         $unit = $repo->find($mmid);
         $yesterday = new \DateTime('yesterday');
@@ -57,7 +57,7 @@ class MMService {
 
     protected function hydrateUnit($entry) {
         // Unit not found or its too old. Query the WS for fresh data.
-        $em = $this->container->get('doctrine')->getEntityManager();
+        $em = $this->container->get('doctrine')->getManager();
 
         $unit = new Unit;
         $unit->setMmId($entry->mm_id);
