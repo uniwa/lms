@@ -91,6 +91,10 @@ doctrine:
                 dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
                 alias: GedmoTree # this one is optional and will default to the name set for the mapping
                 is_bundle: false
+        filters:
+            softdeleteable:
+                class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                enabled: true
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -195,6 +199,7 @@ stof_doctrine_extensions:
             timestampable: true
             blameable: true
             loggable: true
+            softdeleteable: true
 
 fr3d_ldap:
     driver:

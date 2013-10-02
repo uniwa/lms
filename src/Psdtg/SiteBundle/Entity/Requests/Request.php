@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Table
  * @ORM\Entity
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  * @ORM\DiscriminatorMap({"new_circuit" = "NewCircuitRequest"})
@@ -56,6 +57,12 @@ class Request
     const STATUS_APPROVED = 'APPROVED';
     const STATUS_REJECTED = 'REJECTED';
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Expose
+     */
+    protected $deletedAt;
+
     public function getId() {
         return $this->id;
     }
@@ -86,6 +93,14 @@ class Request
 
     public function setTechFactsheetNo($techFactsheetNo) {
         $this->techFactsheetNo = $techFactsheetNo;
+    }
+
+    public function getDeletedAt() {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt($deletedAt) {
+        $this->deletedAt = $deletedAt;
     }
 
     public function getStatus() {
