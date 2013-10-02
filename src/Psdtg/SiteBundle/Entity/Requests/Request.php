@@ -59,7 +59,6 @@ class Request
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Expose
      */
     protected $deletedAt;
 

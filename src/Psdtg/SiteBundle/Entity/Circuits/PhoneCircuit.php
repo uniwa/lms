@@ -31,6 +31,12 @@ class PhoneCircuit extends Circuit
     protected $number;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @Expose
+     */
+    protected $paidByPsd = false;
+
+    /**
      * @ORM\Column(type="string", length=50)
      */
     protected $bandwidth = self::ADSL_PROFILE_2MBPS;

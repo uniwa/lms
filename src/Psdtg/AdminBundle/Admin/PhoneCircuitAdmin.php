@@ -15,6 +15,7 @@ class PhoneCircuitAdmin extends CircuitAdmin
         $formMapper
             ->add('type', 'choice', array('choices' => PhoneCircuit::getTypes()))
             ->add('number')
+            ->add('paidByPsd')
             ->add('profile', 'choice', array('choices' => ADSL::getProfiles(), 'required' => true))
             ->add('realspeed')
         ;
@@ -25,6 +26,7 @@ class PhoneCircuitAdmin extends CircuitAdmin
         $listMapper
             ->add('type', 'trans')
             ->add('number')
+            ->add('paidByPsd')
             ->add('profile', 'trans')
             ->add('realspeed', 'trans')
         ;
