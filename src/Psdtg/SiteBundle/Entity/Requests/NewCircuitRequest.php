@@ -11,7 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class NewCircuitRequest extends Request
 {
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\ManyToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\CircuitType")
+     * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      */
     protected $circuitType;
 
@@ -26,20 +27,6 @@ class NewCircuitRequest extends Request
 
     public function setCircuitType($circuitType) {
         $this->circuitType = $circuitType;
-    }
-
-    public static function getNewCircuitRequestTypes() {
-        return array(
-            'pstn_dialup' => 'PSTN dialup',
-            'pstn_adsl' => 'PSTN aDSL',
-            'pstn_vdsl' => 'PSTN VDSL',
-            'isdn_dialup' => 'ISDN dialup',
-            'isdn_adsl' => 'ISDN aDSL',
-            'isdn_vdsl' => 'ISDN VDSL',
-            'vdsl_ll' => 'VDSL LL(LRE)',
-            'll' => 'LL(M1020)',
-            'eline_me' => 'e-line ME',
-        );
     }
 
     public static function getStatuses() {

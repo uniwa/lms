@@ -17,12 +17,11 @@ use JMS\Serializer\Annotation\ReadOnly;
 class PhoneCircuit extends Circuit
 {
     /**
-     * @ORM\Column(type="string", length=16, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\CircuitType")
+     * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      * @Expose
      */
-    protected $type = self::TYPE_PSTN;
-    const TYPE_PSTN = 'PSTN';
-    const TYPE_ISDN = 'ISDN';
+    protected $circuitType;
 
     /**
      * @ORM\Column(type="string", length=16, nullable=true)
@@ -48,19 +47,20 @@ class PhoneCircuit extends Circuit
      */
     protected $realspeed; // Ταχύτητα που κλείδωσε
 
-    public function getType() {
-        return $this->type;
+    public function getCircuitType() {
+        return $this->circuitType;
     }
 
-    public function setType($type) {
-        $this->type = $type;
+    public function setCircuitType($circuitType) {
+        $this->circuitType = $circuitType;
     }
 
-    public static function getTypes() {
-        return array(
-            self::TYPE_PSTN => 'PSTN',
-            self::TYPE_ISDN => 'ISDN',
-        );
+    public function getPaidByPsd() {
+        return $this->paidByPsd;
+    }
+
+    public function setPaidByPsd($paidByPsd) {
+        $this->paidByPsd = $paidByPsd;
     }
 
     public function getNumber() {

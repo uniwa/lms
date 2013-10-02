@@ -13,10 +13,10 @@ class PhoneCircuitAdmin extends CircuitAdmin
     {
         parent::configureFormFields($formMapper);
         $formMapper
-            ->add('type', 'choice', array('choices' => PhoneCircuit::getTypes()))
+            ->add('circuitType')
             ->add('number')
             ->add('paidByPsd')
-            ->add('profile', 'choice', array('choices' => ADSL::getProfiles(), 'required' => true))
+            ->add('bandwidth')
             ->add('realspeed')
         ;
     }
@@ -24,7 +24,7 @@ class PhoneCircuitAdmin extends CircuitAdmin
     protected function configureListFields(ListMapper $listMapper) {
         parent::configureListFields($listMapper);
         $listMapper
-            ->add('type', 'trans')
+            ->add('circuitType')
             ->add('number')
             ->add('paidByPsd')
             ->add('profile', 'trans')
