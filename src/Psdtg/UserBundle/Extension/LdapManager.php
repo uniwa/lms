@@ -62,11 +62,11 @@ class LdapManager extends BaseLdapManager
         }
         // Set the unit
         $mmservice = $this->container->get('psdtg.mm.service');
-        $units = $mmservice->findUnitsBy(array(
+        $unit = $mmservice->findOneUnitBy(array(
             'ldapuid' => $entry['uid'][0],
         ));
-        if(count($units) > 0) {
-            $user->setUnit($units[0]);
+        if(count($unit) > 0) {
+            $user->setUnit($unit);
         } else {
             throw new \Exception('Δεν βρέθηκε η μονάδα (mm_id) του χρήστη');
         }

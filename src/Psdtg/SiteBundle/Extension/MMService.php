@@ -2,6 +2,7 @@
 
 namespace Psdtg\SiteBundle\Extension;
 
+use Psdtg\SiteBundle\Exception\MMException;
 use Psdtg\SiteBundle\Entity\Unit;
 
 class MMService {
@@ -35,10 +36,10 @@ class MMService {
         $results = array();
         $params = array();
         if(isset($filters['name']) && $filters['name'] != '') {
-            $params['unit_name'] = $filters['name'];
+            $params['name'] = $filters['name'];
         }
         if(isset($filters['fy']) && $filters['fy'] != '') {
-            $params['fy'] = $filters['fy'];
+            $params['implementation_entity'] = $filters['fy'];
         }
         if(isset($filters['ldapuid']) && $filters['ldapuid'] != '') {
             /* ldap – Πίνακας λογαριασμών ldap
@@ -55,6 +56,14 @@ class MMService {
         return $results;
     }
 
+    public function findOneUnitBy(array $filters = array()) {
+        $units = $this->findUnitsBy($filters+array('limit' => 1));
+        if(!isset($units[0])) {
+            throw new MMException('Η μονάδα δεν βρέθηκε');
+        }
+        return $units[0];
+    }
+
     protected function hydrateUnit($entry) {
         // Unit not found or its too old. Query the WS for fresh data.
         $em = $this->container->get('doctrine')->getManager();
@@ -62,11 +71,9 @@ class MMService {
         $unit = new Unit;
         $unit->setMmId($entry->mm_id);
         $unit->setUnitId($entry->mm_id);
-        if(is_object($entry->fy)) {
-            $unit->setFyName($entry->fy->name);
-            $unit->setFyInitials($entry->fy->initials);
-        }
-        $unit->setName($entry->unit_name);
+        $unit->setFyName($entry->implementation_entity);
+        $unit->setFyInitials($entry->implementation_entity_initials);
+        $unit->setName($entry->name);
         $unit->setPostalCode($entry->postal_code);
         $unit->setRegistryNo($entry->registry_no);
         $unit->setStreetAddress($entry->street_address);
@@ -84,8 +91,10 @@ class MMService {
         if(!isset($params['state']) || $params['state'] == '') {
             $params['state'] = "ΕΝΕΡΓΗ";
         }
-        if(!isset($params['count']) || $params['count'] == '') {
+        if(!isset($params['limit']) || $params['limit'] == '') {
             $params['count'] = 10;
+        } else {
+            $params['count'] = $params['limit'];
         }
         if(!isset($params['startat']) || $params['startat'] == '') {
             $params['startat'] = 0;
@@ -114,14 +123,15 @@ class MMService {
         curl_close($curl);
         if ($http_status == 200)
         {
-            $data = json_decode($data);
-            //echo 'Found : '.count($data).' unit'.(count($data) == 1 ? '' : 's').'<br><br>';
-            //var_dump($data);
-            return $data->data;
+            $decodedData = json_decode($data);
+            if(!$decodedData || !isset($decodedData->data)) {
+                throw new MMException('MMSCH Error: '.$data);
+            }
+            return $decodedData->data;
         }
         else
         {
-            throw new \Exception('MMSCH Error: '.$data);
+            throw new MMException('MMSCH Error: '.$data);
         }
     }
 }
