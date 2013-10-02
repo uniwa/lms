@@ -103,11 +103,12 @@ class MMService {
         $server = 'http://mmsch.teiath.gr/api/'.$resource;
 
         $curl = curl_init ($server);
-        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC ) ;
-        curl_setopt($curl, CURLOPT_USERPWD, $username.":".$password);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($params) );
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($curl, CURLOPT_USERPWD,  $username.":".$password);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode( $params ));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
 
         $data = curl_exec ($curl);
         $http_status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -117,7 +118,7 @@ class MMService {
             $data = json_decode($data);
             //echo 'Found : '.count($data).' unit'.(count($data) == 1 ? '' : 's').'<br><br>';
             //var_dump($data);
-            return $data;
+            return $data->data;
         }
         else
         {
