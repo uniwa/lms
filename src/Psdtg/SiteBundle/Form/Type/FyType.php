@@ -23,6 +23,9 @@ class FyType extends AbstractType
                 'path' => 'get_fys',
                 'field_id' => 'name',
                 'field_name' => 'name',
+                'ajax' => array(
+                    'quietMillis' => 300,
+                ),
             ),
             'class' => null,
         ));

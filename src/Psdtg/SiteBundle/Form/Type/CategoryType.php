@@ -23,6 +23,9 @@ class CategoryType extends AbstractType
                 'path' => 'get_categories',
                 'field_id' => 'name',
                 'field_name' => 'name',
+                'ajax' => array(
+                    'quietMillis' => 300,
+                ),
             ),
             'class' => null,
         ));

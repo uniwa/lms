@@ -47,12 +47,13 @@ class MMService {
             ldap_id	int(11)		Ο κωδικός του λογαριασμού ldap
             uid	varchar(255)		To uid του λογαριασμού ldap
             unit_id	int(11)		Η μοναδα που ανήκει ο λογαριασμός ldap */
-            $results[] = $this->findUnit('1000003');
+            $params['mm_id'] = '1000003';
         }
         $mmUnitEntries = $this->queryUnits($params);
         foreach($mmUnitEntries as $curMmUnitEntry) {
             $results[] = $this->hydrateUnit($curMmUnitEntry);
         }
+        $this->container->get('doctrine')->getManager()->flush($results);
         return $results;
     }
 
@@ -61,10 +62,13 @@ class MMService {
         if(!isset($units[0])) {
             throw new MMException('Η μονάδα δεν βρέθηκε');
         }
+        if(count($units) > 1) {
+            throw new MMException('Βρέθηκαν περισσότερες της μιας μονάδας: '.count($units));
+        }
         return $units[0];
     }
 
-    protected function hydrateUnit($entry) {
+    protected function hydrateUnit($entry, $flush = false) {
         // Unit not found or its too old. Query the WS for fresh data.
         $em = $this->container->get('doctrine')->getManager();
 
@@ -81,8 +85,10 @@ class MMService {
         $unit->setCreatedAt(new \DateTime('now'));
         $unit->setUpdatedAt(new \DateTime('now'));
 
-        $em->merge($unit);
-        $em->flush();
+        $unit = $em->merge($unit);
+        if($flush == true) {
+            $em->flush($unit);
+        }
 
         return $unit;
     }

@@ -10,8 +10,26 @@
     <script type="text/javascript">
         jQuery(document).ready(function($) {
             var $field = $('#{{ id }}');
+            var timeout;
 
             var $configs = {{ configs|json_encode|raw }};
+
+            var queryFunc = function(query) {
+                if(query.term.length >= $configs.minimumInputLength) {
+                    $.ajax({
+                        url: '{{path(configs.path)}}?name='+query.term,
+                        cache: true,
+                        dataType: "json",
+                        success: function(data) {
+                            var ret = {results: []};
+                            $.each(data, function() {
+                                ret.results.push({id: this.{{configs.field_id}}, text: this.{{configs.field_name}}});
+                            });
+                            query.callback(ret);
+                        }
+                    });
+                }
+            };
 
             // custom configs
             $configs = $.extend($configs, {
@@ -25,24 +43,41 @@
                     }
                 },
                 query: function (query) {
-                    $.getJSON('{{path(configs.path)}}?name='+query.term, function(data) {
-                        var ret = {results: []};
-                        $.each(data, function() {
-                            ret.results.push({id: this.{{configs.field_id}}, text: this.{{configs.field_name}}});
-                        });
-                        query.callback(ret);
-                    });
-                }
+                    window.clearTimeout(timeout);
+                    timeout = setTimeout(function() { queryFunc(query); }, $configs.ajax.quietMillis);
+                },
+                allowClear: {{form.vars.required ? false : true}}
             });
             // end of custom configs
 
             $field.select2($configs);
+            $field.keyup(function() {
+              if(timeout) {
+                window.clearTimeout(timeout);
+              }
+              timeout = setTimeout(function() { queryFunc($field.val()); }, $configs.ajax.quietMillis);
+            });
         });
     </script>
 {% endblock %}
 
 {% block mmunit_widget %}
     <div class="control-group">
-    {{ form_widget(form) }}
+    {#{{ form_widget(form) }}#}
+    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" />
+    </div>
+{% endblock %}
+
+{% block mmfy_widget %}
+    <div class="control-group">
+    {#{{ form_widget(form) }}#}
+    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" />
+    </div>
+{% endblock %}
+
+{% block mmcategory_widget %}
+    <div class="control-group">
+    {#{{ form_widget(form) }}#}
+    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" />
     </div>
 {% endblock %}

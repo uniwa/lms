@@ -37,6 +37,10 @@ class UnitType extends AbstractType
                 'path' => 'get_units',
                 'field_id' => 'mm_id',
                 'field_name' => 'name',
+                'minimumInputLength' => 3,
+                'ajax' => array(
+                    'quietMillis' => 300,
+                ),
             ),
             'class' => null,
         ));

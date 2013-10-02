@@ -77,8 +77,8 @@ abstract class RequestAdmin extends Admin
     {
         $datagridMapper
             ->add('unit', null, array(), 'mmunit')
-            ->add('unit.categoryName', null, array(), 'mmcategory')
-            ->add('unit.fyName', null, array(), 'mmfy')
+            ->add('unit.categoryName', null, array(), 'mmcategory', array('required' => false))
+            ->add('unit.fyName', null, array(), 'mmfy', array('required' => false))
             ->add('createdBy', null, array(), null, array('attr' => array('placeholder' => 'LDAP Username')))
             ->add('status', null, array(), 'choice', array('choices' => NewCircuitRequest::getStatuses()))
         ;

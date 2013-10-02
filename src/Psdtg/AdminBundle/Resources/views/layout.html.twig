@@ -2,13 +2,11 @@
 
 {% block stylesheets %}
 {{parent()}}
-<link rel="stylesheet" href="{{ asset('stylesheets/select2.css') }}" type="text/css" media="all" />
 {% if form is defined %}{{ form_stylesheet(form) }}{% endif %}
 {% endblock %}
 
 {% block javascripts %}
 {{parent()}}
-<script src="{{ asset('javascripts/select2.min.js') }}" type="text/javascript"></script>
 {% if form is defined %}{{ form_javascript(form) }}{% endif %}
 {% endblock %}
 
