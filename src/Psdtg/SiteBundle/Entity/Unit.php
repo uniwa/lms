@@ -119,7 +119,7 @@ class Unit
     }
 
     public function getFy() {
-        $fy = new Fy();
+        $fy = new UnitFy();
         $fy->setName($this->fyName);
         $fy->setInitials($this->fyInitials);
         return $fy;
@@ -171,7 +171,7 @@ class Unit
     }
 
     public function getCategory() {
-        $category = new Category();
+        $category = new UnitCategory();
         $category->setName($this->categoryName);
         return $category;
     }

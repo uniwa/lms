@@ -2,8 +2,8 @@
 
 namespace Psdtg\SiteBundle\Entity\Repositories;
 
-use Psdtg\SiteBundle\Entity\Category;
-use Psdtg\SiteBundle\Entity\Fy;
+use Psdtg\SiteBundle\Entity\UnitCategory;
+use Psdtg\SiteBundle\Entity\UnitFy;
 
 class UnitsRepository extends BaseRepository
 {
@@ -20,7 +20,7 @@ class UnitsRepository extends BaseRepository
         $catobjects = array();
         foreach($categories as $curCategory) {
             if($curCategory['categoryName'] != '') {
-                $catobject = new Category();
+                $catobject = new UnitCategory();
                 $catobject->setName($curCategory['categoryName']);
                 $catobjects[] = $catobject;
             }

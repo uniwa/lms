@@ -2,7 +2,6 @@
 
 namespace Psdtg\SiteBundle\Extension;
 
-use Psdtg\SiteBundle\Entity\Fy;
 use Psdtg\SiteBundle\Entity\Unit;
 
 class MMService {
