@@ -31,13 +31,16 @@ class PhoneCircuit extends Circuit
     protected $number;
 
     /**
-     * @ORM\OneToMany(targetEntity="Psdtg\SiteBundle\Entity\Services\ADSL", mappedBy="phoneCircuit")
+     * @ORM\Column(type="string", length=50)
      */
-    protected $adsl;
+    protected $bandwidth = self::ADSL_PROFILE_2MBPS;
+    const ADSL_PROFILE_2MBPS = '2mbps';
+    const ADSL_PROFILE_24MBPS = '24mbps';
 
-    public function __construct() {
-        $this->adsl = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $realspeed; // Ταχύτητα που κλείδωσε
 
     public function getType() {
         return $this->type;
@@ -62,12 +65,20 @@ class PhoneCircuit extends Circuit
         $this->number = $number;
     }
 
-    public function getAdsl() {
-        return $this->adsl;
+    public function getBandwidth() {
+        return $this->bandwidth;
     }
 
-    public function setAdsl($adsl) {
-        $this->adsl = $adsl;
+    public function setBandwidth($bandwidth) {
+        $this->bandwidth = $bandwidth;
+    }
+
+    public function getRealspeed() {
+        return $this->realspeed;
+    }
+
+    public function setRealspeed($realspeed) {
+        $this->realspeed = $realspeed;
     }
 
     public function __toString() {

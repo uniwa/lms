@@ -15,10 +15,8 @@ class PhoneCircuitAdmin extends CircuitAdmin
         $formMapper
             ->add('type', 'choice', array('choices' => PhoneCircuit::getTypes()))
             ->add('number')
-            /*->add('adsl', 'sonata_type_collection', array(), array(
-                'edit' => 'inline',
-                'inline' => 'table',
-            ))*/
+            ->add('profile', 'choice', array('choices' => ADSL::getProfiles(), 'required' => true))
+            ->add('realspeed')
         ;
     }
 
@@ -27,9 +25,8 @@ class PhoneCircuitAdmin extends CircuitAdmin
         $listMapper
             ->add('type', 'trans')
             ->add('number')
-            ->add('adsl.id', 'boolean')
-            ->add('adsl.profile', 'trans')
-            ->add('adsl.realspeed', 'trans')
+            ->add('profile', 'trans')
+            ->add('realspeed', 'trans')
         ;
     }
 
