@@ -37,7 +37,7 @@ class CircuitAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('unit', 'mmunit')
+            ->add('unit', 'mmunit', array('required' => true))
             ->add('activatedAt', 'genemu_jquerydate', array('widget' => 'single_text'))
             //->add('services')
         ;

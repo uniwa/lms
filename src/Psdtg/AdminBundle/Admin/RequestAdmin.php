@@ -41,7 +41,7 @@ abstract class RequestAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('unit', 'mmunit', array())
+            ->add('unit', 'mmunit', array('required' => true))
         ;
     }
 

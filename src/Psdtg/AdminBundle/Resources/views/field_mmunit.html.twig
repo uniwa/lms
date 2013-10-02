@@ -46,7 +46,7 @@
                     window.clearTimeout(timeout);
                     timeout = setTimeout(function() { queryFunc(query); }, $configs.ajax.quietMillis);
                 },
-                allowClear: {{form.vars.required ? false : true}}
+                allowClear: {{form.vars.required == true ? "false" : "true"}}
             });
             // end of custom configs
 
@@ -64,20 +64,20 @@
 {% block mmunit_widget %}
     <div class="control-group">
     {#{{ form_widget(form) }}#}
-    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" />
+    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" />
     </div>
 {% endblock %}
 
 {% block mmfy_widget %}
     <div class="control-group">
     {#{{ form_widget(form) }}#}
-    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" />
+    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" />
     </div>
 {% endblock %}
 
 {% block mmcategory_widget %}
     <div class="control-group">
     {#{{ form_widget(form) }}#}
-    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" />
+    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" />
     </div>
 {% endblock %}
