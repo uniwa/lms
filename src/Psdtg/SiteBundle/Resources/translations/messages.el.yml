@@ -17,6 +17,15 @@ Activated At: Ημ/νία Ενεργοποίησης
 Phone Circuit List: Λίστα Τηλεφωνικών Κυκλωμάτων
 Type: Τύπος
 Number: Αριθμός
+pstn_dialup: 'PSTN dialup'
+pstn_adsl: 'PSTN aDSL'
+pstn_vdsl: 'PSTN VDSL'
+isdn_dialup: 'ISDN dialup'
+isdn_adsl: 'ISDN aDSL'
+isdn_vdsl: 'ISDN VDSL'
+vdsl_ll: 'VDSL LL(LRE)'
+ll: 'LL(M1020)'
+eline_me: 'e-line ME'
 
 Adsl: ADSL
 Adsl Id: Έχει ADSL

@@ -36,14 +36,14 @@ class PhoneCircuit extends Circuit
     protected $paidByPsd = false;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     protected $bandwidth = self::ADSL_PROFILE_2MBPS;
     const ADSL_PROFILE_2MBPS = '2mbps';
     const ADSL_PROFILE_24MBPS = '24mbps';
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $realspeed; // Ταχύτητα που κλείδωσε
 
