@@ -49,4 +49,15 @@ class PhoneCircuitAdmin extends CircuitAdmin
         $datagridMapper
         ;
     }
+
+    public function getExportFields()
+    {
+        return array_merge(parent::getExportFields(),array(
+            //'circuitType.name',
+            'number',
+            'paidByPsd',
+            'bandwidth',
+            'realspeed',
+        ));
+    }
 }

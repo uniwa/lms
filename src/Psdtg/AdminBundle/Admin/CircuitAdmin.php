@@ -88,4 +88,15 @@ class CircuitAdmin extends Admin
     public function isAclEnabled() {
         return false;
     }
+
+    public function getExportFields()
+    {
+        return array(
+            'id',
+            'unit.name',
+            'unit.categoryName',
+            'unit.fy',
+            'activatedAt',
+        );
+    }
 }

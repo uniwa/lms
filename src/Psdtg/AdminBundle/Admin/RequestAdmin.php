@@ -90,4 +90,18 @@ abstract class RequestAdmin extends Admin
     public function isAclEnabled() {
         return false;
     }
+
+    public function getExportFields()
+    {
+        return array(
+            'id',
+            'unit.name',
+            'unit.state',
+            'unit.mmId',
+            'unit.categoryName',
+            'unit.fy',
+            'createdBy',
+            'status',
+        );
+    }
 }
