@@ -28,6 +28,7 @@ class CircuitAdmin extends Admin
             ->add('unit.name')
             ->add('unit.categoryName')
             ->add('unit.fy')
+            ->add('unit.state')
             ->add('activatedAt', 'date')
         ;
     }
