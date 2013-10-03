@@ -81,6 +81,7 @@ abstract class RequestAdmin extends Admin
             ->add('unit', null, array(), 'mmunit')
             ->add('unit.categoryName', null, array(), 'mmcategory', array('required' => false))
             ->add('unit.fyName', null, array(), 'mmfy', array('required' => false))
+            ->add('unit.state', null, array(), 'choice', array('choices' => array('ΕΝΕΡΓΗ' => 'ΕΝΕΡΓΗ', 'ΚΑΤΑΡΓΗΜΕΝΗ' => 'ΚΑΤΑΡΓΗΜΕΝΗ', 'ΣΕ ΑΝΑΣΤΟΛΗ' => 'ΣΕ ΑΝΑΣΤΟΛΗ')))
             ->add('createdBy', null, array(), null, array('attr' => array('placeholder' => 'LDAP Username')))
             ->add('status', null, array(), 'choice', array('choices' => NewCircuitRequest::getStatuses()))
         ;

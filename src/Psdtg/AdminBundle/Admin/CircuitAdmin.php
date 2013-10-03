@@ -80,6 +80,7 @@ class CircuitAdmin extends Admin
             ->add('unit', null, array(), 'mmunit')
             ->add('unit.categoryName', null, array(), 'mmcategory')
             ->add('unit.fyName', null, array(), 'mmfy')
+            ->add('unit.state', null, array(), 'choice', array('choices' => array('ΕΝΕΡΓΗ' => 'ΕΝΕΡΓΗ', 'ΚΑΤΑΡΓΗΜΕΝΗ' => 'ΚΑΤΑΡΓΗΜΕΝΗ', 'ΣΕ ΑΝΑΣΤΟΛΗ' => 'ΣΕ ΑΝΑΣΤΟΛΗ')))
             ->add('activatedAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'required' => false, 'attr' => array('class' => 'datepicker')))
         ;
     }
