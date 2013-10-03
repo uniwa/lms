@@ -80,6 +80,7 @@ class MMService {
         $unit = new Unit;
         $unit->setMmId($entry->mm_id);
         $unit->setUnitId($entry->mm_id);
+        $unit->setState($entry->state);
         $unit->setFyName($entry->implementation_entity);
         $unit->setFyInitials($entry->implementation_entity_initials);
         $unit->setName($entry->name);
@@ -99,9 +100,6 @@ class MMService {
     }
 
     protected function queryUnits($params = array()) {
-        if(!isset($params['state']) || $params['state'] == '') {
-            $params['state'] = "ΕΝΕΡΓΗ";
-        }
         if(!isset($params['limit']) || $params['limit'] == '') {
             $params['count'] = 10;
         } else {

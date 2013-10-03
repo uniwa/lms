@@ -74,6 +74,12 @@ class Unit
      * @ORM\Column(type="string", nullable=true)
      * @Expose
      */
+    protected $state;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Expose
+     */
     protected $postalCode;
 
     /**
@@ -100,6 +106,14 @@ class Unit
 
     public function setUnitId($unitId) {
         $this->unitId = $unitId;
+    }
+
+    public function getState() {
+        return $this->state;
+    }
+
+    public function setState($state) {
+        $this->state = $state;
     }
 
     public function getFyName() {

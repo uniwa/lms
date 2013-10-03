@@ -32,8 +32,15 @@ class ImportCSVCommand extends ContainerAwareCommand
         $em = $this->container->get('doctrine')->getManager();
         $mmservice = $this->container->get('psdtg.mm.service');
         foreach($this->parseCSV() as $row) {
-            $circuit = new PhoneCircuit();
             $fields = explode(',', $row[0]);
+            $circuit = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit')->findOneBy(array(
+                'number' => ($fields[3].$fields[4]),
+            ));
+            if(isset($circuit)) {
+                $output->writeln('Skipping circuit: '.$circuit->getNumber());
+                continue;
+            }
+            $circuit = new PhoneCircuit();
             try {
                 $unit = $mmservice->findOneUnitBy(array('mm_id' => $fields[0]));
             } catch(\RunTimeException $e) {
