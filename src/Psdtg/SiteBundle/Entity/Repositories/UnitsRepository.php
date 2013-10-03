@@ -41,7 +41,7 @@ class UnitsRepository extends BaseRepository
         $fyobjects = array();
         foreach($fys as $curFy) {
             if($curFy['fyName'] != '') {
-                $fyobject = new Fy();
+                $fyobject = new UnitFy();
                 $fyobject->setName($curFy['fyName']);
                 $fyobject->setInitials($curFy['fyInitials']);
                 $fyobjects[] = $fyobject;
