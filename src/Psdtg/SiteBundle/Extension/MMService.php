@@ -23,8 +23,10 @@ class MMService {
                 'mm_id' => $mmid,
                 'count' => 1,
             ));
-            if(count($mmUnitEntries) > 0) {
+            if(count($mmUnitEntries) == 1) {
                 $unit = $this->hydrateUnit($mmUnitEntries[0]);
+            } elseif(count($mmUnitEntries) > 1) {
+                throw new MMException('Found more than one unit: '.count($mmUnitEntries));
             } else {
                 $unit = null;
             }
@@ -35,6 +37,9 @@ class MMService {
     public function findUnitsBy(array $filters = array()) {
         $results = array();
         $params = array();
+        if(isset($filters['mm_id']) && $filters['mm_id'] != '') {
+            $params['mm_id'] = $filters['mm_id'];
+        }
         if(isset($filters['name']) && $filters['name'] != '') {
             $params['name'] = $filters['name'];
         }
@@ -60,10 +65,10 @@ class MMService {
     public function findOneUnitBy(array $filters = array()) {
         $units = $this->findUnitsBy($filters+array('limit' => 1));
         if(!isset($units[0])) {
-            throw new MMException('Η μονάδα δεν βρέθηκε');
+            throw new MMException('The unit was not found');
         }
         if(count($units) > 1) {
-            throw new MMException('Βρέθηκαν περισσότερες της μιας μονάδας: '.count($units));
+            throw new MMException('Found more than one unit: '.count($units));
         }
         return $units[0];
     }

@@ -39,6 +39,7 @@ class CircuitAdmin extends Admin
         $formMapper
             ->add('unit', 'mmunit', array('required' => true))
             ->add('activatedAt', 'genemu_jquerydate', array('widget' => 'single_text'))
+            ->add('comments')
             //->add('services')
         ;
     }

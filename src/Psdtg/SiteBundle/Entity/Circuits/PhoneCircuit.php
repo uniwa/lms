@@ -43,7 +43,7 @@ class PhoneCircuit extends Circuit
     const ADSL_PROFILE_24MBPS = '24mbps';
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     protected $realspeed; // Ταχύτητα που κλείδωσε
 

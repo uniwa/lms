@@ -56,6 +56,12 @@ abstract class Circuit
      */
     protected $deletedAt;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Expose
+     */
+    protected $comments;
+
     public function getId() {
         return $this->id;
     }
@@ -76,7 +82,7 @@ abstract class Circuit
         return $this->activatedAt;
     }
 
-    public function setActivatedAt($activatedAt) {
+    public function setActivatedAt(\DateTime $activatedAt = null) {
         $this->activatedAt = $activatedAt;
     }
 
@@ -86,6 +92,14 @@ abstract class Circuit
 
     public function setDeletedAt($deletedAt) {
         $this->deletedAt = $deletedAt;
+    }
+
+    public function getComments() {
+        return $this->comments;
+    }
+
+    public function setComments($comments) {
+        $this->comments = $comments;
     }
 
     public function __toString() {
