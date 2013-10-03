@@ -6,9 +6,22 @@ use Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class PhoneCircuitAdmin extends CircuitAdmin
 {
+    protected function configureShowField(ShowMapper $showMapper)
+    {
+        parent::configureShowField($showMapper);
+        $showMapper
+            ->add('circuitType.name', 'trans')
+            ->add('number')
+            ->add('paidByPsd')
+            ->add('bandwidth', 'trans')
+            ->add('realspeed', 'trans')
+        ;
+    }
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
@@ -26,9 +39,7 @@ class PhoneCircuitAdmin extends CircuitAdmin
         $listMapper
             ->add('circuitType.name', 'trans')
             ->add('number')
-            ->add('paidByPsd')
             ->add('bandwidth', 'trans')
-            ->add('realspeed', 'trans')
         ;
     }
 
@@ -36,7 +47,6 @@ class PhoneCircuitAdmin extends CircuitAdmin
     {
         parent::configureDatagridFilters($datagridMapper);
         $datagridMapper
-
         ;
     }
 }

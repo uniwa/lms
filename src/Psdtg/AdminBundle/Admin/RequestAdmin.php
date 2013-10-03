@@ -27,7 +27,10 @@ abstract class RequestAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('mmId')
+            ->add('unit.mmId')
+            ->add('unit.name')
+            ->add('unit.categoryName')
+            ->add('unit.fy')
             ->add('createdBy')
             ->add('status', 'trans')
         ;
@@ -59,11 +62,9 @@ abstract class RequestAdmin extends Admin
                     'edit' => array(),
             )))
             ->addIdentifier('id')
-            ->add('unit.mmId')
             ->add('unit.name')
             ->add('unit.categoryName')
             ->add('unit.fy')
-            ->add('createdBy')
             ->add('status', 'trans')
         ;
     }
@@ -82,5 +83,9 @@ abstract class RequestAdmin extends Admin
             ->add('createdBy', null, array(), null, array('attr' => array('placeholder' => 'LDAP Username')))
             ->add('status', null, array(), 'choice', array('choices' => NewCircuitRequest::getStatuses()))
         ;
+    }
+
+    public function isAclEnabled() {
+        return false;
     }
 }

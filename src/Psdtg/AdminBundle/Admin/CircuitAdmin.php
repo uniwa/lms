@@ -26,6 +26,9 @@ class CircuitAdmin extends Admin
             ->add('id')
             ->add('unit.mmId')
             ->add('unit.name')
+            ->add('unit.categoryName')
+            ->add('unit.fy')
+            ->add('activatedAt', 'date')
         ;
     }
 
@@ -58,11 +61,10 @@ class CircuitAdmin extends Admin
                     'edit' => array(),
             )))
             ->addIdentifier('id')
-            ->add('unit.mmId')
             ->add('unit.name')
             ->add('unit.categoryName')
             ->add('unit.fy')
-            ->add('activatedAt')
+            ->add('activatedAt', 'date')
         ;
     }
 
@@ -79,5 +81,9 @@ class CircuitAdmin extends Admin
             ->add('unit.fyName', null, array(), 'mmfy')
             ->add('activatedAt', 'doctrine_orm_datetime_range', array(), null, array('widget' => 'single_text', 'required' => false, 'attr' => array('class' => 'datepicker')))
         ;
+    }
+
+    public function isAclEnabled() {
+        return false;
     }
 }
