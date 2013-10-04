@@ -20,10 +20,11 @@ class UnitController extends Controller {
             'name' => $this->getRequest()->get('name')
         );
         $securityContext = $this->container->get('security.context');
+        /* Show only requests from same FY as the user
         if(!$securityContext->isGranted('ROLE_KEDO')) {
             $fyName = $securityContext->getToken()->getUser()->getUnit()->getFy()->getName();
             $params['fy'] = $fyName;
-        }
+        }*/
         $units = $mmservice->findUnitsBy($params);
         $view = View::create()->setStatusCode(200)->setData($units);
         return $this->get('fos_rest.view_handler')->handle($view);

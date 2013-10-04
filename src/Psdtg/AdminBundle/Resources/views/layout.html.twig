@@ -17,7 +17,7 @@
     </a>
     <div style="float: right; text-align: center;">
         <div>
-            {{app.user.username}} | {{app.user.unit.name}} | {% if is_granted('ROLE_KEDO') %}{{'ROLE_KEDO'|trans({})}}{% elseif is_granted('ROLE_HELPDESK') %}{{'ROLE_HELPDESK'|trans({})}}{% else %}{{'ROLE_USER'|trans({})}}{% endif %}
+            {{app.user.username}} {#| {{app.user.unit.name}}#} | {% if is_granted('ROLE_KEDO') %}{{'ROLE_KEDO'|trans({})}}{% elseif is_granted('ROLE_HELPDESK') %}{{'ROLE_HELPDESK'|trans({})}}{% else %}{{'ROLE_USER'|trans({})}}{% endif %}
         </div>
         <div>
             <a href="{{ url('fos_user_security_logout') }}" style="float: right;">
