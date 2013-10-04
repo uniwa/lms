@@ -65,12 +65,15 @@ class ImportCSVCommand extends ContainerAwareCommand
                 'εκκρεμεί - ΕΛΛ ΧΩΝΕΥΤΗΣ',
                 'ραντ. 25/4 εκκρεμεί',*/
             );
+            if(!isset($map[$fields[5]])) {
+                $output->writeln('Circuit type not found for : '.$fields[3].$fields[4]);
+                continue;
+            }
             $circuitType = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\CircuitType')->findOneBy(array(
                 'name' => $map[$fields[5]]
             ));
             if(!isset($circuitType)) {
-                $output->writeln('Circuit type not found for : '.$fields[3].$fields[4]);
-                continue;
+                throw new \Exception('Circuit type not found - database error');
             }
             $circuit->setCircuitType($circuitType);
             // End circuit type
