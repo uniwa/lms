@@ -68,6 +68,10 @@ class ImportCSVCommand extends ContainerAwareCommand
             $circuitType = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\CircuitType')->findOneBy(array(
                 'name' => $map[$fields[5]]
             ));
+            if(!isset($circuitType)) {
+                $output->writeln('Circuit type not found for : '.$fields[3].$fields[4]);
+                continue;
+            }
             $circuit->setCircuitType($circuitType);
             // End circuit type
             $circuit->setBandwidth($fields[6]);
