@@ -59,8 +59,8 @@ abstract class RequestAdmin extends Admin
         $listMapper
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
+                    'show' => array('template' => 'PsdtgAdminBundle:Button:show_button.html.twig'),
+                    'edit' => array('template' => 'PsdtgAdminBundle:Button:edit_button.html.twig'),
             )))
             ->addIdentifier('id')
             ->add('unit.name')
