@@ -15,6 +15,11 @@
         <img src="{{ asset(admin_pool.titlelogo) }}"  alt="{{ admin_pool.title }}" />
         {{ admin_pool.title }}
     </a>
+    {#<form action="{{ url('sonata_admin_search') }}" method="GET"  class="navbar-search">
+        <div class="input-append">
+            <input type="text" name="q" value="{{ app.request.get('q') }}" class="input-large search-query" placeholder="{{ 'search_placeholder'|trans({}, 'SonataAdminBundle') }}"/>
+        </div>
+    </form>#}
     <div style="float: right; text-align: center;">
         <div>
             {{app.user.username}} {#| {{app.user.unit.name}}#} | {% if is_granted('ROLE_KEDO') %}{{'ROLE_KEDO'|trans({})}}{% elseif is_granted('ROLE_HELPDESK') %}{{'ROLE_HELPDESK'|trans({})}}{% else %}{{'ROLE_USER'|trans({})}}{% endif %}
