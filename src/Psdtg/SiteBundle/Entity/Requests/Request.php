@@ -120,6 +120,10 @@ class Request
     }
 
     public function __toString() {
-        return (string)'Αίτηση '.$this->getTechFactsheetNo().' ('.$this->getUnit()->getName().')';
+        if($this->getId() != null) {
+            return (string)'Αίτηση '.$this->getTechFactsheetNo().' ('.$this->getUnit()->getName().')';
+        } else {
+            return 'Νέα Αίτηση';
+        }
     }
 }
