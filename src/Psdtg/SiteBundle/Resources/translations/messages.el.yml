@@ -17,7 +17,7 @@ Activated At: Ημ/νία Ενεργοποίησης
 Phone Circuit List: Λίστα Τηλεφωνικών Κυκλωμάτων
 Type: Τύπος
 Number: Αριθμός
-Circuit Type Name: Τύπος Προσβασιμότητας
+Circuit Type Name: Τύπος Συνδεσιμότητας
 Paid By Psd: Ανήκει στο ΠΣΔ
 Bandwidth: Εύρος Ζώνης
 Realspeed: Πραγματική Ταχύτητα
@@ -62,7 +62,7 @@ Unit Fy Name: Φορέας Υλοποίησης
 
 # New Line Request
 New Circuit Request List: Λίστα Αιτημάτων Νέου Κυκλώματος
-Circuit Type: Τύπος Κυκλώματος
+Circuit Type: Τύπος Συνδεσιμότητας
 Tech Factsheet No: Αριθμός Τεχνικού Δελτίου
 PSD_CONTROL: Ελέγχεται από ΠΣΔ
 OTE_CONTROL: Ελέγχεται από ΟΤΕ
