@@ -22,6 +22,11 @@ class CircuitType
      */
     protected $name;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $noLease = false;
+
     public function getId() {
         return $this->id;
     }
@@ -36,6 +41,14 @@ class CircuitType
 
     public function setName($name) {
         $this->name = $name;
+    }
+
+    public function getNoLease() {
+        return $this->noLease;
+    }
+
+    public function setNoLease($noLease) {
+        $this->noLease = $noLease;
     }
 
     public function __toString() {

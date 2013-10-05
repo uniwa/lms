@@ -19,6 +19,7 @@ class NewCircuitRequest extends Request
     const STATUS_OTEPENDING = 'OTEPENDING';
     const STATUS_LOCALOTE = 'LOCALOTE';
     const STATUS_CREWLEVEL = 'CREWLEVEL';
+    const STATUS_WAITINGCREW = 'WAITINGCREW';
     const STATUS_INSTALLED = 'INSTALLED';
 
     public function getCircuitType() {
@@ -36,6 +37,7 @@ class NewCircuitRequest extends Request
                 self::STATUS_OTEPENDING => self::STATUS_OTEPENDING,
                 self::STATUS_LOCALOTE => self::STATUS_LOCALOTE,
                 self::STATUS_CREWLEVEL => self::STATUS_CREWLEVEL,
+                self::STATUS_WAITINGCREW => self::STATUS_WAITINGCREW,
             ),
             'ΟΤΕ_PSD_CONTROL' => array(
                 self::STATUS_INSTALLED => self::STATUS_INSTALLED,

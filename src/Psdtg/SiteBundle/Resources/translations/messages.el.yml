@@ -17,7 +17,7 @@ Activated At: Ημ/νία Ενεργοποίησης
 Phone Circuit List: Λίστα Τηλεφωνικών Κυκλωμάτων
 Type: Τύπος
 Number: Αριθμός
-Circuit Type Name: Τύπος Κυκλώματος
+Circuit Type Name: Τύπος Προσβασιμότητας
 Paid By Psd: Ανήκει στο ΠΣΔ
 Bandwidth: Εύρος Ζώνης
 Realspeed: Πραγματική Ταχύτητα
@@ -64,4 +64,5 @@ OTE_CONTROL: Ελέγχεται από ΟΤΕ
 OTEPENDING: Εκκρεμεί στον ΟΤΕ
 LOCALOTE: Μεταφέρθηκε στον τοπικό ΟΤΕ
 CREWLEVEL: Μεταφέρθηκε σε επίπεδο συνεργείου
-INSTALLED: Εγκαταστάθηκε
+WAITINGCREW: Επίσκεψη συνεργείου ΟΤΕ για εγκατάσταση
+INSTALLED: Ικανοποιήθηκε
