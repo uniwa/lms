@@ -14,7 +14,7 @@ class NewCircuitRequestAdmin extends RequestAdmin
         parent::configureFormFields($formMapper);
         $formMapper
             ->add('techFactsheetNo')
-            ->add('circuitType', null, array('required' => true))
+            ->add('circuitType', null, array('required' => true, 'query_builder' => $this->getAllowedCircuitTypes()))
         ;
         $subject = $this->getSubject();
         if($subject->getStatus() === Request::STATUS_APPROVED) {
@@ -24,6 +24,11 @@ class NewCircuitRequestAdmin extends RequestAdmin
                 }
             }
         }
+    }
+
+    protected function getAllowedCircuitTypes() {
+        $ctRepository = $this->getModelManager()->getEntityManager('Psdtg\SiteBundle\Entity\Circuits\CircuitType')->getRepository('Psdtg\SiteBundle\Entity\Circuits\CircuitType');
+        return $ctRepository->getCircuitTypesQb(array('noLease' => false));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

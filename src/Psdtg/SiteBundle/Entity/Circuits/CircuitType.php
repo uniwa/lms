@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Psdtg\SiteBundle\Entity\Repositories\Circuits\CircuitTypesRepository")
  */
 class CircuitType
 {

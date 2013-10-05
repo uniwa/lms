@@ -21,15 +21,21 @@ Circuit Type Name: Τύπος Προσβασιμότητας
 Paid By Psd: Ανήκει στο ΠΣΔ
 Bandwidth: Εύρος Ζώνης
 Realspeed: Πραγματική Ταχύτητα
-pstn_dialup: 'PSTN dialup'
-pstn_adsl: 'PSTN aDSL'
-pstn_vdsl: 'PSTN VDSL'
-isdn_dialup: 'ISDN dialup'
-isdn_adsl: 'ISDN aDSL'
-isdn_vdsl: 'ISDN VDSL'
-vdsl_ll: 'VDSL LL(LRE)'
+pstn_dialup: 'PSTN'
+isdn_dialup: 'ISDN'
 ll: 'LL(M1020)'
+hellascom: 'HellasCom'
 eline_me: 'e-line ME'
+vdsl_ll: 'VDSL LL(LRE)'
+pstn_adsl: 'aDSLoPSTN'
+pstn_vdsl: 'VDSLoPSTN'
+isdn_adsl: 'aDSLoISDN'
+isdn_vdsl: 'VDSLoISDN'
+ethernet_satellite: 'ETHERNEToSATELLITE'
+wireless_man: 'WIRELESSoMAN'
+ethernet_man: 'ETHERNEToMAN'
+wiress_broadband: 'Wireless Broadband'
+backbone: 'Κυκλώματα Κορμού αστικά/υπεραστικά'
 
 Adsl: ADSL
 Adsl Id: Έχει ADSL
