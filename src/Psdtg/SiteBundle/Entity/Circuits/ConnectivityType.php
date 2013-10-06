@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Psdtg\SiteBundle\Entity\Repositories\Circuits\CircuitTypesRepository")
+ * @ORM\Entity(repositoryClass="Psdtg\SiteBundle\Entity\Repositories\Circuits\ConnectivityTypesRepository")
  */
-class CircuitType
+class ConnectivityType
 {
     /**
      * @ORM\Column(type="integer")

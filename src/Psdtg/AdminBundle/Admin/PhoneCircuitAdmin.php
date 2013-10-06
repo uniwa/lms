@@ -14,7 +14,7 @@ class PhoneCircuitAdmin extends CircuitAdmin
     {
         parent::configureShowField($showMapper);
         $showMapper
-            ->add('circuitType.name', 'trans')
+            ->add('connectivityType.name', 'trans')
             ->add('number')
             ->add('paidByPsd')
             ->add('bandwidth', 'trans')
@@ -26,7 +26,7 @@ class PhoneCircuitAdmin extends CircuitAdmin
     {
         parent::configureFormFields($formMapper);
         $formMapper
-            ->add('circuitType', null, array('required' => true))
+            ->add('connectivityType', null, array('required' => true))
             ->add('number')
             ->add('paidByPsd', null, array('required' => true))
             ->add('bandwidth')
@@ -37,7 +37,7 @@ class PhoneCircuitAdmin extends CircuitAdmin
     protected function configureListFields(ListMapper $listMapper) {
         parent::configureListFields($listMapper);
         $listMapper
-            ->add('circuitType.name', 'trans')
+            ->add('connectivityType.name', 'trans')
             ->add('number')
             ->add('bandwidth', 'trans')
         ;
@@ -53,7 +53,7 @@ class PhoneCircuitAdmin extends CircuitAdmin
     public function getExportFields()
     {
         return array_merge(parent::getExportFields(),array(
-            //'circuitType.name',
+            //'connectivityType.name',
             'number',
             'paidByPsd',
             'bandwidth',

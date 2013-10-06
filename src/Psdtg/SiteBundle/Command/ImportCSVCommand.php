@@ -69,13 +69,13 @@ class ImportCSVCommand extends ContainerAwareCommand
                 $output->writeln('Circuit type not found for : '.$fields[3].$fields[4]);
                 continue;
             }
-            $circuitType = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\CircuitType')->findOneBy(array(
+            $connectivityType = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType')->findOneBy(array(
                 'name' => $map[$fields[5]]
             ));
-            if(!isset($circuitType)) {
+            if(!isset($connectivityType)) {
                 throw new \Exception('Circuit type not found - database error');
             }
-            $circuit->setCircuitType($circuitType);
+            $circuit->setCircuitType($connectivityType);
             // End circuit type
             $circuit->setBandwidth($fields[6]);
             //$requestedAt = $fields[7];

@@ -17,11 +17,11 @@ use JMS\Serializer\Annotation\ReadOnly;
 class PhoneCircuit extends Circuit
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\CircuitType")
+     * @ORM\ManyToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\ConnectivityType")
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      * @Expose
      */
-    protected $circuitType;
+    protected $connectivityType;
 
     /**
      * @ORM\Column(type="string", length=16, nullable=true)
@@ -47,12 +47,12 @@ class PhoneCircuit extends Circuit
      */
     protected $realspeed; // Ταχύτητα που κλείδωσε
 
-    public function getCircuitType() {
-        return $this->circuitType;
+    public function getConnectivityType() {
+        return $this->connectivityType;
     }
 
-    public function setCircuitType($circuitType) {
-        $this->circuitType = $circuitType;
+    public function setConnectivityType($connectivityType) {
+        $this->connectivityType = $connectivityType;
     }
 
     public function getPaidByPsd() {

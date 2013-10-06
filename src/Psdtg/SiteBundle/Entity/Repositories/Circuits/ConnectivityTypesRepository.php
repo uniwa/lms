@@ -4,9 +4,9 @@ namespace Psdtg\SiteBundle\Entity\Repositories\Circuits;
 
 use Psdtg\SiteBundle\Entity\Repositories\BaseRepository;
 
-class CircuitTypesRepository extends BaseRepository
+class ConnectivityTypesRepository extends BaseRepository
 {
-    public function getCircuitTypesQb($filters = array()) {
+    public function getConnectivityTypesQb($filters = array()) {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('ct');
         $qb->from($this->_entityName, 'ct');

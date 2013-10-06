@@ -11,10 +11,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 class NewCircuitRequest extends Request
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\CircuitType")
+     * @ORM\ManyToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\ConnectivityType")
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      */
-    protected $circuitType;
+    protected $connectivityType;
 
     const STATUS_OTEPENDING = 'OTEPENDING';
     const STATUS_LOCALOTE = 'LOCALOTE';
@@ -22,12 +22,12 @@ class NewCircuitRequest extends Request
     const STATUS_WAITINGCREW = 'WAITINGCREW';
     const STATUS_INSTALLED = 'INSTALLED';
 
-    public function getCircuitType() {
-        return $this->circuitType;
+    public function getConnectivityType() {
+        return $this->connectivityType;
     }
 
-    public function setCircuitType($circuitType) {
-        $this->circuitType = $circuitType;
+    public function setConnectivityType($connectivityType) {
+        $this->connectivityType = $connectivityType;
     }
 
     public static function getStatuses() {
