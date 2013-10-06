@@ -25,10 +25,13 @@ class SyncCircuitsCommand extends ContainerAwareCommand
         $mmservice = $this->container->get('psdtg.mm.service');
         $batchSize = 20;
         $i = 0;
-        $q = $em->createQuery('select u from Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit pc');
+        $q = $em->createQuery('select pc from Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit pc WHERE pc.mmSyncLastUpdateDate IS NULL');
         $iterableResult = $q->iterate();
         foreach($iterableResult AS $row) {
+            $row = $row[0];
+            $output->write('Syncing circuit '.$row->getId().'...');
             $mmservice->persistMM($row);
+            $output->writeln(' got '.$row->getMmSyncId());
             if (($i % $batchSize) == 0) {
                 $em->flush();
                 $em->clear();

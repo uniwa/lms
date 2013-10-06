@@ -159,6 +159,9 @@ class MMService {
     }
 
     public function persistCircuit(PhoneCircuit $circuit) {
+        if($circuit->getConnectivityType() == null) {
+            throw new \Exception('No connectivity type');
+        }
         if($circuit->getConnectivityType()->getMmSyncId() == null) {
             $this->persistConnectivityType($circuit->getConnectivityType());
         }
