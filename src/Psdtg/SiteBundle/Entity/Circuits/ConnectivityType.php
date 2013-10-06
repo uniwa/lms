@@ -2,13 +2,17 @@
 
 namespace Psdtg\SiteBundle\Entity\Circuits;
 
+use Psdtg\SiteBundle\Entity\MMSyncableEntity;
+
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Psdtg\SiteBundle\Entity\Repositories\Circuits\ConnectivityTypesRepository")
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  */
-class ConnectivityType
+class ConnectivityType extends MMSyncableEntity
 {
     /**
      * @ORM\Column(type="integer")
@@ -26,6 +30,11 @@ class ConnectivityType
      * @ORM\Column(type="boolean")
      */
     protected $noLease = false;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $deletedAt;
 
     public function getId() {
         return $this->id;
@@ -49,6 +58,18 @@ class ConnectivityType
 
     public function setNoLease($noLease) {
         $this->noLease = $noLease;
+    }
+
+    public function getDeletedAt() {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt($deletedAt) {
+        $this->deletedAt = $deletedAt;
+    }
+
+    public function isActive() {
+        return !isset($this->deletedAt);
     }
 
     public function __toString() {

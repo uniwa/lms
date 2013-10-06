@@ -5,6 +5,7 @@ namespace Psdtg\SiteBundle\Entity\Circuits;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Blameable\Traits\BlameableEntity;
+use Psdtg\SiteBundle\Entity\MMSyncableEntity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Criteria;
@@ -25,7 +26,7 @@ use JMS\Serializer\Annotation\ReadOnly;
  * "phone_circuit" = "PhoneCircuit"
  * })
  */
-abstract class Circuit
+abstract class Circuit extends MMSyncableEntity
 {
     use TimestampableEntity;
     use BlameableEntity;
@@ -100,6 +101,10 @@ abstract class Circuit
 
     public function setComments($comments) {
         $this->comments = $comments;
+    }
+
+    public function isActive() {
+        return !isset($this->deletedAt);
     }
 
     public function __toString() {

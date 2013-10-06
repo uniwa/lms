@@ -28,7 +28,7 @@ class PhoneCircuitAdmin extends CircuitAdmin
         $formMapper
             ->add('connectivityType', null, array('required' => true))
             ->add('number')
-            ->add('paidByPsd', null, array('required' => true))
+            ->add('paidByPsd', null, array('required' => false))
             ->add('bandwidth')
             ->add('realspeed')
         ;

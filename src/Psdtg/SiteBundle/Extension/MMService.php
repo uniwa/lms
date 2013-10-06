@@ -4,6 +4,10 @@ namespace Psdtg\SiteBundle\Extension;
 
 use Psdtg\SiteBundle\Exception\MMException;
 use Psdtg\SiteBundle\Entity\Unit;
+use Psdtg\SiteBundle\Extension\MMSyncableListener;
+use Psdtg\SiteBundle\Entity\MMSyncableEntity;
+use Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit;
+use Psdtg\SiteBundle\Entity\Circuits\ConnectivityType;
 
 class MMService {
     protected $container;
@@ -71,6 +75,16 @@ class MMService {
             throw new MMException('Found more than one unit: '.count($units));
         }
         return $units[0];
+    }
+
+    public function persistMM(MMSyncableEntity $entity) {
+        if($entity instanceof PhoneCircuit) {
+            return $this->persistCircuit($entity);
+        } elseif ($entity instanceof ConnectivityType) {
+            return $this->persistConnectivityType($entity);
+        } else {
+            throw new MMException('Unsupported entity');
+        }
     }
 
     protected function hydrateUnit($entry, $flush = false) {
@@ -141,6 +155,88 @@ class MMService {
         else
         {
             throw new MMException('MMSCH Error: '.$data);
+        }
+    }
+
+    public function persistCircuit(PhoneCircuit $circuit) {
+        if($circuit->getConnectivityType()->getMmSyncId() == null) {
+            $this->persistConnectivityType($circuit->getConnectivityType());
+        }
+        if($circuit->getMmSyncId() != null) {
+            $method = 'PUT';
+            $extraParams = array('circuit_id' => $circuit->getMmSyncId());
+        } else {
+            $method = 'POST';
+            $extraParams = array();
+        }
+        if($circuit->getUnit() == null) {
+            throw new MMException('Unit cannot be null');
+        }
+        $params = array_merge($extraParams, array(
+               "mm_id" => $circuit->getUnit()->getMmId(),
+               "name" => $circuit->__toString(),
+               "connectivity_type" => $circuit->getConnectivityType()->getMmSyncId(),
+               "phone_number" => $circuit->getNumber(),
+               "status" => $circuit->isActive(),
+               "activated_date" => $circuit->getActivatedAt() instanceof \DateTime ? $circuit->getActivatedAt()->format('Y-m-d H:i') : null,
+               "updated_date" => $circuit->getUpdatedAt() instanceof \DateTime ? $circuit->getUpdatedAt()->format('Y-m-d H:i') : null,
+               "deactivated_date" => $circuit->getDeletedAt() instanceof \DateTime ? $circuit->getDeletedAt()->format('Y-m-d H:i') : null,
+               "bandwidth" => $circuit->getBandwidth(),
+               "readspeed" => $circuit->getRealspeed(),
+               "paid_by_psd" => $circuit->getPaidByPsd(),
+        ));
+
+        $curl = curl_init("http://mmsch.teiath.gr/api/circuits");
+
+        $username = 'mmschadmin';
+        $password = 'mmschadmin';
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($curl, CURLOPT_USERPWD,  $username.":".$password);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode( $params ));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $origData = curl_exec($curl);
+        $data = json_decode($origData);
+        if($data->status == 200) {
+            if($method == 'POST') {
+                $circuit->setMmSyncId($data->circuit_id);
+                $circuit->setMmSyncLastUpdateDate(new \DateTime('now'));
+            }
+        } else {
+            throw new MMException('Error adding circuit: '.$origData);
+        }
+    }
+
+    public function persistConnectivityType(ConnectivityType $connectivityType) {
+        if($connectivityType->getMmSyncId() != null) {
+            $method = 'PUT';
+            $extraParams = array('connectivity_type_id' => $connectivityType->getMmSyncId());
+        } else {
+            $method = 'POST';
+            $extraParams = array();
+        }
+        $params = array_merge($extraParams, array("name" => $connectivityType->getName()));
+
+        $curl = curl_init("http://mmsch.teiath.gr/api/connectivity_types");
+
+        $username = 'mmschadmin';
+        $password = 'mmschadmin';
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($curl, CURLOPT_USERPWD,  $username.":".$password);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode( $params ));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $origData = curl_exec($curl);
+        $data = json_decode($origData);
+        if($data->status == 200) {
+            if($method == 'POST') {
+                $connectivityType->setMmSyncId($data->connectivity_type_id);
+                $connectivityType->setMmSyncLastUpdateDate(new \DateTime('now'));
+            }
+        } else {
+            throw new MMException('Error adding connectivity type: '.$origData);
         }
     }
 }
