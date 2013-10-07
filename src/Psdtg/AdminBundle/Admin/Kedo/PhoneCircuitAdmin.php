@@ -12,5 +12,8 @@ class PhoneCircuitAdmin extends BasePhoneCircuitAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
+        $formMapper
+            ->add('connectivityType', null, array('required' => true))
+        ;
     }
 }

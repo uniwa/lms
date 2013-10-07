@@ -85,10 +85,6 @@ class CircuitAdmin extends Admin
         ;
     }
 
-    public function isAclEnabled() {
-        return false;
-    }
-
     public function getExportFields()
     {
         return array(
@@ -98,5 +94,10 @@ class CircuitAdmin extends Admin
             'unit.fy',
             'activatedAt',
         );
+    }
+
+    public function getBatchActions()
+    {
+        return array();
     }
 }

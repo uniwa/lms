@@ -5,14 +5,17 @@ namespace Psdtg\SiteBundle\Extension;
 use Doctrine\Common\EventArgs;
 use Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit;
 use Psdtg\SiteBundle\Entity\Circuits\ConnectivityType;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Psdtg\SiteBundle\Entity\MMSyncableEntity;
 
 class MMSyncableListener
 {
     protected $mmservice;
+    protected $kernel;
 
-    public function __construct(MMService $mmservice) {
+    public function __construct(MMService $mmservice, KernelInterface $kernel) {
         $this->mmservice = $mmservice;
+        $this->kernel = $kernel;
     }
 
     public function prePersist(EventArgs $args) {
@@ -21,7 +24,9 @@ class MMSyncableListener
             return;
         }
 
-        $this->mmservice->persistMM($entity);
+        if($this->kernel->getEnvironment() == 'prod') {
+            $this->mmservice->persistMM($entity);
+        }
     }
 
     public function preUpdate(EventArgs $args) {
@@ -30,7 +35,9 @@ class MMSyncableListener
             return;
         }
 
-        $this->mmservice->persistMM($entity);
+        if($this->kernel->getEnvironment() == 'prod') {
+            $this->mmservice->persistMM($entity);
+        }
     }
 
     public function preRemove(EventArgs $args) {
@@ -38,9 +45,11 @@ class MMSyncableListener
         if(!$entity instanceof MMSyncableEntity) {
             return;
         }
-        $oldDeletedAt = $entity->getDeletedAt();
-        $entity->setDeletedAt(new \DateTime('now'));
-        $this->mmservice->persistMM($entity);
-        $entity->setDeletedAt($oldDeletedAt);
+        if($this->kernel->getEnvironment() == 'prod') {
+            $oldDeletedAt = $entity->getDeletedAt();
+            $entity->setDeletedAt(new \DateTime('now'));
+            $this->mmservice->persistMM($entity);
+            $entity->setDeletedAt($oldDeletedAt);
+        }
     }
 }

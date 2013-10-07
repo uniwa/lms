@@ -17,19 +17,17 @@ class PhoneCircuitAdmin extends BasePhoneCircuitAdmin
 
     protected $securityContext;
 
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->clearExcept(array(
-            'list',
-            'show',
-            'batch',
-        ));
-    }
-
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
-        // No Editing
+        $formMapper
+            ->add('connectivityType', null, array('required' => true, 'query_builder' => $this->getAllowedConnectivityTypes()))
+        ;
+    }
+
+    private function getAllowedConnectivityTypes() {
+        $ctRepository = $this->getModelManager()->getEntityManager('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType')->getRepository('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType');
+        return $ctRepository->getConnectivityTypesQb(array('noLease' => true));
     }
 
     protected function configureListFields(ListMapper $listMapper) {
@@ -43,7 +41,7 @@ class PhoneCircuitAdmin extends BasePhoneCircuitAdmin
         $datagridMapper->remove('unit.fyName');
     }
 
-    public function createQuery($context = 'list')
+    /*public function createQuery($context = 'list')
     {
         if($context === 'list') {
             // User should only see the lines belong to their FY
@@ -58,7 +56,7 @@ class PhoneCircuitAdmin extends BasePhoneCircuitAdmin
 
             return new ProxyQuery($qb);
         }
-    }
+    }*/
 
     public function setSecurityContext(SecurityContextInterface $securityContext)
     {

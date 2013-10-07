@@ -87,10 +87,6 @@ abstract class RequestAdmin extends Admin
         ;
     }
 
-    public function isAclEnabled() {
-        return false;
-    }
-
     public function getExportFields()
     {
         return array(
@@ -103,5 +99,10 @@ abstract class RequestAdmin extends Admin
             'createdBy',
             'status',
         );
+    }
+
+    public function getBatchActions()
+    {
+        return array();
     }
 }

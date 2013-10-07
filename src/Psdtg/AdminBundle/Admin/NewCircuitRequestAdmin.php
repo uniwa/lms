@@ -26,7 +26,7 @@ class NewCircuitRequestAdmin extends RequestAdmin
         }
     }
 
-    protected function getAllowedConnectivityTypes() {
+    private function getAllowedConnectivityTypes() {
         $ctRepository = $this->getModelManager()->getEntityManager('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType')->getRepository('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType');
         return $ctRepository->getConnectivityTypesQb(array('noLease' => false));
     }

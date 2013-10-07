@@ -168,6 +168,7 @@ services:
             - { name: doctrine.event_listener, event: preRemove }
         arguments:
             - "@psdtg.mm.service"
+            - "@kernel"
 
 fos_rest:
     view:

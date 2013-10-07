@@ -8,7 +8,7 @@ security:
 
     access_decision_manager:
         # Strategy can be: affirmative, unanimous or consensus
-        strategy: affirmative
+        strategy: unanimous
 
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
@@ -16,8 +16,8 @@ security:
 
     role_hierarchy:
         ROLE_USER:      ROLE_USER
-        ROLE_HELPDESK:  ROLE_HELPDESK
-        ROLE_KEDO:      ROLE_KEDO
+        ROLE_HELPDESK:  [ROLE_USER, ROLE_HELPDESK]
+        ROLE_KEDO:      [ROLE_USER, ROLE_KEDO]
 
     providers:
       fr3d_ldapbundle:
