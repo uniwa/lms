@@ -73,5 +73,26 @@
            <argument>Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest</argument>
            <argument>SonataAdminBundle:CRUD</argument>
        </service>
+       <!-- RemoveCircuitRequest -->
+        <service id="sonata.admin.removecircuitrequests.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\RemoveCircuitRequestAdmin">
+           <tag name="sonata.admin"
+                manager_type="orm"
+                group="Αιτήματα"
+                label="Αίτημα Κατάργησης Κυκλώματος"
+                />
+           <argument />
+           <argument>Psdtg\SiteBundle\Entity\Requests\RemoveCircuitRequest</argument>
+           <argument>SonataAdminBundle:CRUD</argument>
+       </service>
+        <service id="sonata.admin.removecircuitrequests.kedo" class="Psdtg\AdminBundle\Admin\Kedo\RemoveCircuitRequestAdmin">
+           <tag name="sonata.admin"
+                manager_type="orm"
+                group="Αιτήματα"
+                label="Αίτημα Νέου Κυκλώματος"
+                />
+           <argument />
+           <argument>Psdtg\SiteBundle\Entity\Requests\RemoveCircuitRequest</argument>
+           <argument>SonataAdminBundle:CRUD</argument>
+       </service>
    </services>
 </container>

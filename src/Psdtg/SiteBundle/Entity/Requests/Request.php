@@ -15,7 +15,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"new_circuit" = "NewCircuitRequest"})
+ * @ORM\DiscriminatorMap({
+ *  "new_circuit" = "NewCircuitRequest",
+ *  "remove_circuit" = "RemoveCircuitRequest",
+ * })
  * @Gedmo\Loggable
  */
 class Request
