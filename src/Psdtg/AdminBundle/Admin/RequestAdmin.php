@@ -9,8 +9,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-
-
 abstract class RequestAdmin extends Admin
 {
     protected $datagridValues = array(
@@ -27,11 +25,6 @@ abstract class RequestAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('unit.mmId')
-            ->add('unit.name')
-            ->add('unit.state')
-            ->add('unit.categoryName')
-            ->add('unit.fy')
             ->add('createdBy')
             ->add('status', 'trans')
         ;
@@ -62,9 +55,6 @@ abstract class RequestAdmin extends Admin
                     'edit' => array('template' => 'PsdtgAdminBundle:Button:edit_button.html.twig'),
             )))
             ->addIdentifier('id')
-            ->add('unit.name')
-            ->add('unit.categoryName')
-            ->add('unit.fy')
             ->add('status', 'trans')
         ;
     }
@@ -77,10 +67,6 @@ abstract class RequestAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('unit', null, array(), 'mmunit')
-            ->add('unit.categoryName', null, array(), 'mmcategory', array('required' => false))
-            ->add('unit.fyName', null, array(), 'mmfy', array('required' => false))
-            ->add('unit.state', null, array(), 'choice', array('choices' => array('ΕΝΕΡΓΗ' => 'ΕΝΕΡΓΗ', 'ΚΑΤΑΡΓΗΜΕΝΗ' => 'ΚΑΤΑΡΓΗΜΕΝΗ', 'ΣΕ ΑΝΑΣΤΟΛΗ' => 'ΣΕ ΑΝΑΣΤΟΛΗ')))
             ->add('createdBy', null, array(), null, array('attr' => array('placeholder' => 'LDAP Username')))
             ->add('status', null, array(), 'choice', array('choices' => NewCircuitRequest::getStatuses()))
         ;

@@ -28,7 +28,8 @@ class CircuitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->entityToIdTransformer->setEntityClass('Psdtg\SiteBundle\Entity\Circuits\Circuit');
-        $this->entityToIdTransformer->setEntityRepository('Psdtg\SiteBundle\Entity\Repositories\Circuits\CircuitsRepository');
+        $this->entityToIdTransformer->setEntityType('Psdtg\SiteBundle\Entity\Circuits\Circuit');
+        $this->entityToIdTransformer->setEntityRepository('Psdtg\SiteBundle\Entity\Circuits\Circuit');
         $builder->addViewTransformer($this->entityToIdTransformer);
     }
 

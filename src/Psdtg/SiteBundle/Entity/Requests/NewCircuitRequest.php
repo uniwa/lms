@@ -16,6 +16,17 @@ class NewCircuitRequest extends Request
      */
     protected $connectivityType;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Unit")
+     * @ORM\JoinColumn(name="mmId", referencedColumnName="mmId", onDelete="SET NULL")
+     */
+    protected $unit;
+
+    /**
+     * @ORM\Column(name="tech_factsheet_no", type="string", length=100)
+     */
+    protected $techFactsheetNo;
+
     const STATUS_OTEPENDING = 'OTEPENDING';
     const STATUS_LOCALOTE = 'LOCALOTE';
     const STATUS_CREWLEVEL = 'CREWLEVEL';
@@ -28,6 +39,22 @@ class NewCircuitRequest extends Request
 
     public function setConnectivityType($connectivityType) {
         $this->connectivityType = $connectivityType;
+    }
+
+    public function getUnit() {
+        return $this->unit;
+    }
+
+    public function setUnit($unit) {
+        $this->unit = $unit;
+    }
+
+    public function getTechFactsheetNo() {
+        return $this->techFactsheetNo;
+    }
+
+    public function setTechFactsheetNo($techFactsheetNo) {
+        $this->techFactsheetNo = $techFactsheetNo;
     }
 
     public static function getStatuses() {

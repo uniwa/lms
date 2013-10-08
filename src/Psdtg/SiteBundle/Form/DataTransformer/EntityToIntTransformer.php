@@ -32,6 +32,10 @@ class EntityToIntTransformer implements DataTransformerInterface
      */
     public function transform($entity)
     {
+        if(!isset($entity)) {
+            return null;
+        }
+
         // Modified from comments to use instanceof so that base classes or interfaces can be specified
         if (null === $entity ||!$entity instanceof $this->entityClass) {
             throw new TransformationFailedException("$this->entityType object must be provided");

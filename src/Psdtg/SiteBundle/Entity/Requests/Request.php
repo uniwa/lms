@@ -34,23 +34,6 @@ class Request
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\Circuit")
-     * @ORM\JoinColumn(name="circuitId", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $circuit;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Unit")
-     * @ORM\JoinColumn(name="mmId", referencedColumnName="mmId", onDelete="SET NULL")
-     */
-    protected $unit;
-
-    /**
-     * @ORM\Column(name="tech_factsheet_no", type="string", length=100)
-     */
-    protected $techFactsheetNo;
-
-    /**
      * @Gedmo\Versioned
      * @ORM\Column(name="status", type="string", length=100)
      */
@@ -71,30 +54,6 @@ class Request
 
     public function setId($id) {
         $this->id = $id;
-    }
-
-    public function getCircuit() {
-        return $this->circuit;
-    }
-
-    public function setCircuit($circuit) {
-        $this->circuit = $circuit;
-    }
-
-    public function getUnit() {
-        return $this->unit;
-    }
-
-    public function setUnit($unit) {
-        $this->unit = $unit;
-    }
-
-    public function getTechFactsheetNo() {
-        return $this->techFactsheetNo;
-    }
-
-    public function setTechFactsheetNo($techFactsheetNo) {
-        $this->techFactsheetNo = $techFactsheetNo;
     }
 
     public function getDeletedAt() {
@@ -124,7 +83,7 @@ class Request
 
     public function __toString() {
         if($this->getId() != null) {
-            return (string)'Αίτηση '.$this->getTechFactsheetNo().' ('.$this->getUnit()->getName().')';
+            return (string)'Αίτηση '.$this->getId();
         } else {
             return 'Νέα Αίτηση';
         }
