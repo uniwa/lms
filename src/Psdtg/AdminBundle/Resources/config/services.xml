@@ -115,5 +115,26 @@
            <argument>Psdtg\SiteBundle\Entity\Requests\ActivateServiceRequest</argument>
            <argument>SonataAdminBundle:CRUD</argument>
        </service>
+       <!-- ChangeServiceRequest -->
+        <service id="sonata.admin.changeservicerequests.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\ChangeServiceRequestAdmin">
+           <tag name="sonata.admin"
+                manager_type="orm"
+                group="Αιτήματα"
+                label="Αίτημα Αλλαγής Τύπου Κυκλώματος"
+                />
+           <argument />
+           <argument>Psdtg\SiteBundle\Entity\Requests\ChangeServiceRequest</argument>
+           <argument>SonataAdminBundle:CRUD</argument>
+       </service>
+        <service id="sonata.admin.changeservicerequests.kedo" class="Psdtg\AdminBundle\Admin\Kedo\ChangeServiceRequestAdmin">
+           <tag name="sonata.admin"
+                manager_type="orm"
+                group="Αιτήματα"
+                label="Αίτημα Αλλαγής Τύπου Κυκλώματος"
+                />
+           <argument />
+           <argument>Psdtg\SiteBundle\Entity\Requests\ChangeServiceRequest</argument>
+           <argument>SonataAdminBundle:CRUD</argument>
+       </service>
    </services>
 </container>

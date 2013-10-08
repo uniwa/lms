@@ -19,6 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  "new_circuit" = "NewCircuitRequest",
  *  "remove_circuit" = "RemoveCircuitRequest",
  *  "activate_service" = "ActivateServiceRequest",
+ *  "change_service" = "ChangeServiceRequest",
  * })
  * @Gedmo\Loggable
  */
