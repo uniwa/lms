@@ -16,9 +16,15 @@ class CircuitController extends Controller {
      */
     public function getCircuitsAction() {
         $repo = $this->container->get('doctrine')->getManager()->getRepository('Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit');
-        $categories = $repo->findCircuits(array(
+        $filters = $this->getRequest()->get('filters', urlencode(json_encode(array())));
+        $decodedFilters = json_decode(urldecode($filters));
+        $arrayFilters = array();
+        foreach($decodedFilters as $curName => $curFilter) {
+            $arrayFilters[$curName] = $curFilter;
+        }
+        $categories = $repo->findCircuits(array_merge(array(
             'name' => $this->getRequest()->get('name')
-        ));
+        ), $arrayFilters));
         $view = View::create()->setStatusCode(200)->setData($categories);
         return $this->get('fos_rest.view_handler')->handle($view);
     }

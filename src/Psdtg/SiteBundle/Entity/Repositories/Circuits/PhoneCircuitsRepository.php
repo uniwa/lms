@@ -12,5 +12,12 @@ class PhoneCircuitsRepository extends CircuitsRepository
             $qb->andWhere('c.number LIKE :name OR nu.name LIKE :name');
             $qb->setParameter('name', '%'.$filters['name'].'%');
         }
+        if(isset($filters['isService']) && $filters['isService'] == true) {
+            $qb->join('c.connectivityType', 'isct');
+            $qb->andWhere('isct.isService = 1');
+        } else if(isset($filters['isService']) && $filters['isService'] == false) {
+            $qb->join('c.connectivityType', 'isct');
+            $qb->andWhere('isct.isService = 0');
+        }
     }
 }

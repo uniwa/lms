@@ -13,11 +13,12 @@
             var timeout;
 
             var $configs = {{ configs|json_encode|raw }};
+            {% set filters = form.vars.filters is defined ? form.vars.filters : [] %}
 
             var queryFunc = function(query) {
                 if(query.term.length >= $configs.minimumInputLength) {
                     $.ajax({
-                        url: '{{path(configs.path)}}?name='+query.term,
+                        url: '{{path(configs.path)}}?name='+query.term+'&filters={{filters|json_encode|url_encode}}',
                         cache: true,
                         dataType: "json",
                         success: function(data) {

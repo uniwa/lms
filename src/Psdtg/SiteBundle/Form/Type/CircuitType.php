@@ -11,6 +11,8 @@
 
 namespace Psdtg\SiteBundle\Form\Type;
 
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\AbstractType;
@@ -33,6 +35,12 @@ class CircuitType extends AbstractType
         $builder->addViewTransformer($this->entityToIdTransformer);
     }
 
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['filters'] = $options['filters'];
+    }
+
+
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
@@ -46,6 +54,7 @@ class CircuitType extends AbstractType
                 ),
             ),
             'class' => null,
+            'filters' => array(),
         ));
     }
 
