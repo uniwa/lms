@@ -12,6 +12,9 @@ ROLE_USER: Μονάδα
 # Circuit
 Ypepth Id: Κωδικός Μονάδας (ypepth id)
 Activated At: Ημ/νία Ενεργοποίησης
+Circuit Unit: Μονάδα
+Circuit Number: Αριθμός
+Circuit Connectivity Type: Τύπος Συνδεσιμότητας
 
 # Phone Circuit
 Phone Circuit List: Λίστα Τηλεφωνικών Κυκλωμάτων
@@ -72,3 +75,6 @@ LOCALOTE: Μεταφέρθηκε στον τοπικό ΟΤΕ
 CREWLEVEL: Μεταφέρθηκε σε επίπεδο συνεργείου
 WAITINGCREW: Επίσκεψη συνεργείου ΟΤΕ για εγκατάσταση
 INSTALLED: Ικανοποιήθηκε
+
+# Remove Line Request
+Remove Circuit Request List: Λίστα Αιτημάτων Κατάργησης Κυκλώματος
