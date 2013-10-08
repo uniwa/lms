@@ -12,7 +12,8 @@ use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\ReadOnly;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Psdtg\SiteBundle\Entity\Repositories\Circuits\PhoneCircuitsRepository")
+ * @ExclusionPolicy("all")
  */
 class PhoneCircuit extends Circuit
 {
@@ -37,6 +38,7 @@ class PhoneCircuit extends Circuit
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Expose
      */
     protected $bandwidth = self::ADSL_PROFILE_2MBPS;
     const ADSL_PROFILE_2MBPS = '2mbps';
@@ -44,8 +46,15 @@ class PhoneCircuit extends Circuit
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Expose
      */
     protected $realspeed; // Ταχύτητα που κλείδωσε
+
+    /**
+     * @Expose
+     * @Accessor(getter="getFullName")
+     */
+    protected $fullName;
 
     public function getConnectivityType() {
         return $this->connectivityType;
@@ -86,6 +95,12 @@ class PhoneCircuit extends Circuit
     public function setRealspeed($realspeed) {
         $this->realspeed = $realspeed;
     }
+
+    public function getFullName() {
+        return $this->number.' '.$this->getUnit()->getName();
+    }
+
+    public function setFullName($fullName) {}
 
     public function __toString() {
         if(isset($this->number)) {

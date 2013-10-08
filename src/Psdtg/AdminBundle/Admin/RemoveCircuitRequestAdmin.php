@@ -12,7 +12,7 @@ class RemoveCircuitRequestAdmin extends RequestAdmin
     {
         parent::configureFormFields($formMapper);
         $formMapper
-            ->add('circuit', 'text', array('required' => true))
+            ->add('circuit', 'circuit', array('required' => true))
         ;
         $subject = $this->getSubject();
         if($subject->getStatus() === Request::STATUS_APPROVED) {

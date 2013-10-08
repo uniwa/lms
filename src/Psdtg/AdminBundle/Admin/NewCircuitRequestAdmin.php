@@ -13,6 +13,7 @@ class NewCircuitRequestAdmin extends RequestAdmin
     {
         parent::configureFormFields($formMapper);
         $formMapper
+            ->add('unit', 'mmunit', array('required' => true))
             ->add('techFactsheetNo')
             ->add('connectivityType', null, array('required' => true, 'query_builder' => $this->getAllowedConnectivityTypes()))
         ;

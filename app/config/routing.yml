@@ -57,3 +57,7 @@ fys:
 categories:
     resource: Psdtg\AdminBundle\Controller\CategoryController
     type:     rest
+
+circuits:
+    resource: Psdtg\AdminBundle\Controller\CircuitController
+    type:     rest

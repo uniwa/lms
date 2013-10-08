@@ -18,13 +18,14 @@ use JMS\Serializer\Annotation\ReadOnly;
 
 /**
  * @ORM\Table
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Psdtg\SiteBundle\Entity\Repositories\Circuits\CircuitsRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  * @ORM\DiscriminatorMap({
  * "phone_circuit" = "PhoneCircuit"
  * })
+ * @ExclusionPolicy("all")
  */
 abstract class Circuit extends MMSyncableEntity
 {

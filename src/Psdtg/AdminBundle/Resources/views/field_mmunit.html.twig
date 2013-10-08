@@ -81,3 +81,10 @@
     <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" />
     </div>
 {% endblock %}
+
+{% block circuit_widget %}
+    <div class="control-group">
+    {#{{ form_widget(form) }}#}
+    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" />
+    </div>
+{% endblock %}

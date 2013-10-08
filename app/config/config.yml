@@ -132,6 +132,11 @@ services:
         public: false
         arguments:
             - "@psdtg.mm.service"
+    psdtg.form.type.entity_to_id_transformer:
+        class: Psdtg\SiteBundle\Form\DataTransformer\EntityToIntTransformer
+        public: false
+        arguments:
+            - "@doctrine.orm.entity_manager"
     psdtg.form.type.mmunit:
         class: Psdtg\SiteBundle\Form\Type\UnitType
         tags:
@@ -146,6 +151,12 @@ services:
         class: Psdtg\SiteBundle\Form\Type\CategoryType
         tags:
             - { name: form.type, alias: mmcategory }
+    psdtg.form.type.circuit:
+        class: Psdtg\SiteBundle\Form\Type\CircuitType
+        tags:
+            - { name: form.type, alias: circuit }
+        arguments:
+            - "@psdtg.form.type.entity_to_id_transformer"
     psdtg.unit.listener:
         class: Psdtg\SiteBundle\Extension\UnitListener
         tags:
