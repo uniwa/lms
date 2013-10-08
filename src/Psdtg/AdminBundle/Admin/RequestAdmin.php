@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 abstract class RequestAdmin extends Admin
 {
@@ -15,6 +16,13 @@ abstract class RequestAdmin extends Admin
         '_sort_order' => 'ASC', // Descendant ordering (default = 'ASC')
         '_sort_by' => 'id' // name of the ordered field (default = the model id
     );
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection
+            ->remove('acl')
+        ;
+    }
 
     /**
      * @param \Sonata\AdminBundle\Show\ShowMapper $showMapper
