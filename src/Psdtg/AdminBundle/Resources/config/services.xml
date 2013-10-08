@@ -94,5 +94,26 @@
            <argument>Psdtg\SiteBundle\Entity\Requests\RemoveCircuitRequest</argument>
            <argument>SonataAdminBundle:CRUD</argument>
        </service>
+       <!-- ActivateServiceRequest -->
+        <service id="sonata.admin.activateservicerequests.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\ActivateServiceRequestAdmin">
+           <tag name="sonata.admin"
+                manager_type="orm"
+                group="Αιτήματα"
+                label="Αίτημα Ενεργοποίησης Υπηρεσίας"
+                />
+           <argument />
+           <argument>Psdtg\SiteBundle\Entity\Requests\ActivateServiceRequest</argument>
+           <argument>SonataAdminBundle:CRUD</argument>
+       </service>
+        <service id="sonata.admin.activateservicerequests.kedo" class="Psdtg\AdminBundle\Admin\Kedo\ActivateServiceRequestAdmin">
+           <tag name="sonata.admin"
+                manager_type="orm"
+                group="Αιτήματα"
+                label="Αίτημα Ενεργοποίησης Υπηρεσίας"
+                />
+           <argument />
+           <argument>Psdtg\SiteBundle\Entity\Requests\ActivateServiceRequest</argument>
+           <argument>SonataAdminBundle:CRUD</argument>
+       </service>
    </services>
 </container>

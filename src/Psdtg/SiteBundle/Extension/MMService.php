@@ -219,7 +219,8 @@ class MMService {
             $method = 'POST';
             $extraParams = array();
         }
-        $params = array_merge($extraParams, array("name" => $connectivityType->getName()));
+        $translator = $this->container->get('translator');
+        $params = array_merge($extraParams, array("name" => $translator->trans($connectivityType->getName())));
 
         $curl = curl_init("http://mmsch.teiath.gr/api/connectivity_types");
 
