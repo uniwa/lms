@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\DiscriminatorMap({
  *  "new_circuit" = "NewCircuitRequest",
  *  "remove_circuit" = "RemoveCircuitRequest",
+ *  "activate_service" = "ActivateServiceRequest",
  * })
  * @Gedmo\Loggable
  */
