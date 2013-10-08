@@ -16,9 +16,4 @@ class ActivateServiceRequestAdmin extends BaseActivateServiceRequestAdmin
             ->add('newConnectivityType', null, array('required' => true, 'query_builder' => $this->getServiceConnectivityTypes()))
         ;
     }
-
-    private function getServiceConnectivityTypes() {
-        $ctRepository = $this->getModelManager()->getEntityManager('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType')->getRepository('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType');
-        return $ctRepository->getConnectivityTypesQb(array('isService' => true));
-    }
 }
