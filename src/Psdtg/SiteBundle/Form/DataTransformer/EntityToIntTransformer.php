@@ -41,7 +41,7 @@ class EntityToIntTransformer implements DataTransformerInterface
             throw new TransformationFailedException("$this->entityType object must be provided");
         }
 
-        return $entity->getId();
+        return $entity->getId().'__'.$entity->__toString();
     }
 
     /**
