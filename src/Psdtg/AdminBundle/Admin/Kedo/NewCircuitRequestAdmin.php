@@ -14,6 +14,7 @@ class NewCircuitRequestAdmin extends BaseNewCircuitRequestAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
+        parent::configureRoutes($collection);
         $collection
             ->remove('create')
         ;
