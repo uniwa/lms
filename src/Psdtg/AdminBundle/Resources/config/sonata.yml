@@ -21,7 +21,7 @@ sonata_block:
         sonata.admin.block.search_result:
           
 sonata_admin:
-    title:      Εφαρμογή Διαχείρισης Τηλεφωνικών Γραμμών ΠΣΔ
+    title:      Εφαρμογή Διαχείρισης Τηλεπικοινωνιακών Κυκλωμάτων ΠΣΔ
     title_logo: /images/psd_logo.png
     templates:
         # default global templates

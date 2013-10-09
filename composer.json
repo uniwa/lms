@@ -26,6 +26,7 @@
         "jms/serializer-bundle": "*",
         "sonata-project/doctrine-orm-admin-bundle": "*",
         "sonata-project/cache-bundle": "*",
+        "sonata-project/intl-bundle": "*",
         "stof/doctrine-extensions-bundle": "*",
         "fr3d/ldap-bundle": "2.0.*",
         "ruudk/capifony-tools": "dev-master"

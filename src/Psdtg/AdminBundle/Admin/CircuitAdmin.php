@@ -68,7 +68,8 @@ class CircuitAdmin extends Admin
                     'show' => array('template' => 'PsdtgAdminBundle:Button:show_button.html.twig'),
                     'edit' => array('template' => 'PsdtgAdminBundle:Button:edit_button.html.twig'),
             )))
-            ->addIdentifier('id')
+            ->add('unit.mmId')
+            ->add('unit.registryNo')
             ->add('unit.name')
             ->add('unit.categoryName')
             ->add('unit.fy')

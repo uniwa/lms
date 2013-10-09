@@ -32,8 +32,8 @@
         <service id="sonata.admin.phonecircuits.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\PhoneCircuitAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
-                group="Τηλεφωνικά Κυκλώματα"
-                label="Τηλεφωνικά Κυκλώματα"
+                group="Τηλεπικοινωνιακά Κυκλώματα"
+                label="Τηλεπικοινωνιακά Κυκλώματα"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit</argument>
@@ -45,8 +45,8 @@
         <service id="sonata.admin.phonecircuits.kedo" class="Psdtg\AdminBundle\Admin\Kedo\PhoneCircuitAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
-                group="Τηλεφωνικά Κυκλώματα"
-                label="Τηλεφωνικά Κυκλώματα"
+                group="Τηλεπικοινωνιακά Κυκλώματα"
+                label="Τηλεπικοινωνιακά Κυκλώματα"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit</argument>

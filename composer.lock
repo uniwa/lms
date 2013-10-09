@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c8fe06b19e0b4783f278d11c25e5cd14",
+    "hash": "8fde3c95db53bc4343670bb58438752c",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -865,12 +865,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "74811d3add014aa20e0bf3530bb0008d72e1792d"
+                "reference": "52de3fd8102984610cee062a5c86629ae2c0596e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/74811d3add014aa20e0bf3530bb0008d72e1792d",
-                "reference": "74811d3add014aa20e0bf3530bb0008d72e1792d",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/52de3fd8102984610cee062a5c86629ae2c0596e",
+                "reference": "52de3fd8102984610cee062a5c86629ae2c0596e",
                 "shasum": ""
             },
             "require": {
@@ -937,7 +937,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2013-09-29 05:33:00"
+            "time": "2013-10-06 10:12:00"
         },
         {
             "name": "genemu/form-bundle",
@@ -1386,12 +1386,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "08f9352dee7757b5d80a0542b39d157b51b86aad"
+                "reference": "d4bf45027f5843ea5984d6246e59963ae4b3ebf2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/08f9352dee7757b5d80a0542b39d157b51b86aad",
-                "reference": "08f9352dee7757b5d80a0542b39d157b51b86aad",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/d4bf45027f5843ea5984d6246e59963ae4b3ebf2",
+                "reference": "d4bf45027f5843ea5984d6246e59963ae4b3ebf2",
                 "shasum": ""
             },
             "require": {
@@ -1445,7 +1445,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2013-10-04 10:43:33"
+            "time": "2013-10-07 20:57:22"
         },
         {
             "name": "jms/serializer-bundle",
@@ -2082,12 +2082,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "013456608134c704edb01ff9487d8a664200af11"
+                "reference": "8779e7144bfeb401d12de9e9e62efdf426c3465b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/013456608134c704edb01ff9487d8a664200af11",
-                "reference": "013456608134c704edb01ff9487d8a664200af11",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/8779e7144bfeb401d12de9e9e62efdf426c3465b",
+                "reference": "8779e7144bfeb401d12de9e9e62efdf426c3465b",
                 "shasum": ""
             },
             "require": {
@@ -2152,7 +2152,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2013-10-04 10:31:12"
+            "time": "2013-10-09 08:25:14"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -2391,6 +2391,66 @@
                 "xls"
             ],
             "time": "2013-08-05 08:50:12"
+        },
+        {
+            "name": "sonata-project/intl-bundle",
+            "version": "dev-master",
+            "target-dir": "Sonata/IntlBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sonata-project/SonataIntlBundle.git",
+                "reference": "1ad1072764af20491fe60bfee0c9017e41c3ce29"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sonata-project/SonataIntlBundle/zipball/1ad1072764af20491fe60bfee0c9017e41c3ce29",
+                "reference": "1ad1072764af20491fe60bfee0c9017e41c3ce29",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "symfony/dependency-injection": ">=2.2,<2.4-dev",
+                "symfony/http-kernel": ">=2.2,<2.4-dev",
+                "symfony/locale": ">=2.2,<2.4-dev",
+                "symfony/templating": ">=2.2,<2.4-dev",
+                "twig/twig": "*"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sonata\\IntlBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Rabaix",
+                    "email": "thomas.rabaix@sonata-project.org",
+                    "homepage": "http://sonata-project.org"
+                },
+                {
+                    "name": "Sonata Community",
+                    "homepage": "https://github.com/sonata-project/SonataIntlBundle/contributors"
+                }
+            ],
+            "description": "Symfony SonataIntlBundle",
+            "homepage": "http://sonata-project.org/bundles/intl",
+            "keywords": [
+                "date",
+                "intl",
+                "number",
+                "sonata",
+                "time"
+            ],
+            "time": "2013-09-27 07:52:07"
         },
         {
             "name": "sonata-project/jquery-bundle",
@@ -2936,12 +2996,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "f47c6d63a9806f795c7d892d5f2d1b10f230547d"
+                "reference": "09c386b3359cc22b4112197c2d8c6d6f7a49c918"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/f47c6d63a9806f795c7d892d5f2d1b10f230547d",
-                "reference": "f47c6d63a9806f795c7d892d5f2d1b10f230547d",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/09c386b3359cc22b4112197c2d8c6d6f7a49c918",
+                "reference": "09c386b3359cc22b4112197c2d8c6d6f7a49c918",
                 "shasum": ""
             },
             "require": {
@@ -2977,7 +3037,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-10-04 14:13:23"
+            "time": "2013-10-07 10:00:50"
         },
         {
             "name": "zendframework/zend-ldap",

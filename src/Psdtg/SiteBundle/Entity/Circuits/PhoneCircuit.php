@@ -106,7 +106,7 @@ class PhoneCircuit extends Circuit
         if(isset($this->number)) {
             return 'Τ'.$this->number;
         } else {
-            return 'Νέο Τηλεφωνικό Κύκλωμα';
+            return 'Νέο Τηλεπικοινωνιακό Κύκλωμα';
         }
     }
 }
