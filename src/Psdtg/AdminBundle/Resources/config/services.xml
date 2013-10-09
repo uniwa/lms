@@ -20,6 +20,15 @@
             <argument type="service" id="logger" on-invalid="null" />
             <tag name="security.voter" priority="254" />
         </service>
+        <service id="security.acl.voter.request_permissions" class="Psdtg\AdminBundle\Voter\RequestAclVoter" public="false">
+            <tag name="monolog.logger" channel="security" />
+            <argument type="service" id="security.acl.provider" />
+            <argument type="service" id="security.acl.object_identity_retrieval_strategy" />
+            <argument type="service" id="security.acl.security_identity_retrieval_strategy" />
+            <argument type="service" id="security.acl.permission.map" />
+            <argument type="service" id="logger" on-invalid="null" />
+            <tag name="security.voter" priority="253" />
+        </service>
         <service id="sonata.admin.dnna.model_manager" class="Psdtg\AdminBundle\Model\DnnaModelManager">
             <argument type="service" id="doctrine" />
         </service>
