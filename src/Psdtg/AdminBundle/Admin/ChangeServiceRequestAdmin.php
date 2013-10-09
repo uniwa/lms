@@ -7,6 +7,7 @@ class ChangeServiceRequestAdmin extends ActivateServiceRequestAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
-        parent::configureFormFieldsWithFilters($formMapper, array('isService' => true));
+        parent::configureFormFields($formMapper);
+        $formMapper->getFormBuilder()->get('circuit')->setAttribute('filters', array('isService' => true));
     }
 }

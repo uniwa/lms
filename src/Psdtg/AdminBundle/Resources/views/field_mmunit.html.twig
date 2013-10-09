@@ -65,27 +65,27 @@
 {% block mmunit_widget %}
     <div class="control-group">
     {#{{ form_widget(form) }}#}
-    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" />
+    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" {% if form.vars.disabled == true %}disabled="disabled"{% endif %} />
     </div>
 {% endblock %}
 
 {% block mmfy_widget %}
     <div class="control-group">
     {#{{ form_widget(form) }}#}
-    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" />
+    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" {% if form.vars.disabled == true %}disabled="disabled"{% endif %} />
     </div>
 {% endblock %}
 
 {% block mmcategory_widget %}
     <div class="control-group">
     {#{{ form_widget(form) }}#}
-    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" />
+    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" {% if form.vars.disabled == true %}disabled="disabled"{% endif %} />
     </div>
 {% endblock %}
 
 {% block circuit_widget %}
     <div class="control-group">
     {#{{ form_widget(form) }}#}
-    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" />
+    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" {% if form.vars.disabled == true %}disabled="disabled"{% endif %} />
     </div>
 {% endblock %}
