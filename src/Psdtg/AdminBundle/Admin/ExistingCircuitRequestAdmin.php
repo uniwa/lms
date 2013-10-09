@@ -21,12 +21,17 @@ class ExistingCircuitRequestAdmin extends RequestAdmin
         ;
     }
 
-    protected function configureFormFields(FormMapper $formMapper, $filters = array())
+    protected function configureFormFieldsWithFilters(FormMapper $formMapper, $filters = array())
     {
-        parent::configureFormFields($formMapper);
         $formMapper
             ->add('circuit', 'circuit', array('required' => true, 'filters' => $filters))
         ;
+        $this->configureFormFields($formMapper);
+    }
+
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        parent::configureFormFields($formMapper);
         $subject = $this->getSubject();
         if($subject->getStatus() === Request::STATUS_APPROVED) {
             foreach($formMapper->getFormBuilder()->all() as $curField) {
