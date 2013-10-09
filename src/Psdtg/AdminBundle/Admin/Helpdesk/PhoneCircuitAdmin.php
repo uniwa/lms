@@ -4,11 +4,8 @@ namespace Psdtg\AdminBundle\Admin\Helpdesk;
 use Psdtg\AdminBundle\Admin\PhoneCircuitAdmin as BasePhoneCircuitAdmin;
 
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 
 class PhoneCircuitAdmin extends BasePhoneCircuitAdmin
 {
@@ -33,12 +30,6 @@ class PhoneCircuitAdmin extends BasePhoneCircuitAdmin
     protected function configureListFields(ListMapper $listMapper) {
         parent::configureListFields($listMapper);
         $listMapper->remove('unit.fy');
-    }
-
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        parent::configureDatagridFilters($datagridMapper);
-        $datagridMapper->remove('unit.fyName');
     }
 
     /*public function createQuery($context = 'list')
