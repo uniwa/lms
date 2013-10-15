@@ -46,6 +46,11 @@ class Request
     const STATUS_REJECTED = 'REJECTED';
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $comments;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $deletedAt;
@@ -56,6 +61,14 @@ class Request
 
     public function setId($id) {
         $this->id = $id;
+    }
+
+    public function getComments() {
+        return $this->comments;
+    }
+
+    public function setComments($comments) {
+        $this->comments = $comments;
     }
 
     public function getDeletedAt() {

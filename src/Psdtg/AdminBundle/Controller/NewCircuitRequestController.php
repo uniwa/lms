@@ -29,8 +29,6 @@ class NewCircuitRequestController extends CRUDController {
                 return parent::redirectTo($object);
             }
         }
-        var_dump($object->getStatus());
-        die();
         return parent::redirectTo($object);
     }
 }

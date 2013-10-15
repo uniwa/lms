@@ -109,6 +109,7 @@ class PhoneCircuit extends Circuit
         $this->setUnit($newcircuitrequest->getUnit());
         $this->setBandwidth($newcircuitrequest->getBandwidth());
         $this->setPaidByPsd(true);
+        $this->setComments($newcircuitrequest->getComments());
     }
 
     public function __toString() {
