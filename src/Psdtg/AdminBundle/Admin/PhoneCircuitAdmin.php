@@ -26,12 +26,18 @@ class PhoneCircuitAdmin extends CircuitAdmin
     {
         parent::configureFormFields($formMapper);
         $formMapper
-            ->add('number', null, array('required' => true))
-            ->add('paidByPsd', null, array('required' => false, 'disabled' => true))
-            ->add('connectivityType', null, array('disabled' => true))
-            ->add('bandwidth', null, array('disabled' => true))
+            ->add('connectivityType', null, array('disabled' => !$this->circuitNoLease($this->getSubject()), 'query_builder' => $this->getAllowedConnectivityTypes()))
+            ->add('number')
+            ->add('paidByPsd', null, array('required' => false, 'disabled' => !$this->circuitNoLease($this->getSubject())))
+            ->add('connectivityType', null, array('disabled' => !$this->circuitNoLease($this->getSubject())))
+            ->add('bandwidth', null, array('disabled' => !$this->circuitNoLease($this->getSubject())))
             ->add('realspeed')
         ;
+    }
+
+    private function getAllowedConnectivityTypes() {
+        $ctRepository = $this->getModelManager()->getEntityManager('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType')->getRepository('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType');
+        return $ctRepository->getConnectivityTypesQb(array('noLease' => true));
     }
 
     protected function configureListFields(ListMapper $listMapper) {

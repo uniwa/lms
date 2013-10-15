@@ -2,7 +2,6 @@
 namespace Psdtg\AdminBundle\Admin\Kedo;
 
 use Psdtg\AdminBundle\Admin\PhoneCircuitAdmin as BasePhoneCircuitAdmin;
-use Sonata\AdminBundle\Form\FormMapper;
 
 class PhoneCircuitAdmin extends BasePhoneCircuitAdmin
 {

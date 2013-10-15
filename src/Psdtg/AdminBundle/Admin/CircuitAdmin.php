@@ -48,11 +48,28 @@ class CircuitAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('unit', 'mmunit', array('disabled' => true))
-            ->add('activatedAt', 'genemu_jquerydate', array('widget' => 'single_text'))
+            ->add('unit', 'mmunit', array('disabled' => !$this->circuitNoLease($this->getSubject()), 'required' => true))
+            ->add('activatedAt', 'genemu_jquerydate', array('required' => true, 'widget' => 'single_text'))
             ->add('comments')
             //->add('services')
         ;
+    }
+
+    // NoLease types allow full editing at all times
+    public function circuitNoLease($subject) {
+        if($subject != null && $subject->getConnectivityType()->getNoLease() == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function circuitFinalized($subject) {
+        if($subject != null && $subject->getActivatedAt() != null && ($subject->getConnectivityType()->requiresNumber() != true || $subject->getNumber() != null)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

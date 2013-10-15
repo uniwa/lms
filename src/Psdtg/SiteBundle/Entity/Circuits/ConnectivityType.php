@@ -37,6 +37,11 @@ class ConnectivityType extends MMSyncableEntity
     protected $isService = false;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $requiresNumber = false;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $deletedAt;
@@ -71,6 +76,14 @@ class ConnectivityType extends MMSyncableEntity
 
     public function setIsService($isService) {
         $this->isService = $isService;
+    }
+
+    public function getRequiresNumber() {
+        return $this->requiresNumber;
+    }
+
+    public function setRequiresNumber($requiresNumber) {
+        $this->requiresNumber = $requiresNumber;
     }
 
     public function getDeletedAt() {

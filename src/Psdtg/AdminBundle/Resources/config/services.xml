@@ -17,6 +17,7 @@
             <argument type="service" id="security.acl.object_identity_retrieval_strategy" />
             <argument type="service" id="security.acl.security_identity_retrieval_strategy" />
             <argument type="service" id="security.acl.permission.map" />
+            <argument type="service" id="sonata.admin.pool" />
             <argument type="service" id="logger" on-invalid="null" />
             <tag name="security.voter" priority="254" />
         </service>
@@ -50,6 +51,9 @@
             <call method="setSecurityContext">
                 <argument type="service" id="security.context" />
             </call>
+            <call method="setRequest">
+                <argument type="service" id="request" />
+            </call>
        </service>
         <service id="sonata.admin.phonecircuits.kedo" class="Psdtg\AdminBundle\Admin\Kedo\PhoneCircuitAdmin">
            <tag name="sonata.admin"
@@ -60,6 +64,9 @@
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit</argument>
            <argument>SonataAdminBundle:CRUD</argument>
+            <call method="setRequest">
+                <argument type="service" id="request" />
+            </call>
        </service>
         <!-- NewCircuitRequest -->
         <service id="sonata.admin.newcircuitrequests.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\NewCircuitRequestAdmin">
