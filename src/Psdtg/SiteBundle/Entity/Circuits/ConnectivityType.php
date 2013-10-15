@@ -86,6 +86,10 @@ class ConnectivityType extends MMSyncableEntity
         $this->requiresNumber = $requiresNumber;
     }
 
+    public function requiresNumber() {
+        return $this->getRequiresNumber();
+    }
+
     public function getDeletedAt() {
         return $this->deletedAt;
     }
