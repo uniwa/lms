@@ -74,7 +74,7 @@ abstract class RequestAdmin extends Admin
     {
         $datagridMapper
             ->add('createdBy', null, array(), null, array('attr' => array('placeholder' => 'LDAP Username')))
-            ->add('status', null, array(), 'requeststatus', array('class' => $this->getClass()))
+            ->add('status', null, array(), 'requeststatus', array('class' => $this->getClass(), 'confirmApproved' => false))
         ;
     }
 

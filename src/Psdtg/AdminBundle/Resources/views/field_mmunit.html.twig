@@ -89,3 +89,23 @@
     <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" {% if form.vars.disabled == true %}disabled="disabled"{% endif %} />
     </div>
 {% endblock %}
+
+{% block requeststatus_widget %}
+<div class="control-group">
+    {% if form.vars.confirmApproved == true %}
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            var $field = $('#{{ id }}');
+            $field.on('change', function(e) {
+                if($(this).val() == "{{form.vars.confirmationValue}}") {
+                    if(!confirm('{{'APPROVED_CONFIRM'|trans}}')) {
+                        $field.select2("val", e.removed.id);
+                    }
+                }
+            });
+        });
+    </script>
+    {% endif %}
+    {{ form_widget(form) }}
+</div>
+{% endblock %}
