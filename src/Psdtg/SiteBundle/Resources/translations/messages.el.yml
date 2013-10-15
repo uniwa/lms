@@ -49,6 +49,7 @@ Adsl Realspeed: ADSL Πραγματική Ταχύτητα
 # Request
 Circuit: Κύκλωμα
 Status: Κατάσταση Αιτήματος
+Comments: Σχόλια
 PENDING: Σε εκκρεμότητα
 APPROVED: Εγκρίθηκε
 REJECTED: Απορρίφθηκε
