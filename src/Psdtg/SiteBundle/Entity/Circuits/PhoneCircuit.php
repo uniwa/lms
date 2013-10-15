@@ -11,6 +11,8 @@ use JMS\Serializer\Annotation\AccessType;
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\ReadOnly;
 
+use Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest;
+
 /**
  * @ORM\Entity(repositoryClass="Psdtg\SiteBundle\Entity\Repositories\Circuits\PhoneCircuitsRepository")
  * @ExclusionPolicy("all")
@@ -101,6 +103,13 @@ class PhoneCircuit extends Circuit
     }
 
     public function setFullName($fullName) {}
+
+    public function populateWithRequestData(NewCircuitRequest $newcircuitrequest) {
+        $this->setConnectivityType($newcircuitrequest->getConnectivityType());
+        $this->setUnit($newcircuitrequest->getUnit());
+        $this->setBandwidth($newcircuitrequest->getBandwidth());
+        $this->setPaidByPsd(true);
+    }
 
     public function __toString() {
         if(isset($this->number)) {

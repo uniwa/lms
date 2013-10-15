@@ -27,8 +27,9 @@ class PhoneCircuitAdmin extends CircuitAdmin
         parent::configureFormFields($formMapper);
         $formMapper
             ->add('number')
-            ->add('paidByPsd', null, array('required' => false))
-            ->add('bandwidth')
+            ->add('paidByPsd', null, array('required' => false, 'disabled' => true))
+            ->add('connectivityType', null, array('disabled' => true))
+            ->add('bandwidth', null, array('disabled' => true))
             ->add('realspeed')
         ;
     }

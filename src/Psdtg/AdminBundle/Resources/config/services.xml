@@ -80,7 +80,7 @@
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest</argument>
-           <argument>SonataAdminBundle:CRUD</argument>
+           <argument>PsdtgAdminBundle:NewCircuitRequest</argument>
        </service>
        <!-- RemoveCircuitRequest -->
         <service id="sonata.admin.removecircuitrequests.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\RemoveCircuitRequestAdmin">

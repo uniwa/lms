@@ -5,6 +5,7 @@ use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Acl\Voter\AclVoter;
 
+use Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest;
 use Psdtg\SiteBundle\Entity\Requests\Request;
 use Psdtg\AdminBundle\Admin\RequestAdmin;
 
@@ -13,11 +14,18 @@ class RequestAclVoter extends AclVoter
     public function vote(TokenInterface $token, $object, array $attributes)
     {
         if(($user = $token->getUser()) instanceof UserInterface) {
-            // Kedo user should not be able to create requests
+            // Kedo user should not be able to create requests or edit requests are are INSTALLED or APPROVED
             if($user->hasRole('ROLE_KEDO')) {
                 foreach ($attributes as $attribute) {
                     if(($object instanceof Request || $object instanceof RequestAdmin) && ($attribute == 'CREATE')) {
                         return self::ACCESS_DENIED;
+                    }
+                    if($attribute == 'EDIT' || $attribute == 'DELETE') {
+                        if($object instanceof Request && $object->getStatus() == Request::STATUS_APPROVED) {
+                            return self::ACCESS_DENIED;
+                        } else if($object instanceof NewCircuitRequest && $object->getStatus() == NewCircuitRequest::STATUS_INSTALLED) {
+                            return self::ACCESS_DENIED;
+                        }
                     }
                 }
             }

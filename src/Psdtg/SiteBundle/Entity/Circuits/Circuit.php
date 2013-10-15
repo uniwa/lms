@@ -47,6 +47,12 @@ abstract class Circuit extends MMSyncableEntity
     protected $unit;
 
     /**
+     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest")
+     * @ORM\JoinColumn(name="newCircuitRrequestId", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $newCircuitRequest;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Expose
      */
@@ -78,6 +84,14 @@ abstract class Circuit extends MMSyncableEntity
 
     public function setUnit($unit) {
         $this->unit = $unit;
+    }
+
+    public function getNewCircuitRequest() {
+        return $this->newCircuitRequest;
+    }
+
+    public function setNewCircuitRequest($newCircuitRequest) {
+        $this->newCircuitRequest = $newCircuitRequest;
     }
 
     public function getActivatedAt() {

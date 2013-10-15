@@ -5,6 +5,8 @@ namespace Psdtg\SiteBundle\Entity\Requests;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit;
+
 /**
  * @ORM\Entity
  */
@@ -33,6 +35,11 @@ class NewCircuitRequest extends Request
     const STATUS_WAITINGCREW = 'WAITINGCREW';
     const STATUS_INSTALLED = 'INSTALLED';
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    protected $bandwidth = PhoneCircuit::ADSL_PROFILE_2MBPS;
+
     public function getConnectivityType() {
         return $this->connectivityType;
     }
@@ -55,6 +62,14 @@ class NewCircuitRequest extends Request
 
     public function setTechFactsheetNo($techFactsheetNo) {
         $this->techFactsheetNo = $techFactsheetNo;
+    }
+
+    public function getBandwidth() {
+        return $this->bandwidth;
+    }
+
+    public function setBandwidth($bandwidth) {
+        $this->bandwidth = $bandwidth;
     }
 
     public static function getStatuses() {
