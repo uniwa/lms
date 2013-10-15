@@ -157,6 +157,10 @@ services:
             - { name: form.type, alias: circuit }
         arguments:
             - "@psdtg.form.type.entity_to_id_transformer"
+    psdtg.form.type.requeststatus:
+        class: Psdtg\SiteBundle\Form\Type\RequestStatusType
+        tags:
+            - { name: form.type, alias: requeststatus }
     psdtg.unit.listener:
         class: Psdtg\SiteBundle\Extension\UnitListener
         tags:

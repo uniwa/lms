@@ -4,8 +4,6 @@ namespace Psdtg\AdminBundle\Admin\Kedo;
 use Psdtg\AdminBundle\Admin\NewCircuitRequestAdmin as BaseNewCircuitRequestAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 
-use Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest;
-
 class NewCircuitRequestAdmin extends BaseNewCircuitRequestAdmin
 {
     protected $baseRouteName = 'admin_lms_newcircuitrequest_kedo';
@@ -16,7 +14,7 @@ class NewCircuitRequestAdmin extends BaseNewCircuitRequestAdmin
         parent::configureFormFields($formMapper);
         $subject = $this->getSubject();
         $formMapper
-            ->add('status', 'choice', array('choices' => NewCircuitRequest::getStatuses()))
+            ->add('status', 'requeststatus', array('class' => $this->getClass()))
             //->add('submitterId', null, array('disabled' => true, 'data' => $subject->getSubmitterId()))
         ;
     }

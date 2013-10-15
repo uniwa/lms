@@ -1,8 +1,6 @@
 <?php
 namespace Psdtg\AdminBundle\Admin;
 
-use Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest;
-
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -76,7 +74,7 @@ abstract class RequestAdmin extends Admin
     {
         $datagridMapper
             ->add('createdBy', null, array(), null, array('attr' => array('placeholder' => 'LDAP Username')))
-            ->add('status', null, array(), 'choice', array('choices' => NewCircuitRequest::getStatuses()))
+            ->add('status', null, array(), 'requeststatus', array('class' => $this->getClass()))
         ;
     }
 

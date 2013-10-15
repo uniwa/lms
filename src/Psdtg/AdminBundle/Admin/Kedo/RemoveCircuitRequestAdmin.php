@@ -4,8 +4,6 @@ namespace Psdtg\AdminBundle\Admin\Kedo;
 use Psdtg\AdminBundle\Admin\RemoveCircuitRequestAdmin as BaseRemoveCircuitRequestAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 
-use Psdtg\SiteBundle\Entity\Requests\Request;
-
 class RemoveCircuitRequestAdmin extends BaseRemoveCircuitRequestAdmin
 {
     protected $baseRouteName = 'admin_lms_removecircuitrequest_kedo';
@@ -15,7 +13,7 @@ class RemoveCircuitRequestAdmin extends BaseRemoveCircuitRequestAdmin
     {
         parent::configureFormFields($formMapper);
         $formMapper
-            ->add('status', 'choice', array('choices' => Request::getStatuses()))
+            ->add('status', 'requeststatus', array('class' => $this->getClass()))
         ;
     }
 }
