@@ -56,8 +56,8 @@ class CircuitAdmin extends Admin
     }
 
     // NoLease types allow full editing at all times
-    public function circuitNoLease($subject) {
-        if($subject != null && $subject->getConnectivityType()->getNoLease() == true) {
+    public function circuitNoLease($subject = null) {
+        if($subject == null || $subject->getId() == null || $subject->getConnectivityType()->getNoLease() == true) {
             return true;
         } else {
             return false;
@@ -65,7 +65,7 @@ class CircuitAdmin extends Admin
     }
 
     public function circuitFinalized($subject) {
-        if($subject != null && $subject->getActivatedAt() != null && ($subject->getConnectivityType()->requiresNumber() != true || $subject->getNumber() != null)) {
+        if($subject != null && $subject->getId() != null && $subject->getActivatedAt() != null && ($subject->getConnectivityType()->requiresNumber() != true || $subject->getNumber() != null)) {
             return true;
         } else {
             return false;

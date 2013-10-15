@@ -26,10 +26,9 @@ class PhoneCircuitAdmin extends CircuitAdmin
     {
         parent::configureFormFields($formMapper);
         $formMapper
-            ->add('connectivityType', null, array('disabled' => !$this->circuitNoLease($this->getSubject()), 'query_builder' => $this->getAllowedConnectivityTypes()))
+            ->add('connectivityType', null, array('disabled' => !$this->circuitNoLease($this->getSubject()), 'query_builder' => $this->circuitNoLease($this->getSubject()) ? $this->getAllowedConnectivityTypes() : null))
             ->add('number')
             ->add('paidByPsd', null, array('required' => false, 'disabled' => !$this->circuitNoLease($this->getSubject())))
-            ->add('connectivityType', null, array('disabled' => !$this->circuitNoLease($this->getSubject())))
             ->add('bandwidth', null, array('disabled' => !$this->circuitNoLease($this->getSubject())))
             ->add('realspeed')
         ;
