@@ -12,3 +12,7 @@
     {% endfor %}
 {% endspaceless %}
 {% endblock choice_widget_options %}
+
+{% block field_widget %}
+    {{block('form_widget')}}
+{% endblock %}
