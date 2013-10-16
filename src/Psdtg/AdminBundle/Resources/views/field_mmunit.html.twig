@@ -63,8 +63,24 @@
 
             {% if dependentFieldId != null %}
                 var $dependentField = $('#{{dependentFieldId}}');
+                if($dependentField.val() == '') {
+                    $field.select2("readonly", true);
+                }
                 $dependentField.on('change', function() {
                     $field.val('').trigger('change');
+                    {% if form.vars.required == true %}
+                    $field.select2("readonly", true);
+                    var query = {
+                        term: '',
+                        callback: function(ret) {
+                            $field.select2("data", {id: ret.results[0].id, text: ret.results[0].text});
+                            $field.select2("readonly", false);
+                        }
+                    };
+                    queryFunc(query);
+                    {% else %}
+                    $field.select2("readonly", false);
+                    {% endif %}
                 });
             {% endif %}
         });
