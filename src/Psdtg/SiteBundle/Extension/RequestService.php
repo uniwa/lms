@@ -36,5 +36,10 @@ class RequestService {
     protected function approveRemoveCircuitRequest(RemoveCircuitRequest $request) {
         $request->getCircuit()->setDeletedAt(new \DateTime('now'));
     }
+
+    protected function approveActivateServiceRequest(ActivateServiceRequest $request) {
+        echo 'activateservice';
+        die();
+    }
 }
 ?>
