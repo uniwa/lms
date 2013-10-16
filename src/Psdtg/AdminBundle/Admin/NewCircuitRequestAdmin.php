@@ -33,7 +33,7 @@ class NewCircuitRequestAdmin extends RequestAdmin
             ->add('bandwidth')
         ;
         $subject = $this->getSubject();
-        if($subject->getStatus() === Request::STATUS_APPROVED) {
+        if($subject->getStatus() === NewCircuitRequest::STATUS_INSTALLED) {
             foreach($formMapper->getFormBuilder()->all() as $curField) {
                 if($curField->getName() !== 'status') {
                     $curField->setDisabled(true);

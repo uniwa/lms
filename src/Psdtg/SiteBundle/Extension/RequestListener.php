@@ -21,8 +21,11 @@ class RequestListener {
         if(!$request instanceof Request) {
             return;
         }
-        if ($eventArgs->hasChangedField('status') && ($eventArgs->getNewValue('status') === NewCircuitRequest::STATUS_INSTALLED || $eventArgs->getNewValue('status') === Request::STATUS_APPROVED)) {
-            $this->requestService->approveRequest($request);
+        if ($eventArgs->hasChangedField('status')) {
+            if(($request instanceof NewCircuitRequest && $eventArgs->getNewValue('status') === NewCircuitRequest::STATUS_INSTALLED) ||
+                ($request instanceof Request && $eventArgs->getNewValue('status') === Request::STATUS_APPROVED)) {
+                $this->requestService->approveRequest($request);
+            }
         }
     }
 
