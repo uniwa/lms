@@ -14,6 +14,8 @@ namespace Psdtg\SiteBundle\Form\Type;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\AbstractType;
 
@@ -38,6 +40,12 @@ class BandwidthProfileType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['filters'] = $options['filters'];
+        if(isset($options['dependentField'])) {
+            $id = $view->parent->children[$options['dependentField']]->vars['id'];
+            $view->vars['dependentProperty'] = $options['dependentProperty'];
+            $view->vars['dependentField'] = $options['dependentField'];
+            $view->vars['dependentFieldId'] = $id;
+        }
     }
 
 
@@ -48,13 +56,16 @@ class BandwidthProfileType extends AbstractType
                 'path' => 'get_bandwidth_profiles',
                 'field_id' => 'id',
                 'field_name' => 'bandwidth',
-                'minimumInputLength' => 5,
                 'ajax' => array(
                     'quietMillis' => 300,
                 ),
             ),
             'class' => null,
             'filters' => array(),
+        ));
+        $resolver->setRequired(array(
+            'dependentProperty',
+            'dependentField',
         ));
     }
 

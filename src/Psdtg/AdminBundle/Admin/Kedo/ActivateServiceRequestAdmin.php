@@ -14,7 +14,7 @@ class ActivateServiceRequestAdmin extends BaseActivateServiceRequestAdmin
         parent::configureFormFields($formMapper);
         $formMapper
             ->add('newConnectivityType', null, array('disabled' => true, 'query_builder' => $this->getServiceConnectivityTypes()))
-            ->add('newBandwidthProfile', 'bandwidth_profile', array('disabled' => true))
+            ->add('newBandwidthProfile', 'bandwidth_profile', array('required' => true, 'dependentProperty' => 'connectivityType', 'dependentField' => 'newConnectivityType'))
             ->add('status', 'requeststatus', array('class' => $this->getClass()))
         ;
     }

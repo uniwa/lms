@@ -17,7 +17,7 @@ class BandwidthProfileController extends Controller {
     public function getBandwidthProfilesAction() {
         $repo = $this->container->get('doctrine')->getManager()->getRepository('Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile');
         $connTypeRepo = $this->container->get('doctrine')->getManager()->getRepository('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType');
-        $connType = $connTypeRepo->find($this->getRequest()->get('connectivityType'));
+        $connType = $connTypeRepo->find($this->getRequest()->get('connectivityType', 0));
         if($connType != null) {
             $bandwidthProfiles = $repo->findBy(array(
                 'connectivityType' => $connType,

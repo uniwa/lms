@@ -14,11 +14,13 @@
 
             var $configs = {{ configs|json_encode|raw }};
             {% set filters = form.vars.filters is defined ? form.vars.filters : [] %}
+            {% set dependentProperty = form.vars.dependentProperty is defined and form.vars.dependentProperty != null ? form.vars.dependentProperty : null %}
+            {% set dependentFieldId = form.vars.dependentFieldId is defined and form.vars.dependentFieldId != null ? form.vars.dependentFieldId : null %}
 
             var queryFunc = function(query) {
                 if(query.term.length >= $configs.minimumInputLength) {
                     $.ajax({
-                        url: '{{path(configs.path)}}?name='+query.term+'&filters={{filters|json_encode|url_encode}}',
+                        url: '{{path(configs.path)}}?name='+query.term+'&filters={{filters|json_encode|url_encode}}{% if dependentProperty != null %}&{{dependentProperty}}='+$('#{{dependentFieldId}}').val()+'{% endif %}',
                         cache: true,
                         dataType: "json",
                         success: function(data) {
@@ -58,6 +60,13 @@
               }
               timeout = setTimeout(function() { queryFunc($field.val()); }, $configs.ajax.quietMillis);
             });
+
+            {% if dependentFieldId != null %}
+                var $dependentField = $('#{{dependentFieldId}}');
+                $dependentField.on('change', function() {
+                    $field.val('').trigger('change');
+                });
+            {% endif %}
         });
     </script>
 {% endblock %}
