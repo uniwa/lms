@@ -61,3 +61,7 @@ categories:
 circuits:
     resource: Psdtg\AdminBundle\Controller\CircuitController
     type:     rest
+
+bandwidth_profiles:
+    resource: Psdtg\AdminBundle\Controller\BandwidthProfileController
+    type:     rest

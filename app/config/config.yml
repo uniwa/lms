@@ -131,11 +131,13 @@ services:
         class: Psdtg\SiteBundle\Extension\RequestService
     psdtg.form.type.unit_to_mmid_transformer:
         class: Psdtg\SiteBundle\Form\DataTransformer\UnitToMmIdTransformer
+        scope: prototype
         public: false
         arguments:
             - "@psdtg.mm.service"
     psdtg.form.type.entity_to_id_transformer:
         class: Psdtg\SiteBundle\Form\DataTransformer\EntityToIntTransformer
+        scope: prototype
         public: false
         arguments:
             - "@doctrine.orm.entity_manager"
@@ -144,7 +146,7 @@ services:
         tags:
             - { name: form.type, alias: mmunit }
         arguments:
-            - "@psdtg.form.type.unit_to_mmid_transformer"
+            - "@psdtg.form.type.unit_to_mmid_transformer="
     psdtg.form.type.mmfy:
         class: Psdtg\SiteBundle\Form\Type\FyType
         tags:
@@ -158,7 +160,13 @@ services:
         tags:
             - { name: form.type, alias: circuit }
         arguments:
-            - "@psdtg.form.type.entity_to_id_transformer"
+            - "@psdtg.form.type.entity_to_id_transformer="
+    psdtg.form.type.bandwidthprofile:
+        class: Psdtg\SiteBundle\Form\Type\BandwidthProfileType
+        tags:
+            - { name: form.type, alias: bandwidth_profile }
+        arguments:
+            - "@psdtg.form.type.entity_to_id_transformer="
     psdtg.form.type.requeststatus:
         class: Psdtg\SiteBundle\Form\Type\RequestStatusType
         tags:

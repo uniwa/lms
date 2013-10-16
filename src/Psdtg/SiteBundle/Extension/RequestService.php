@@ -27,7 +27,7 @@ class RequestService {
         $circuit->setNewCircuitRequest($request);
         $circuit->setConnectivityType($request->getConnectivityType());
         $circuit->setUnit($request->getUnit());
-        $circuit->setBandwidth($request->getBandwidth());
+        $circuit->setBandwidthProfile($request->getBandwidthProfile());
         $circuit->setPaidByPsd(true);
         $circuit->setComments($request->getComments());
         $request->setCircuit($circuit);

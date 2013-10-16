@@ -90,6 +90,13 @@
     </div>
 {% endblock %}
 
+{% block bandwidth_profile_widget %}
+    <div class="control-group">
+    {#{{ form_widget(form) }}#}
+    <input type="hidden" id="{{form.vars.id}}" name="{{form.vars.full_name}}" value="{{value}}" {% if form.vars.disabled == true %}disabled="disabled"{% endif %} />
+    </div>
+{% endblock %}
+
 {% block requeststatus_widget %}
 <div class="control-group">
     {% if form.vars.confirmApproved == true %}

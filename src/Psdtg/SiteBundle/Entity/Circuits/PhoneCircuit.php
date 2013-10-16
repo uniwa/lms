@@ -42,9 +42,13 @@ class PhoneCircuit extends Circuit
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Expose
      */
-    protected $bandwidth = self::ADSL_PROFILE_2MBPS;
-    const ADSL_PROFILE_2MBPS = '2mbps';
-    const ADSL_PROFILE_24MBPS = '24mbps';
+    protected $bandwidth = null; // Deprecated
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile")
+     * @ORM\JoinColumn(name="bandwidth_profile_id", referencedColumnName="id")
+     */
+    protected $bandwidthProfile;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -88,6 +92,14 @@ class PhoneCircuit extends Circuit
 
     public function setBandwidth($bandwidth) {
         $this->bandwidth = $bandwidth;
+    }
+
+    public function getBandwidthProfile() {
+        return $this->bandwidthProfile;
+    }
+
+    public function setBandwidthProfile($bandwidthProfile) {
+        $this->bandwidthProfile = $bandwidthProfile;
     }
 
     public function getRealspeed() {

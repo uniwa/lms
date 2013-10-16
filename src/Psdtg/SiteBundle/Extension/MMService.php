@@ -187,7 +187,7 @@ class MMService {
                "activated_date" => $circuit->getActivatedAt() instanceof \DateTime ? $circuit->getActivatedAt()->format('Y-m-d H:i') : null,
                "updated_date" => $circuit->getUpdatedAt() instanceof \DateTime ? $circuit->getUpdatedAt()->format('Y-m-d H:i') : null,
                "deactivated_date" => $circuit->getDeletedAt() instanceof \DateTime ? $circuit->getDeletedAt()->format('Y-m-d H:i') : null,
-               "bandwidth" => $circuit->getBandwidth(),
+               "bandwidth" => $circuit->getBandwidthProfile()->getBandwidth(),
                "readspeed" => $circuit->getRealspeed(),
                "paid_by_psd" => $circuit->getPaidByPsd(),
         ));

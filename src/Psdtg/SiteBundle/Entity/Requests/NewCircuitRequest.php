@@ -36,9 +36,10 @@ class NewCircuitRequest extends Request
     const STATUS_INSTALLED = 'INSTALLED';
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile")
+     * @ORM\JoinColumn(name="bandwidth_profile_id", referencedColumnName="id")
      */
-    protected $bandwidth = PhoneCircuit::ADSL_PROFILE_2MBPS;
+    protected $bandwidthProfile;
 
     /**
      * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\Circuit", mappedBy="newCircuitRequest")
@@ -69,12 +70,12 @@ class NewCircuitRequest extends Request
         $this->techFactsheetNo = $techFactsheetNo;
     }
 
-    public function getBandwidth() {
-        return $this->bandwidth;
+    public function getBandwidthProfile() {
+        return $this->bandwidthProfile;
     }
 
-    public function setBandwidth($bandwidth) {
-        $this->bandwidth = $bandwidth;
+    public function setBandwidthProfile($bandwidthProfile) {
+        $this->bandwidthProfile = $bandwidthProfile;
     }
 
     public function getCircuit() {
