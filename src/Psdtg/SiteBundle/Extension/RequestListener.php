@@ -1,11 +1,13 @@
 <?php
 namespace Psdtg\SiteBundle\Extension;
 
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 use Psdtg\SiteBundle\Extension\RequestService;
 use Psdtg\SiteBundle\Entity\Requests\Request;
 use Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest;
+use Psdtg\SiteBundle\Entity\Requests\ExistingCircuitRequest;
 
 class RequestListener {
     protected $requestService;
@@ -21,6 +23,17 @@ class RequestListener {
         }
         if ($eventArgs->hasChangedField('status') && ($eventArgs->getNewValue('status') === NewCircuitRequest::STATUS_INSTALLED || $eventArgs->getNewValue('status') === Request::STATUS_APPROVED)) {
             $this->requestService->approveRequest($request);
+        }
+    }
+
+    public function postUpdate(LifecycleEventArgs $eventArgs) {
+        $request = $eventArgs->getEntity();
+        if(!$request instanceof Request) {
+            return;
+        }
+        if($request instanceof NewCircuitRequest || $request instanceof ExistingCircuitRequest) {
+            $eventArgs->getEntityManager()->persist($request->getCircuit());
+            $eventArgs->getEntityManager()->flush($request->getCircuit());
         }
     }
 }

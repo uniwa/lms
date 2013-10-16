@@ -2,6 +2,7 @@
 
 namespace Psdtg\SiteBundle\Extension;
 
+use Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit;
 use Psdtg\SiteBundle\Entity\Requests\Request;
 use Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest;
 
@@ -21,7 +22,6 @@ class RequestService {
     }
 
     protected function approveNewCircuitRequest(NewCircuitRequest $request) {
-        $circuitAdmin = $this->container->get('sonata.admin.phonecircuits.kedo');
         $circuit = new PhoneCircuit();
         $circuit->setNewCircuitRequest($request);
         $circuit->setConnectivityType($request->getConnectivityType());
@@ -29,8 +29,8 @@ class RequestService {
         $circuit->setBandwidth($request->getBandwidth());
         $circuit->setPaidByPsd(true);
         $circuit->setComments($request->getComments());
-        $circuitAdmin->create($circuit);
         $request->setCircuit($circuit);
+        // We don't persist here because the circuit will be cascaded
     }
 }
 ?>

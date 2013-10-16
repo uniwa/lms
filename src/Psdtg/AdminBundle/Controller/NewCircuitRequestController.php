@@ -6,7 +6,6 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest;
-use Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit;
 
 class NewCircuitRequestController extends CRUDController {
     public function redirectTo($object) {

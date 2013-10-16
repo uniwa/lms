@@ -175,6 +175,7 @@ services:
         class: Psdtg\SiteBundle\Extension\RequestListener
         tags:
             - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: postUpdate }
         arguments:
             - "@psdtg.request.service"
     psdtg.mmsyncable.listener:
