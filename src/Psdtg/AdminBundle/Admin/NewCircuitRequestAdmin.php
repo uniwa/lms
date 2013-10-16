@@ -30,7 +30,7 @@ class NewCircuitRequestAdmin extends RequestAdmin
             ->add('unit', 'mmunit', array('required' => true))
             ->add('techFactsheetNo')
             ->add('connectivityType', null, array('required' => true, 'query_builder' => $this->getAllowedConnectivityTypes()))
-            ->add('bandwidth')
+            ->add('bandwidthProfile', 'bandwidth_profile', array('required' => true, 'dependentProperty' => 'connectivityType', 'dependentField' => 'connectivityType'))
         ;
         $subject = $this->getSubject();
         if($subject->getStatus() === NewCircuitRequest::STATUS_INSTALLED) {
