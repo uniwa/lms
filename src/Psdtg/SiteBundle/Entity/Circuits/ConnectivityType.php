@@ -27,6 +27,11 @@ class ConnectivityType extends MMSyncableEntity
     protected $name;
 
     /**
+     * @ORM\OneToMany(targetEntity="Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile", mappedBy="connectivityType")
+     */
+    protected $bandwidthProfiles;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     protected $noLease = false;
@@ -60,6 +65,14 @@ class ConnectivityType extends MMSyncableEntity
 
     public function setName($name) {
         $this->name = $name;
+    }
+
+    public function getBandwidthProfiles() {
+        return $this->bandwidthProfiles;
+    }
+
+    public function setBandwidthProfiles($bandwidthProfiles) {
+        $this->bandwidthProfiles = $bandwidthProfiles;
     }
 
     public function getNoLease() {
