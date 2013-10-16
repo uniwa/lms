@@ -63,12 +63,7 @@
 
             {% if dependentFieldId != null %}
                 var $dependentField = $('#{{dependentFieldId}}');
-                if($dependentField.val() == '') {
-                    $field.select2("readonly", true);
-                }
-                $dependentField.on('change', function() {
-                    $field.val('').trigger('change');
-                    {% if form.vars.required == true %}
+                var refreshBandwidthProfiles = function() {
                     $field.select2("readonly", true);
                     var query = {
                         term: '',
@@ -78,6 +73,20 @@
                         }
                     };
                     queryFunc(query);
+                }
+                if($dependentField.val() == '') {
+                    $field.select2("readonly", true);
+                } else {
+                    {% if form.vars.required == true %}
+                    if($field.val() == '') {
+                        refreshBandwidthProfiles();
+                    }
+                    {% endif %}
+                }
+                $dependentField.on('change', function() {
+                    $field.val('').trigger('change');
+                    {% if form.vars.required == true %}
+                    refreshBandwidthProfiles();
                     {% else %}
                     $field.select2("readonly", false);
                     {% endif %}
