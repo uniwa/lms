@@ -20,10 +20,10 @@ class PhoneCircuitAclVoter extends AclVoter
 
     public function vote(TokenInterface $token, $object, array $attributes)
     {
-        if(($user = $token->getUser()) instanceof UserInterface) {
+        if(($user = $token->getUser()) instanceof UserInterface && $object instanceof PhoneCircuit) {
             // All users should be able to directly edit noLease circuits
             foreach ($attributes as $attribute) {
-                if($object instanceof PhoneCircuit && ($attribute == 'EDIT' || $attribute == 'DELETE')) {
+                if($attribute == 'EDIT' || $attribute == 'DELETE') {
                     if($object->getConnectivityType()->getNoLease() == true) {
                         return self::ACCESS_GRANTED;
                     }
@@ -33,7 +33,7 @@ class PhoneCircuitAclVoter extends AclVoter
             if($user->hasRole('ROLE_HELPDESK')) {
                 return self::ACCESS_DENIED;
             } else if($user->hasRole('ROLE_KEDO')) {
-                if($object instanceof PhoneCircuit && ($attribute == 'EDIT' || $attribute == 'DELETE')) {
+                if($attribute == 'EDIT' || $attribute == 'DELETE') {
                     // Kedo user can edit if the circuit is not finalized
                     $admin = $this->pool->getAdminByAdminCode('sonata.admin.phonecircuits.kedo');
                     if(!$admin->circuitNoLease($object) && $admin->circuitFinalized($object)) {

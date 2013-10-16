@@ -29,7 +29,7 @@ class PhoneCircuitAdmin extends CircuitAdmin
             ->add('connectivityType', null, array('disabled' => !$this->circuitNoLease($this->getSubject()), 'query_builder' => $this->circuitNoLease($this->getSubject()) ? $this->getAllowedConnectivityTypes() : null, 'help' => ($this->circuitNoLease($this->getSubject())? '&nbsp;Επιτρέπονται μόνο τύποι που δεν εμπεριέχουν μίσθωση για το ΠΣΔ. <BR />&nbsp;Για άλλους τύπους πρέπει να δημιουργηθεί Αίτημα Νέου Κυκλώματος.' : '')))
             ->add('number')
             ->add('paidByPsd', null, array('required' => false, 'disabled' => !$this->circuitNoLease($this->getSubject())))
-            ->add('bandwidthProfile', 'bandwidth_profile', array('disabled' => !$this->circuitNoLease($this->getSubject()), 'dependentProperty' => 'connectivityType', 'dependentField' => 'newConnectivityType'))
+            ->add('bandwidthProfile', 'bandwidth_profile', array('disabled' => !$this->circuitNoLease($this->getSubject()), 'dependentProperty' => 'connectivityType', 'dependentField' => 'connectivityType'))
             ->add('realspeed')
         ;
     }

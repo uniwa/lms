@@ -42,6 +42,9 @@ class BandwidthProfileType extends AbstractType
         $view->vars['filters'] = $options['filters'];
         if(isset($options['dependentField'])) {
             $id = $view->parent->children[$options['dependentField']]->vars['id'];
+            if($id == '') {
+                throw new \Exception('Dependent id not found');
+            }
             $view->vars['dependentProperty'] = $options['dependentProperty'];
             $view->vars['dependentField'] = $options['dependentField'];
             $view->vars['dependentFieldId'] = $id;
