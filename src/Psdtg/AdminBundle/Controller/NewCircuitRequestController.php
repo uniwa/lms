@@ -16,10 +16,7 @@ class NewCircuitRequestController extends CRUDController {
         if($object->getStatus() == NewCircuitRequest::STATUS_INSTALLED) {
             try {
                 $circuitAdmin = $this->get('sonata.admin.phonecircuits.kedo');
-                $circuit = new PhoneCircuit();
-                $circuit->setNewCircuitRequest($object);
-                $circuit->populateWithRequestData($object);
-                $circuitAdmin->create($circuit);
+                $circuit = $object->getCircuit();
                 $url = $circuitAdmin->generateObjectUrl('edit', $circuit);
                 return new RedirectResponse($url);
             } catch(\Exception $e) {

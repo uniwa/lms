@@ -127,6 +127,10 @@ services:
         class: Psdtg\SiteBundle\Extension\MMService
         arguments:
             - "@service_container"
+    psdtg.request.service:
+        class: Psdtg\SiteBundle\Extension\RequestService
+        arguments:
+            - "@service_container"
     psdtg.form.type.unit_to_mmid_transformer:
         class: Psdtg\SiteBundle\Form\DataTransformer\UnitToMmIdTransformer
         public: false
@@ -167,14 +171,12 @@ services:
             - { name: doctrine.event_listener, event: postLoad }
         arguments:
             - "@psdtg.mm.service"
-    psdtg.newcircuitrequest.listener:
-        class: Psdtg\SiteBundle\Extension\NewCircuitRequestListener
+    psdtg.request.listener:
+        class: Psdtg\SiteBundle\Extension\RequestListener
         tags:
-            - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }
-            - { name: doctrine.event_listener, event: preRemove }
-        #arguments:
-            #- "@service_container"
+        arguments:
+            - "@psdtg.request.service"
     psdtg.mmsyncable.listener:
         class: Psdtg\SiteBundle\Extension\MMSyncableListener
         tags:

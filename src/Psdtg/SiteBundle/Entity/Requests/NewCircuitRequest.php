@@ -40,6 +40,11 @@ class NewCircuitRequest extends Request
      */
     protected $bandwidth = PhoneCircuit::ADSL_PROFILE_2MBPS;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\Circuit", mappedBy="newCircuitRequest")
+     */
+    protected $circuit;
+
     public function getConnectivityType() {
         return $this->connectivityType;
     }
@@ -70,6 +75,14 @@ class NewCircuitRequest extends Request
 
     public function setBandwidth($bandwidth) {
         $this->bandwidth = $bandwidth;
+    }
+
+    public function getCircuit() {
+        return $this->circuit;
+    }
+
+    public function setCircuit($circuit) {
+        $this->circuit = $circuit;
     }
 
     public static function getStatuses() {

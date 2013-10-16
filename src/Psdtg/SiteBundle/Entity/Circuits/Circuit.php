@@ -47,7 +47,7 @@ abstract class Circuit extends MMSyncableEntity
     protected $unit;
 
     /**
-     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest")
+     * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest", inversedBy="circuit")
      * @ORM\JoinColumn(name="newCircuitRrequestId", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $newCircuitRequest;

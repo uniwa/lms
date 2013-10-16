@@ -104,14 +104,6 @@ class PhoneCircuit extends Circuit
 
     public function setFullName($fullName) {}
 
-    public function populateWithRequestData(NewCircuitRequest $newcircuitrequest) {
-        $this->setConnectivityType($newcircuitrequest->getConnectivityType());
-        $this->setUnit($newcircuitrequest->getUnit());
-        $this->setBandwidth($newcircuitrequest->getBandwidth());
-        $this->setPaidByPsd(true);
-        $this->setComments($newcircuitrequest->getComments());
-    }
-
     public function __toString() {
         if(isset($this->number)) {
             return 'Τ'.$this->number;
