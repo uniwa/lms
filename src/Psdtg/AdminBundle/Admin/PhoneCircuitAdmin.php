@@ -52,7 +52,21 @@ class PhoneCircuitAdmin extends CircuitAdmin
     {
         parent::configureDatagridFilters($datagridMapper);
         $datagridMapper
+            ->add('paidByPsd')
         ;
+    }
+
+    public function getFilterParameters()
+    {
+        $this->datagridValues = array_merge(
+            array('paidByPsd' => array(
+                'type' => 2,
+                'value' => 1
+            )),
+            $this->datagridValues
+        );
+
+        return parent::getFilterParameters();
     }
 
     public function getExportFields()
