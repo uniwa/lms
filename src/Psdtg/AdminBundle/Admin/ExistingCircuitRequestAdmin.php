@@ -25,7 +25,7 @@ class ExistingCircuitRequestAdmin extends RequestAdmin
     {
         parent::configureFormFields($formMapper);
         $formMapper
-            ->add('circuit', 'circuit', array('required' => true))
+            ->add('circuit', 'circuit', array('required' => true, 'help' => 'Αναζήτηση μπορεί να γίνει είτε με το όνομα της μονάδας είτε με τον αριθμό του κυκλώματος'))
         ;
         $subject = $this->getSubject();
         if($subject->getStatus() === Request::STATUS_APPROVED) {

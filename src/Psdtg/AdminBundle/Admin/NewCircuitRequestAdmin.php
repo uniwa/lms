@@ -15,11 +15,15 @@ class NewCircuitRequestAdmin extends RequestAdmin
     {
         parent::configureShowField($showMapper);
         $showMapper
-            ->add('unit.mmId')
+            ->add('unit.mmId', 'string')
             ->add('unit.name')
             ->add('unit.state')
             ->add('unit.categoryName')
             ->add('unit.fy')
+            ->add('techFactsheetNo')
+            ->add('connectivityType')
+            ->add('bandwidthProfile')
+            ->add('comments')
         ;
     }
 
