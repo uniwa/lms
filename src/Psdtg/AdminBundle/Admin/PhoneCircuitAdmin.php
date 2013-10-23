@@ -27,8 +27,15 @@ class PhoneCircuitAdmin extends CircuitAdmin
         parent::configureFormFields($formMapper);
         $formMapper
             ->add('connectivityType', null, array('disabled' => !$this->circuitNoLease($this->getSubject()), 'query_builder' => $this->circuitNoLease($this->getSubject()) ? $this->getAllowedConnectivityTypes() : null, 'help' => ($this->circuitNoLease($this->getSubject())? '&nbsp;Επιτρέπονται μόνο τύποι που δεν εμπεριέχουν μίσθωση για το ΠΣΔ. <BR />&nbsp;Για άλλους τύπους πρέπει να δημιουργηθεί Αίτημα Νέου Κυκλώματος.' : '')))
-            ->add('number')
-            ->add('paidByPsd', null, array('required' => false, 'disabled' => !$this->circuitNoLease($this->getSubject())))
+        ;
+        if ($this->id($this->getSubject()) && !$this->circuitNoLease($this->getSubject())) {
+          // ONLY SHOW FIELDS IF SHOWING A NO-LEASE CIRCUIT
+            $formMapper
+                ->add('number')
+                ->add('paidByPsd', null, array('required' => false, 'disabled' => !$this->circuitNoLease($this->getSubject())))
+            ;
+        }
+        $formMapper
             ->add('bandwidthProfile', 'bandwidth_profile', array('disabled' => !$this->circuitNoLease($this->getSubject()), 'dependentProperty' => 'connectivityType', 'dependentField' => 'connectivityType'))
             ->add('realspeed')
         ;
@@ -53,6 +60,7 @@ class PhoneCircuitAdmin extends CircuitAdmin
         parent::configureDatagridFilters($datagridMapper);
         $datagridMapper
             ->add('paidByPsd')
+            ->add('connectivityType')
         ;
     }
 
