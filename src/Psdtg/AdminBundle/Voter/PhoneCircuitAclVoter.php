@@ -23,7 +23,9 @@ class PhoneCircuitAclVoter extends AclVoter
         if(($user = $token->getUser()) instanceof UserInterface && $object instanceof PhoneCircuit) {
             // All users should be able to directly edit noLease circuits
             foreach ($attributes as $attribute) {
-                if($attribute == 'EDIT' || $attribute == 'DELETE') {
+                if($attribute == 'VIEW') {
+                    return self::ACCESS_GRANTED;
+                } else if($attribute == 'EDIT' || $attribute == 'DELETE') {
                     if($object->getConnectivityType()->getNoLease() == true) {
                         return self::ACCESS_GRANTED;
                     }
