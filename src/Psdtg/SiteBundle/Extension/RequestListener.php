@@ -34,7 +34,7 @@ class RequestListener {
         if(!$request instanceof Request) {
             return;
         }
-        if($request instanceof NewCircuitRequest || $request instanceof ExistingCircuitRequest) {
+        if(($request instanceof NewCircuitRequest && $request->getCircuit() != null) || $request instanceof ExistingCircuitRequest) {
             $eventArgs->getEntityManager()->persist($request->getCircuit());
             $eventArgs->getEntityManager()->flush($request->getCircuit());
         }
