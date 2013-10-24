@@ -20,7 +20,7 @@
             var queryFunc = function(query) {
                 if(query.term.length >= $configs.minimumInputLength) {
                     $.ajax({
-                        url: '{{path(configs.path)}}?name='+jQuery('<div />').text(query.term).html()+'&filters={{filters|json_encode|url_encode}}{% if dependentProperty != null %}&{{dependentProperty}}='+$('#{{dependentFieldId}}').val()+'{% endif %}',
+                        url: '{{path(configs.path)}}?name='+encodeURI(query.term)+'&filters={{filters|json_encode|url_encode}}{% if dependentProperty != null %}&{{dependentProperty}}='+$('#{{dependentFieldId}}').val()+'{% endif %}',
                         cache: true,
                         dataType: "json",
                         success: function(data) {
