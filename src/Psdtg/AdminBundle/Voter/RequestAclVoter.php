@@ -21,7 +21,7 @@ class RequestAclVoter extends AclVoter
                         return self::ACCESS_DENIED;
                     }
                     if($attribute == 'EDIT' || $attribute == 'DELETE') {
-                        if($object instanceof Request && $object->getStatus() == Request::STATUS_APPROVED) {
+                        if($object instanceof Request && !($object instanceof NewCircuitRequest) && $object->getStatus() == Request::STATUS_APPROVED) {
                             return self::ACCESS_DENIED;
                         } else if($object instanceof NewCircuitRequest && $object->getStatus() == NewCircuitRequest::STATUS_INSTALLED) {
                             return self::ACCESS_DENIED;
