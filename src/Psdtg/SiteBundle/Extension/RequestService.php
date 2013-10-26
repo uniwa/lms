@@ -38,8 +38,8 @@ class RequestService {
     }
 
     protected function approveChangeConnectivityTypeRequest(ChangeConnectivityTypeRequest $request) {
-        echo 'activateservice';
-        die();
+        $request->getCircuit()->setConnectivityType($request->getNewConnectivityType());
+        $request->getCircuit()->setBandwidthProfile($request->getNewBandwidthProfile());
     }
 }
 ?>
