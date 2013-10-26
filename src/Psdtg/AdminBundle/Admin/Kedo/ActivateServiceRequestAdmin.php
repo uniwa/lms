@@ -6,15 +6,13 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class ActivateServiceRequestAdmin extends BaseActivateServiceRequestAdmin
 {
-    protected $baseRouteName = 'admin_lms_activateservicerequest_kedo';
-    protected $baseRoutePattern = 'activateservicerequest_kedo';
+    protected $baseRouteName = 'admin_lms_changeservicerequest_kedo';
+    protected $baseRoutePattern = 'changeservicerequest_kedo';
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
         $formMapper
-            ->add('newConnectivityType', null, array('disabled' => true, 'query_builder' => $this->getServiceConnectivityTypes()))
-            ->add('newBandwidthProfile', 'bandwidth_profile', array('disabled' => true, 'dependentProperty' => 'connectivityType', 'dependentField' => 'newConnectivityType'))
             ->add('status', 'requeststatus', array('class' => $this->getClass()))
         ;
     }

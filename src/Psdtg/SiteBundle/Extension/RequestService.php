@@ -6,8 +6,8 @@ use Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit;
 use Psdtg\SiteBundle\Entity\Requests\Request;
 use Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest;
 use Psdtg\SiteBundle\Entity\Requests\RemoveCircuitRequest;
+use Psdtg\SiteBundle\Entity\Requests\ChangeConnectivityTypeRequest;
 use Psdtg\SiteBundle\Entity\Requests\ActivateServiceRequest;
-use Psdtg\SiteBundle\Entity\Requests\ChangeServiceRequest;
 
 class RequestService {
     public function approveRequest(Request $request) {
@@ -37,7 +37,7 @@ class RequestService {
         $request->getCircuit()->setDeletedAt(new \DateTime('now'));
     }
 
-    protected function approveActivateServiceRequest(ActivateServiceRequest $request) {
+    protected function approveChangeConnectivityTypeRequest(ChangeConnectivityTypeRequest $request) {
         echo 'activateservice';
         die();
     }

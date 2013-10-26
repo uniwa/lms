@@ -110,46 +110,46 @@
            <argument>Psdtg\SiteBundle\Entity\Requests\RemoveCircuitRequest</argument>
            <argument>PsdtgAdminBundle:Request</argument>
        </service>
+       <!-- ChangeConnectivityTypeRequest -->
+        <service id="sonata.admin.changeconnectivitytyperequests.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\ChangeConnectivityTypeRequestAdmin">
+           <tag name="sonata.admin"
+                manager_type="orm"
+                group="Αιτήματα"
+                label="Αίτημα αλλαγής τύπου κυκλώματος"
+                />
+           <argument />
+           <argument>Psdtg\SiteBundle\Entity\Requests\ChangeConnectivityTypeRequest</argument>
+           <argument>PsdtgAdminBundle:Request</argument>
+       </service>
+        <service id="sonata.admin.changeconnectivitytyperequests.kedo" class="Psdtg\AdminBundle\Admin\Kedo\ChangeConnectivityTypeRequestAdmin">
+           <tag name="sonata.admin"
+                manager_type="orm"
+                group="Αιτήματα"
+                label="Αίτημα αλλαγής τύπου κυκλώματος"
+                />
+           <argument />
+           <argument>Psdtg\SiteBundle\Entity\Requests\ChangeConnectivityTypeRequest</argument>
+           <argument>PsdtgAdminBundle:Request</argument>
+       </service>
        <!-- ActivateServiceRequest -->
-        <service id="sonata.admin.activateservicerequests.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\ActivateServiceRequestAdmin">
+        <service id="sonata.admin.activateservicerequest.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\ActivateServiceRequestAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Αιτήματα"
-                label="Αίτημα Ενεργοποίησης Υπηρεσίας"
+                label="Αίτημα ενεργοποίησης υπηρεσίας σε υπάρχον ιδιωτικό κύκλωμα"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\ActivateServiceRequest</argument>
            <argument>PsdtgAdminBundle:Request</argument>
        </service>
-        <service id="sonata.admin.activateservicerequests.kedo" class="Psdtg\AdminBundle\Admin\Kedo\ActivateServiceRequestAdmin">
+        <service id="sonata.admin.activateservicerequest.kedo" class="Psdtg\AdminBundle\Admin\Kedo\ActivateServiceRequestAdmin">
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Αιτήματα"
-                label="Αίτημα Ενεργοποίησης Υπηρεσίας"
+                label="Αίτημα ενεργοποίησης υπηρεσίας σε υπάρχον ιδιωτικό κύκλωμα"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\ActivateServiceRequest</argument>
-           <argument>PsdtgAdminBundle:Request</argument>
-       </service>
-       <!-- ChangeServiceRequest -->
-        <service id="sonata.admin.changeservicerequests.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\ChangeServiceRequestAdmin">
-           <tag name="sonata.admin"
-                manager_type="orm"
-                group="Αιτήματα"
-                label="Αίτημα Αλλαγής Τύπου Κυκλώματος"
-                />
-           <argument />
-           <argument>Psdtg\SiteBundle\Entity\Requests\ChangeServiceRequest</argument>
-           <argument>PsdtgAdminBundle:Request</argument>
-       </service>
-        <service id="sonata.admin.changeservicerequests.kedo" class="Psdtg\AdminBundle\Admin\Kedo\ChangeServiceRequestAdmin">
-           <tag name="sonata.admin"
-                manager_type="orm"
-                group="Αιτήματα"
-                label="Αίτημα Αλλαγής Τύπου Κυκλώματος"
-                />
-           <argument />
-           <argument>Psdtg\SiteBundle\Entity\Requests\ChangeServiceRequest</argument>
            <argument>PsdtgAdminBundle:Request</argument>
        </service>
    </services>
