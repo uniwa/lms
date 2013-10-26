@@ -44,6 +44,9 @@ class MMService {
         if(isset($filters['mm_id']) && $filters['mm_id'] != '') {
             $params['mm_id'] = $filters['mm_id'];
         }
+        if(isset($filters['registry_no']) && $filters['registry_no'] != '') {
+            $params['registry_no'] = $filters['registry_no'];
+        }
         if(isset($filters['name']) && $filters['name'] != '') {
             $params['name'] = $filters['name'];
         }
