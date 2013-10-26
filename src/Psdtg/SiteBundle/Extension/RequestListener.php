@@ -21,6 +21,7 @@ class RequestListener {
         if(!$request instanceof Request) {
             return;
         }
+        $this->requestService->setCircuitsRepository($eventArgs->getEntityManager()->getRepository('Psdtg\SiteBundle\Entity\\Circuits\PhoneCircuit'));
         if ($eventArgs->hasChangedField('status')) {
             if(($request instanceof NewCircuitRequest && $eventArgs->getNewValue('status') === NewCircuitRequest::STATUS_INSTALLED) ||
                 ($request instanceof Request && $eventArgs->getNewValue('status') === Request::STATUS_APPROVED)) {
@@ -34,6 +35,7 @@ class RequestListener {
         if(!$request instanceof Request) {
             return;
         }
+        $this->requestService->setCircuitsRepository($eventArgs->getEntityManager()->getRepository('Psdtg\SiteBundle\Entity\\Circuits\PhoneCircuit'));
         if(($request instanceof NewCircuitRequest || $request instanceof ExistingCircuitRequest) && $request->getCircuit() != null) {
             $eventArgs->getEntityManager()->persist($request->getCircuit());
             $eventArgs->getEntityManager()->flush($request->getCircuit());

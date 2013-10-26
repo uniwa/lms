@@ -12,9 +12,9 @@ class ActivateServiceRequestAdmin extends ChangeConnectivityTypeRequestAdmin
         $formMapper->remove('circuit');
         $formMapper
             ->add('unit', 'mmunit', array('required' => true))
-            ->add('number', null, array('required' => true))
-            ->add('newConnectivityType', null, array('disabled' => true, 'query_builder' => $this->getServiceConnectivityTypes()))
-            ->add('newBandwidthProfile', 'bandwidth_profile', array('disabled' => true, 'dependentProperty' => 'connectivityType', 'dependentField' => 'newConnectivityType'))
+            ->add('number', null, array('required' => true, 'help' => 'Ο αριθμός θα πρέπει να αφορά κύκλωμα που δεν ανήκει στο ΠΣΔ. Σε διαφορειτκή περίπτωση ακολουθείτε τη ροή "Αίτημα αλλαγής τύπου κυκλώματος".'))
+            ->add('newConnectivityType', null, array('query_builder' => $this->getServiceConnectivityTypes()))
+            ->add('newBandwidthProfile', 'bandwidth_profile', array('dependentProperty' => 'connectivityType', 'dependentField' => 'newConnectivityType'))
         ;
     }
 

@@ -129,6 +129,7 @@ services:
             - "@service_container"
     psdtg.request.service:
         class: Psdtg\SiteBundle\Extension\RequestService
+        public: false
     psdtg.form.type.unit_to_mmid_transformer:
         class: Psdtg\SiteBundle\Form\DataTransformer\UnitToMmIdTransformer
         scope: prototype
