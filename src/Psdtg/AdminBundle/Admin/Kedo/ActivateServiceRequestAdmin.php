@@ -12,6 +12,7 @@ class ActivateServiceRequestAdmin extends BaseActivateServiceRequestAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
+        $formMapper->remove('circuit');
         $formMapper
             ->add('status', 'requeststatus', array('class' => $this->getClass()))
         ;

@@ -44,6 +44,7 @@ class ExistingCircuitRequestAdmin extends RequestAdmin
             ->add('circuit.unit')
             ->add('circuit.number')
             ->add('circuit.connectivityType', 'trans')
+            ->add('circuit.bandwidthProfile', 'trans')
         ;
     }
 
