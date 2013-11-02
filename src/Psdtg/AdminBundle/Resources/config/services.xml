@@ -115,7 +115,7 @@
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Αιτήματα"
-                label="Αίτημα αλλαγής τύπου κυκλώματος"
+                label="Αίτημα Αλλαγής Τύπου Κυκλώματος"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\ChangeConnectivityTypeRequest</argument>
@@ -125,7 +125,7 @@
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Αιτήματα"
-                label="Αίτημα αλλαγής τύπου κυκλώματος"
+                label="Αίτημα Αλλαγής Τύπου Κυκλώματος"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\ChangeConnectivityTypeRequest</argument>
@@ -136,7 +136,7 @@
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Αιτήματα"
-                label="Αίτημα ενεργοποίησης υπηρεσίας σε υπάρχον ιδιωτικό κύκλωμα"
+                label="Αίτημα Ενεργοποίησης Υπηρεσίας σε υπάρχον Ιδιωτικό Κύκλωμα"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\ActivateServiceRequest</argument>
@@ -146,7 +146,7 @@
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Αιτήματα"
-                label="Αίτημα ενεργοποίησης υπηρεσίας σε υπάρχον ιδιωτικό κύκλωμα"
+                label="Αίτημα Ενεργοποίησης Υπηρεσίας σε υπάρχον Ιδιωτικό Κύκλωμα"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\ActivateServiceRequest</argument>
@@ -157,7 +157,7 @@
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Αιτήματα"
-                label="Αίτημα αλλαγής ιδιοκτησίας κυκλώματος"
+                label="Αίτημα Αλλαγής Ιδιοκτησίας Κυκλώματος"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\ChangeOwnershipRequest</argument>
@@ -167,7 +167,7 @@
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Αιτήματα"
-                label="Αίτημα αλλαγής ιδιοκτησίας κυκλώματος"
+                label="Αίτημα Αλλαγής Ιδιοκτησίας Κυκλώματος"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\ChangeOwnershipRequest</argument>
