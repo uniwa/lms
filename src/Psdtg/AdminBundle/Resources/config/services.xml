@@ -136,7 +136,7 @@
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Αιτήματα"
-                label="Αίτημα Ενεργοποίησης Υπηρεσίας σε υπάρχον Ιδιωτικό Κύκλωμα"
+                label="Αίτημα Ενεργοποίησης Υπηρεσίας σε Υπάρχον Ιδιωτικό Κύκλωμα"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\ActivateServiceRequest</argument>
@@ -146,7 +146,7 @@
            <tag name="sonata.admin"
                 manager_type="orm"
                 group="Αιτήματα"
-                label="Αίτημα Ενεργοποίησης Υπηρεσίας σε υπάρχον Ιδιωτικό Κύκλωμα"
+                label="Αίτημα Ενεργοποίησης Υπηρεσίας σε Υπάρχον Ιδιωτικό Κύκλωμα"
                 />
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Requests\ActivateServiceRequest</argument>
