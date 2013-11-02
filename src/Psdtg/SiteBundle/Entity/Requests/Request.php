@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  "remove_circuit" = "RemoveCircuitRequest",
  *  "activate_service" = "ActivateServiceRequest",
  *  "change_service" = "ChangeConnectivityTypeRequest",
+ *  "change_ownership" = "ChangeOwnershipRequest",
  * })
  * @Gedmo\Loggable
  */

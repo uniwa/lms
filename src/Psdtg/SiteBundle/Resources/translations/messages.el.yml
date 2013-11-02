@@ -17,6 +17,7 @@ Circuit Number: Αριθμός
 Circuit Connectivity Type: Τύπος Συνδεσιμότητας
 Connectivity Type: Τύπος Συνδεσιμότητας
 Connectivity Type Name: Τύπος Συνδεσιμότητας
+Circuit Bandwidth Profile: Bandwidth Profile Κυκλώματος
 
 # Phone Circuit
 Phone Circuit List: Λίστα Τηλεπικοινωνιακών Κυκλωμάτων
@@ -89,5 +90,10 @@ Activate Service Request List: Λίστα Αιτημάτων Ενεργοποί�
 New Connectivity Type: Νέος Τύπος Συνδεσιμότητας
 New Connectivity Type Name: Νέος Τύπος Συνδεσιμότητας
 
-#Change Service Request
+# Change Service Request
 Change Service Request List: Λίστα Αιτημάτων Αλλαγής Τύπου Κυκλώματος
+
+# Change Ownership Request
+Change Ownership Request List: Λίστα Αιτημάτων Αλλαγής Ιδιοκτησίας Κυκλώματος
+New Unit: Νέα Μονάδα
+New Unit Name: Νέα Μονάδα

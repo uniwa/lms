@@ -6,8 +6,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class ActivateServiceRequestAdmin extends BaseActivateServiceRequestAdmin
 {
-    protected $baseRouteName = 'admin_lms_changeservicerequest_kedo';
-    protected $baseRoutePattern = 'changeservicerequest_kedo';
+    protected $baseRouteName = 'admin_lms_activateservicerequest_kedo';
+    protected $baseRoutePattern = 'activateservicerequest_kedo';
 
     protected function configureFormFields(FormMapper $formMapper)
     {

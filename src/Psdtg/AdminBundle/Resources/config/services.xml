@@ -152,5 +152,26 @@
            <argument>Psdtg\SiteBundle\Entity\Requests\ActivateServiceRequest</argument>
            <argument>PsdtgAdminBundle:Request</argument>
        </service>
+       <!-- ChangeOwnershipRequest -->
+        <service id="sonata.admin.changeownershiprequest.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\ChangeOwnershipRequestAdmin">
+           <tag name="sonata.admin"
+                manager_type="orm"
+                group="Αιτήματα"
+                label="Αίτημα αλλαγής ιδιοκτησίας κυκλώματος"
+                />
+           <argument />
+           <argument>Psdtg\SiteBundle\Entity\Requests\ChangeOwnershipRequest</argument>
+           <argument>PsdtgAdminBundle:Request</argument>
+       </service>
+        <service id="sonata.admin.changeownershiprequest.kedo" class="Psdtg\AdminBundle\Admin\Kedo\ChangeOwnershipRequestAdmin">
+           <tag name="sonata.admin"
+                manager_type="orm"
+                group="Αιτήματα"
+                label="Αίτημα αλλαγής ιδιοκτησίας κυκλώματος"
+                />
+           <argument />
+           <argument>Psdtg\SiteBundle\Entity\Requests\ChangeOwnershipRequest</argument>
+           <argument>PsdtgAdminBundle:Request</argument>
+       </service>
    </services>
 </container>

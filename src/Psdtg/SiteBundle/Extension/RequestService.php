@@ -8,6 +8,7 @@ use Psdtg\SiteBundle\Entity\Requests\NewCircuitRequest;
 use Psdtg\SiteBundle\Entity\Requests\RemoveCircuitRequest;
 use Psdtg\SiteBundle\Entity\Requests\ChangeConnectivityTypeRequest;
 use Psdtg\SiteBundle\Entity\Requests\ActivateServiceRequest;
+use Psdtg\SiteBundle\Entity\Requests\ChangeOwnershipRequest;
 
 use JMS\DiExtraBundle\Annotation as DI;
 use Psdtg\SiteBundle\Entity\Repositories\Circuits\CircuitsRepository;
@@ -65,6 +66,10 @@ class RequestService {
         $circuit->setConnectivityType($request->getNewConnectivityType());
         $circuit->setBandwidthProfile($request->getNewBandwidthProfile());
         $request->setCircuit($circuit);
+    }
+
+    protected function approveChangeOwnershipRequest(ChangeOwnershipRequest $request) {
+        $request->getCircuit()->setUnit($request->getNewUnit());
     }
 }
 ?>

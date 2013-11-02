@@ -5,6 +5,6 @@ use Psdtg\AdminBundle\Admin\ActivateServiceRequestAdmin as BaseActivateServiceRe
 
 class ActivateServiceRequestAdmin extends BaseActivateServiceRequestAdmin
 {
-    protected $baseRouteName = 'admin_lms_changeservicerequest_user';
-    protected $baseRoutePattern = 'changeservicerequest_user';
+    protected $baseRouteName = 'admin_lms_activateservicerequest_user';
+    protected $baseRoutePattern = 'activateservicerequest_user';
 }

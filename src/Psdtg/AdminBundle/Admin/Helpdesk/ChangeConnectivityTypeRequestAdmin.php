@@ -6,8 +6,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class ChangeConnectivityTypeRequestAdmin extends BaseChangeConnectivityTypeRequestAdmin
 {
-    protected $baseRouteName = 'admin_lms_activateservicerequest_user';
-    protected $baseRoutePattern = 'activateservicerequest_user';
+    protected $baseRouteName = 'admin_lms_changeconnectivitytyperequest_user';
+    protected $baseRoutePattern = 'chagneconnectivitytyperequest_user';
 
     protected function configureFormFields(FormMapper $formMapper)
     {
