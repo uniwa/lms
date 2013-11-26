@@ -3,6 +3,7 @@ namespace Psdtg\SiteBundle\Command;
 
 use Symfony\Component\Finder\Finder;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -16,14 +17,9 @@ class ImportCSVCommand extends ContainerAwareCommand
         $this
             ->setName('lms:importcsv')
             ->setDescription('Import a CSV with line data')
+            ->addOption('file', null, InputOption::VALUE_REQUIRED, 'xls file to import from')
             ;
     }
-
-    private $cvsParsingOptions = array(
-	'finder_in' => 'C:\Users\Niral\Desktop\psdtg\comments',
-	'finder_name' => 'stoixeia_pros_dimos8eni.csv',
-	'ignoreFirstLine' => true
-    );
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -31,10 +27,13 @@ class ImportCSVCommand extends ContainerAwareCommand
         $this->container = $this->getContainer();
         $em = $this->container->get('doctrine')->getManager();
         $mmservice = $this->container->get('psdtg.mm.service');
-        foreach($this->parseCSV() as $row) {
+        $this->cvsParsingOptions = array(
+            'ignoreFirstLine' => true
+        );
+        foreach($this->parseCSV($input->getOption('file')) as $row) {
             $fields = explode(',', $row[0]);
             $circuit = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit')->findOneBy(array(
-                'number' => ($fields[3].$fields[4]),
+                'number' => ($fields[10]),
             ));
             if(isset($circuit)) {
                 $output->writeln('Skipping circuit: '.$circuit->getNumber());
@@ -42,47 +41,68 @@ class ImportCSVCommand extends ContainerAwareCommand
             }
             $circuit = new PhoneCircuit();
             try {
-                $unit = $mmservice->findOneUnitBy(array('mm_id' => $fields[0]));
+                $unit = $mmservice->findOneUnitBy(array('registry_no' => $fields[7]));
             } catch(\RunTimeException $e) {
-                $output->writeln('Unit not found for: '.$fields[0]);
+                $output->writeln('Unit not found for: '.$fields[7]);
                 continue;
             }
             $circuit->setUnit($unit);
-            $circuit->setNumber($fields[3].$fields[4]);
+            $circuit->setNumber($fields[10]);
             // Circuit type
-            if($fields[5] == '') { $fields[5] = 'ADSL'; } // Handle blank fields
             $map = array(
                 /*'ADSL',
                 'ETHERNET',*/
-                'ISDN' => 'isdn_dialup',
-                'ISDN εκκρεμεί Μεταφορά' => 'isdn_dialup',
-                'ISDN-ADSL' => 'isdn_adsl',
-                'LL' => 'll',
-                'PSTN' => 'pstn_dialup',
-                'PSTN-ADSL' => 'pstn_adsl',
+                'ISDN ISDN' => 'isdn_dialup',
+                'ISDN ADSL' => 'isdn_adsl',
+                'PSTN PSTN' => 'pstn_dialup',
+                'PSTN ADSL' => 'pstn_adsl',
                 /*'WIRELESS',
+                'LL' => 'll',
                 'εκκρεμεί',
                 'εκκρεμεί - ΕΛΛ ΧΩΝΕΥΤΗΣ',
                 'ραντ. 25/4 εκκρεμεί',*/
             );
-            if(!isset($map[$fields[5]])) {
-                $output->writeln('Circuit type not found for : '.$fields[3].$fields[4]);
+            if(!isset($map[$fields[8]])) {
+                $output->writeln('Circuit type not found for : '.$fields[10]);
                 continue;
             }
             $connectivityType = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType')->findOneBy(array(
-                'name' => $map[$fields[5]]
+                'name' => $map[$fields[8].' '.$fields[9]]
             ));
             if(!isset($connectivityType)) {
                 throw new \Exception('Circuit type not found - database error');
             }
             $circuit->setCircuitType($connectivityType);
             // End circuit type
-            $circuit->setBandwidth($fields[6]);
-            //$requestedAt = $fields[7];
-            if($fields[8] != "") {
-                $circuit->setActivatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', $fields[8]));
+            if($connectivityType->getName() == 'pstn_dialup') {
+                $bandwidthProfile = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile')->findOneBy(array(
+                    'connectivityType' => $connectivityType,
+                    'name' => '56kbps',
+                ));
+            } else if($connectivityType->getName() == 'pstn_adsl' || $connectivityType->getName() == 'isdn_adsl') {
+                if($fields[17]) {
+                    $bandwidthProfile = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile')->findOneBy(array(
+                        'connectivityType' => $connectivityType,
+                        'name' => '24576/1024Kbps',
+                    ));
+                } else {
+                    $bandwidthProfile = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile')->findOneBy(array(
+                        'connectivityType' => $connectivityType,
+                        'name' => '2048/512Kbps',
+                    ));
+                }
+            } else if($connectivityType->getName() == 'isdn_dialup') {
+                $bandwidthProfile = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile')->findOneBy(array(
+                    'connectivityType' => $connectivityType,
+                    'name' => '128Kbps',
+                ));
             }
-            $circuit->setComments($fields[9]);
+            $circuit->setBandwidth($bandwidthProfile);
+            //$requestedAt = $fields[7];
+            if($fields[6] != "") {
+                $circuit->setActivatedAt(\DateTime::createFromFormat('m-d-Y', $fields[6]));
+            }
+            $circuit->setComments($fields[18]);
             $circuit->setPaidByPsd(true);
             $circuit->setCreatedBy('lmsadmin');
             $circuit->setUpdatedBy('lmsadmin');
@@ -93,14 +113,12 @@ class ImportCSVCommand extends ContainerAwareCommand
         $output->writeln('Lines imported successfully');
     }
 
-    private function parseCSV()
+    private function parseCSV($file)
     {
         $ignoreFirstLine = $this->cvsParsingOptions['ignoreFirstLine'];
 
         $finder = new Finder();
-        $finder->files()
-            ->in($this->cvsParsingOptions['finder_in'])
-            ->name($this->cvsParsingOptions['finder_name'])
+        $finder->files()->in(dirname($file))->name(basename($file));
         ;
         foreach ($finder as $file) { $csv = $file; }
 
