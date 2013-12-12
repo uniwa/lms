@@ -30,7 +30,7 @@ abstract class RequestAdmin extends Admin
     protected function configureShowField(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
+            ->add('id', 'string')
             ->add('createdBy')
             ->add('status', 'trans')
         ;

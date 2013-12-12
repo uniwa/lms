@@ -30,8 +30,8 @@ class CircuitAdmin extends Admin
     protected function configureShowField(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
-            ->add('unit.mmId')
+            ->add('id', 'string')
+            ->add('unit.mmId', 'string')
             ->add('unit.name')
             ->add('unit.categoryName')
             ->add('unit.fy')
