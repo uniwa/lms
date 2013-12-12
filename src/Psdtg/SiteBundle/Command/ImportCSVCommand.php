@@ -113,7 +113,8 @@ class ImportCSVCommand extends ContainerAwareCommand
             $circuit->setBandwidthProfile($bandwidthProfile);
             // End bandwidth profile
             if($fields[23] != "") {
-                $circuit->setActivatedAt(\DateTime::createFromFormat('n/j/Y', $fields[23]));
+                $date = \DateTime::createFromFormat('n/j/Y', $fields[23]);
+                $circuit->setActivatedAt($date instanceof \DateTime ? $date : null);
             }
             $circuit->setComments($fields[34]);
             $circuit->setPaidByPsd(true);
