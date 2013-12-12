@@ -41,7 +41,7 @@ class ImportCSVCommand extends ContainerAwareCommand
             }
             $circuit = new PhoneCircuit();
             try {
-                $unit = $mmservice->findOneUnitBy(array('registry_no' => $fields[8]));
+                $unit = $mmservice->findOneUnitBy(array('mm_id' => $fields[8]));
             } catch(\RunTimeException $e) {
                 $output->writeln('Unit not found for: '.$fields[8]);
                 continue;
@@ -56,14 +56,15 @@ class ImportCSVCommand extends ContainerAwareCommand
                 'ISDN ADSL' => 'isdn_adsl',
                 'PSTN PSTN' => 'pstn_dialup',
                 'PSTN ADSL' => 'pstn_adsl',
+                'PSTN ADSL' => 'pstn_adsl',
                 /*'WIRELESS',
                 'LL' => 'll',
                 'εκκρεμεί',
                 'εκκρεμεί - ΕΛΛ ΧΩΝΕΥΤΗΣ',
                 'ραντ. 25/4 εκκρεμεί',*/
             );
-            if(!isset($map[$fields[24]])) {
-                $output->writeln('Circuit type not found for : '.$fields[8]);
+            if(!isset($map[$fields[24].' '.$fields[25]])) {
+                $output->writeln('Circuit type '.$fields[24].' '.$fields[25].' not found for : '.$fields[8]);
                 continue;
             }
             $connectivityType = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType')->findOneBy(array(
@@ -72,43 +73,47 @@ class ImportCSVCommand extends ContainerAwareCommand
             if(!isset($connectivityType)) {
                 throw new \Exception('Circuit type not found - database error');
             }
-            $circuit->setCircuitType($connectivityType);
+            $circuit->setConnectivityType($connectivityType);
             // End circuit type
             // Bandwidth profile
             if($connectivityType->getName() == 'pstn_dialup') {
                 $bandwidthProfile = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile')->findOneBy(array(
                     'connectivityType' => $connectivityType,
-                    'name' => '56kbps',
+                    'bandwidth' => '56kbps',
                 ));
             } else if($connectivityType->getName() == 'pstn_adsl' || $connectivityType->getName() == 'isdn_adsl') {
                 if(trim($fields[33]) === 'yes') {
                     $bandwidthProfile = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile')->findOneBy(array(
                         'connectivityType' => $connectivityType,
-                        'name' => '24576/1024Kbps',
+                        'bandwidth' => '24576/1024Kbps',
                     ));
                 } else {
                     $bandwidthProfile = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile')->findOneBy(array(
                         'connectivityType' => $connectivityType,
-                        'name' => '2048/512Kbps',
+                        'bandwidth' => '2048/512Kbps',
                     ));
                 }
             } else if($connectivityType->getName() == 'isdn_dialup') {
                 if(trim($fields[33]) === 'yes') {
                     $bandwidthProfile = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile')->findOneBy(array(
                         'connectivityType' => $connectivityType,
-                        'name' => '128Kbps',
+                        'bandwidth' => '128Kbps',
                     ));
                 } else {
-$bandwidthProfile = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile')->findOneBy(array(
+                    $bandwidthProfile = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile')->findOneBy(array(
                         'connectivityType' => $connectivityType,
-                        'name' => '64Kbps',
+                        'bandwidth' => '64Kbps',
                     ));
                 }
             }
-            $circuit->setBandwidth($bandwidthProfile);
+            if(!isset($bandwidthProfile)) {
+                $output->writeln('Bandwidth profile (connectivityType: '.$connectivityType->getName().', '.trim($fields[33]).') not found for : '.$fields[8]);
+                continue;
+            }
+            $circuit->setBandwidthProfile($bandwidthProfile);
             // End bandwidth profile
             if($fields[23] != "") {
-                $circuit->setActivatedAt(\DateTime::createFromFormat('m-d-Y', $fields[23]));
+                $circuit->setActivatedAt(\DateTime::createFromFormat('n/j/Y', $fields[23]));
             }
             $circuit->setComments($fields[34]);
             $circuit->setPaidByPsd(true);

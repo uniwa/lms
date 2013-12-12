@@ -39,12 +39,6 @@ class PhoneCircuit extends Circuit
     protected $paidByPsd = false;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     * @Expose
-     */
-    protected $bandwidth = null; // Deprecated
-
-    /**
      * @ORM\ManyToOne(targetEntity="Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile")
      * @ORM\JoinColumn(name="bandwidth_profile_id", referencedColumnName="id")
      */
@@ -84,14 +78,6 @@ class PhoneCircuit extends Circuit
 
     public function setNumber($number) {
         $this->number = $number;
-    }
-
-    public function getBandwidth() {
-        return $this->bandwidth;
-    }
-
-    public function setBandwidth($bandwidth) {
-        $this->bandwidth = $bandwidth;
     }
 
     public function getBandwidthProfile() {
