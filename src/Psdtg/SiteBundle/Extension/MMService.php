@@ -80,6 +80,28 @@ class MMService {
         return $units[0];
     }
 
+    public function findCircuitByNumberAndUnit($number, Unit $unit) {
+        $circuits = $this->queryMM('circuits', array(
+            'mm_id' => $unit->getId(),
+        ));
+        foreach($circuits as $curCircuit) {
+            if($curCircuit->phone_number == $number) {
+                return $curCircuit;
+            }
+        }
+        return null;
+    }
+
+    public function findConnectivityTypeByName($name) {
+        $types = $this->queryMM('connectivity_types');
+        foreach($types as $curType) {
+            if($curType->name == $name) {
+                return $curType;
+            }
+        }
+        return null;
+    }
+
     public function persistMM(MMSyncableEntity $entity) {
         if($entity instanceof PhoneCircuit) {
             return $this->persistCircuit($entity);
@@ -175,6 +197,11 @@ class MMService {
             $method = 'PUT';
             $extraParams = array('circuit_id' => $circuit->getMmSyncId());
         } else {
+            if(($curCircuit = $this->findCircuitByNumberAndUnit($circuit->getNumber(), $circuit->getUnit())) != null) { // Check if already exists
+                $circuit->setMmSyncId($curCircuit->circuit_id);
+                $circuit->setMmSyncLastUpdateDate(new \DateTime('now'));
+                return;
+            }
             $method = 'POST';
             $extraParams = array();
         }
@@ -222,6 +249,11 @@ class MMService {
             $method = 'PUT';
             $extraParams = array('connectivity_type_id' => $connectivityType->getMmSyncId());
         } else {
+            if(($curConType = $this->findConnectivityTypeByName($connectivityType->getName())) != null) { // Check if already exists
+                $connectivityType->setMmSyncId($curConType->connectivity_type_id);
+                $connectivityType->setMmSyncLastUpdateDate(new \DateTime('now'));
+                return;
+            }
             $method = 'POST';
             $extraParams = array();
         }
