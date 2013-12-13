@@ -245,6 +245,7 @@ class MMService {
     }
 
     public function persistConnectivityType(ConnectivityType $connectivityType) {
+        $translator = $this->container->get('translator');
         if($connectivityType->getMmSyncId() != null) {
             $method = 'PUT';
             $extraParams = array('connectivity_type_id' => $connectivityType->getMmSyncId());
@@ -257,7 +258,6 @@ class MMService {
             $method = 'POST';
             $extraParams = array();
         }
-        $translator = $this->container->get('translator');
         $params = array_merge($extraParams, array("name" => $translator->trans($connectivityType->getName())));
 
         $curl = curl_init("http://mmsch.teiath.gr/api/connectivity_types");
