@@ -82,7 +82,7 @@ class MMService {
 
     public function findCircuitByNumberAndUnit($number, Unit $unit) {
         $circuits = $this->queryMM('circuits', array(
-            'mm_id' => $unit->getId(),
+            'mm_id' => $unit->getMmId(),
         ));
         foreach($circuits as $curCircuit) {
             if($curCircuit->phone_number == $number) {
