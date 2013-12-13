@@ -30,10 +30,13 @@ class ImportCSVCommand extends ContainerAwareCommand
         $this->cvsParsingOptions = array(
             'ignoreFirstLine' => true
         );
-        foreach($this->parseCSV($input->getOption('file')) as $row) {
-            $fields = explode(',', $row[0]);
+        $xls = $this->parseCSV($input->getOption('file'));
+        $headersRow = $xls->getRowIterator(1)->current();
+        $headers = $this->parseHeadersToArray($headersRow);
+        foreach ($xls->getRowIterator(2) as $row) {
+            $fields = $this->parseRowToArray($row, $headers);
             $circuit = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit')->findOneBy(array(
-                'number' => ($fields[20]),
+                'number' => ($fields['edunet_line']),
             ));
             if(isset($circuit)) {
                 $output->writeln('Skipping circuit: '.$circuit->getNumber());
@@ -41,13 +44,13 @@ class ImportCSVCommand extends ContainerAwareCommand
             }
             $circuit = new PhoneCircuit();
             try {
-                $unit = $mmservice->findOneUnitBy(array('mm_id' => $fields[8]));
+                $unit = $mmservice->findOneUnitBy(array('mm_id' => $fields['mm_id']));
             } catch(\RunTimeException $e) {
-                $output->writeln('Unit not found for: '.$fields[8]);
+                $output->writeln('Unit not found for: '.$fields['mm_id']);
                 continue;
             }
             $circuit->setUnit($unit);
-            $circuit->setNumber($fields[20]);
+            $circuit->setNumber($fields['edunet_line']);
             // Circuit type
             $map = array(
                 /*'ADSL',
@@ -63,12 +66,13 @@ class ImportCSVCommand extends ContainerAwareCommand
                 'εκκρεμεί - ΕΛΛ ΧΩΝΕΥΤΗΣ',
                 'ραντ. 25/4 εκκρεμεί',*/
             );
-            if(!isset($map[$fields[24].' '.$fields[25]])) {
-                $output->writeln('Circuit type '.$fields[24].' '.$fields[25].' not found for : '.$fields[8]);
+            if(!isset($map[$fields['type'].' '.$fields['service']])) {
+                var_dump($fields);
+                $output->writeln('Circuit type '.$fields['type'].' '.$fields['service'].' not found for : '.$fields['mm_id']);
                 continue;
             }
             $connectivityType = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType')->findOneBy(array(
-                'name' => $map[$fields[24].' '.$fields[25]]
+                'name' => $map[$fields['type'].' '.$fields['service']]
             ));
             if(!isset($connectivityType)) {
                 throw new \Exception('Circuit type not found - database error');
@@ -82,7 +86,7 @@ class ImportCSVCommand extends ContainerAwareCommand
                     'bandwidth' => '56kbps',
                 ));
             } else if($connectivityType->getName() == 'pstn_adsl' || $connectivityType->getName() == 'isdn_adsl') {
-                if(trim($fields[33]) === 'yes') {
+                if(trim($fields['24mb']) === 'yes') {
                     $bandwidthProfile = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile')->findOneBy(array(
                         'connectivityType' => $connectivityType,
                         'bandwidth' => '24576/1024Kbps',
@@ -94,7 +98,7 @@ class ImportCSVCommand extends ContainerAwareCommand
                     ));
                 }
             } else if($connectivityType->getName() == 'isdn_dialup') {
-                if(trim($fields[33]) === 'yes') {
+                if(trim($fields['24mb']) === 'yes') {
                     $bandwidthProfile = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\BandwidthProfile')->findOneBy(array(
                         'connectivityType' => $connectivityType,
                         'bandwidth' => '128Kbps',
@@ -107,16 +111,16 @@ class ImportCSVCommand extends ContainerAwareCommand
                 }
             }
             if(!isset($bandwidthProfile)) {
-                $output->writeln('Bandwidth profile (connectivityType: '.$connectivityType->getName().', '.trim($fields[33]).') not found for : '.$fields[8]);
+                $output->writeln('Bandwidth profile (connectivityType: '.$connectivityType->getName().', '.trim($fields['24mb']).') not found for : '.$fields['mm_id']);
                 continue;
             }
             $circuit->setBandwidthProfile($bandwidthProfile);
             // End bandwidth profile
-            if($fields[23] != "") {
-                $date = \DateTime::createFromFormat('n/j/Y', $fields[23]);
+            if($fields['date_active'] != "") {
+                $date = \DateTime::createFromFormat('n/j/Y', $fields['date_active']);
                 $circuit->setActivatedAt($date instanceof \DateTime ? $date : null);
             }
-            $circuit->setComments($fields[34]);
+            $circuit->setComments($fields['comments']);
             $circuit->setPaidByPsd(true);
             $circuit->setCreatedBy('lmsadmin');
             $circuit->setUpdatedBy('lmsadmin');
@@ -125,6 +129,28 @@ class ImportCSVCommand extends ContainerAwareCommand
         }
 
         $output->writeln('Lines imported successfully');
+    }
+
+    private function parseHeadersToArray($headersRow) {
+        $cellIterator = $headersRow->getCellIterator();
+        $cellIterator->setIterateOnlyExistingCells(false); 
+        $result = array();
+        foreach ($cellIterator as $cell) {
+            $result[] = $cell->getValue();
+        }
+        return $result;
+    }
+
+    private function parseRowToArray($row, $headers) {
+        $cellIterator = $row->getCellIterator();
+        $cellIterator->setIterateOnlyExistingCells(false); 
+        $result = array();
+        $i = 0;
+        foreach ($cellIterator as $cell) {
+            $result[$headers[$i]] = $cell->getValue();
+            $i++;
+        }
+        return $result;
     }
 
     private function parseCSV($file)
@@ -136,18 +162,10 @@ class ImportCSVCommand extends ContainerAwareCommand
         ;
         foreach ($finder as $file) { $csv = $file; }
 
-        $rows = array();
-        if (($handle = fopen($csv->getRealPath(), "r")) !== FALSE) {
-            $i = 0;
-            while (($data = fgetcsv($handle, null, ";")) !== FALSE) {
-                $i++;
-                if ($ignoreFirstLine && $i == 1) { continue; }
-                $rows[] = $data;
-            }
-            fclose($handle);
-        }
-
-        return $rows;
+        $phpExcelObject = $this->getContainer()->get('xls.load_xls2007')->load($csv->getRealPath());
+        $sheet = $phpExcelObject->getSheet(0);
+        //$objReader = PHPExcel_IOFactory::createReader($inputFileType);
+        return $sheet;
     }
 
     private function fixInconsistencies() {

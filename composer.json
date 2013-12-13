@@ -24,12 +24,14 @@
         "friendsofsymfony/rest-bundle": "0.12.*",
         "friendsofsymfony/rest": "0.8.*",
         "jms/serializer-bundle": "*",
+        "sonata-project/core-bundle": "~2.2@dev",
         "sonata-project/doctrine-orm-admin-bundle": "*",
         "sonata-project/cache-bundle": "*",
         "sonata-project/intl-bundle": "*",
         "stof/doctrine-extensions-bundle": "*",
         "fr3d/ldap-bundle": "2.0.*",
-        "ruudk/capifony-tools": "dev-master"
+        "ruudk/capifony-tools": "dev-master",
+        "liuggio/excelbundle": "1.0.*"
     },
     "scripts": {
         "post-install-cmd": [

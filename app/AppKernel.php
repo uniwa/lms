@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             // KNP
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             // Sonata
+            new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\CacheBundle\SonataCacheBundle(),
@@ -44,6 +45,8 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             // FR3D LDAP
             new FR3D\LdapBundle\FR3DLdapBundle(),
+            // Liuggio Excel Bundle
+            new Liuggio\ExcelBundle\LiuggioExcelBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
