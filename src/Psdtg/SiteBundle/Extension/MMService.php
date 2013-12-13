@@ -249,7 +249,7 @@ class MMService {
             $method = 'PUT';
             $extraParams = array('connectivity_type_id' => $connectivityType->getMmSyncId());
         } else {
-            if(($curConType = $this->findConnectivityTypeByName($connectivityType->getName())) != null) { // Check if already exists
+            if(($curConType = $this->findConnectivityTypeByName($translator->trans($connectivityType->getName()))) != null) { // Check if already exists
                 $connectivityType->setMmSyncId($curConType->connectivity_type_id);
                 $connectivityType->setMmSyncLastUpdateDate(new \DateTime('now'));
                 return;
