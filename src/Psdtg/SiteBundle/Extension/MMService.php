@@ -83,6 +83,7 @@ class MMService {
     public function findCircuitByNumberAndUnit($number, Unit $unit) {
         $circuits = $this->queryMM('circuits', array(
             'mm_id' => $unit->getMmId(),
+            'orderby' => 'phone_number', // If this is ommitted a field ambiguity error occurs in the MM API
         ));
         foreach($circuits as $curCircuit) {
             if($curCircuit->phone_number == $number) {

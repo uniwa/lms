@@ -37,6 +37,10 @@ class MMSyncableListener
 
         if($this->kernel->getEnvironment() == 'prod') {
             $this->mmservice->persistMM($entity);
+            $em = $args->getEntityManager();
+            $uow = $em->getUnitOfWork();
+            $meta = $em->getClassMetadata(get_class($entity));
+            $uow->recomputeSingleEntityChangeSet($meta, $entity);
         }
     }
 
