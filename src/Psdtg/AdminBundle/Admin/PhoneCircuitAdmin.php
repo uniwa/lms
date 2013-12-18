@@ -59,6 +59,7 @@ class PhoneCircuitAdmin extends CircuitAdmin
     {
         parent::configureDatagridFilters($datagridMapper);
         $datagridMapper
+            ->add('number')
             ->add('paidByPsd')
             ->add('connectivityType')
         ;
