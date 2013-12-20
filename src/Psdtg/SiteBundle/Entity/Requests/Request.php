@@ -56,6 +56,11 @@ class Request
      */
     protected $deletedAt;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $activatedAt;
+
     public function getId() {
         return $this->id;
     }
@@ -78,6 +83,14 @@ class Request
 
     public function setDeletedAt($deletedAt) {
         $this->deletedAt = $deletedAt;
+    }
+
+    public function getActivatedAt() {
+        return $this->activatedAt;
+    }
+
+    public function setActivatedAt($activatedAt) {
+        $this->activatedAt = $activatedAt;
     }
 
     public function getStatus() {
