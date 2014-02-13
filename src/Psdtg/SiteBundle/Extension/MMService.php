@@ -157,7 +157,7 @@ class MMService {
     protected function queryMM($resource, $params = array()) {
         $username = "mmsch";
         $password = "mmsch";
-        $server = 'http://mmsch.teiath.gr/api/'.$resource;
+        $server = 'http://mmsch.teiath.gr/ver3/api/'.$resource;
 
         $curl = curl_init ($server);
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -223,7 +223,7 @@ class MMService {
                "paid_by_psd" => $circuit->getPaidByPsd(),
         ));
 
-        $curl = curl_init("http://mmsch.teiath.gr/api/circuits");
+        $curl = curl_init("http://mmsch.teiath.gr/ver3/api/circuits");
 
         $username = 'mmschadmin';
         $password = 'mmschadmin';
@@ -261,7 +261,7 @@ class MMService {
         }
         $params = array_merge($extraParams, array("name" => $translator->trans($connectivityType->getName())));
 
-        $curl = curl_init("http://mmsch.teiath.gr/api/connectivity_types");
+        $curl = curl_init("http://mmsch.teiath.gr/ver3/api/connectivity_types");
 
         $username = 'mmschadmin';
         $password = 'mmschadmin';
