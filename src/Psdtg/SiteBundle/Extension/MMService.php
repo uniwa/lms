@@ -94,7 +94,7 @@ class MMService {
     }
 
     public function findConnectivityTypeByName($name) {
-        $types = $this->queryMM('connectivity_types');
+        $types = $this->queryMM('circuit_types');
         foreach($types as $curType) {
             if($curType->name == $name) {
                 return $curType;
@@ -212,7 +212,7 @@ class MMService {
         $params = array_merge($extraParams, array(
                "mm_id" => $circuit->getUnit()->getMmId(),
                "name" => $circuit->__toString(),
-               "connectivity_type" => $circuit->getConnectivityType()->getMmSyncId(),
+               "circuit_types" => $circuit->getConnectivityType()->getMmSyncId(),
                "phone_number" => $circuit->getNumber(),
                "status" => $circuit->isActive(),
                "activated_date" => $circuit->getActivatedAt() instanceof \DateTime ? $circuit->getActivatedAt()->format('Y-m-d H:i') : null,
@@ -249,7 +249,7 @@ class MMService {
         $translator = $this->container->get('translator');
         if($connectivityType->getMmSyncId() != null) {
             $method = 'PUT';
-            $extraParams = array('connectivity_type_id' => $connectivityType->getMmSyncId());
+            $extraParams = array('circuit_type_id' => $connectivityType->getMmSyncId());
         } else {
             if(($curConType = $this->findConnectivityTypeByName($translator->trans($connectivityType->getName()))) != null) { // Check if already exists
                 $connectivityType->setMmSyncId($curConType->connectivity_type_id);
@@ -261,7 +261,7 @@ class MMService {
         }
         $params = array_merge($extraParams, array("name" => $translator->trans($connectivityType->getName())));
 
-        $curl = curl_init("http://mmsch.teiath.gr/ver3/api/connectivity_types");
+        $curl = curl_init("http://mmsch.teiath.gr/ver3/api/circuit_types");
 
         $username = 'mmschadmin';
         $password = 'mmschadmin';
