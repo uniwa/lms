@@ -252,7 +252,7 @@ class MMService {
             $extraParams = array('circuit_type_id' => $connectivityType->getMmSyncId());
         } else {
             if(($curConType = $this->findConnectivityTypeByName($translator->trans($connectivityType->getName()))) != null) { // Check if already exists
-                $connectivityType->setMmSyncId($curConType->connectivity_type_id);
+                $connectivityType->setMmSyncId($curConType->circuit_type_id);
                 $connectivityType->setMmSyncLastUpdateDate(new \DateTime('now'));
                 return;
             }
@@ -275,7 +275,7 @@ class MMService {
         $data = json_decode($origData);
         if($data->status == 200) {
             if($method == 'POST') {
-                $connectivityType->setMmSyncId($data->connectivity_type_id);
+                $connectivityType->setMmSyncId($data->circuit_type_id);
                 $connectivityType->setMmSyncLastUpdateDate(new \DateTime('now'));
             }
         } else {
