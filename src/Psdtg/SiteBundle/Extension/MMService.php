@@ -96,7 +96,7 @@ class MMService {
     public function findConnectivityTypeByName($name) {
         $types = $this->queryMM('circuit_types');
         foreach($types as $curType) {
-            if($curType->name == $name) {
+            if($curType->circuit_type == $name) {
                 return $curType;
             }
         }
@@ -259,7 +259,7 @@ class MMService {
             $method = 'POST';
             $extraParams = array();
         }
-        $params = array_merge($extraParams, array("name" => $translator->trans($connectivityType->getName())));
+        $params = array_merge($extraParams, array("circuit_type" => $translator->trans($connectivityType->getName())));
 
         $curl = curl_init("http://mmsch.teiath.gr/ver3/api/circuit_types");
 
