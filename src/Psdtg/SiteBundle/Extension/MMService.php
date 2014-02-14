@@ -212,7 +212,7 @@ class MMService {
         $params = array_merge($extraParams, array(
                "mm_id" => $circuit->getUnit()->getMmId(),
                "name" => $circuit->__toString(),
-               "circuit_types" => $circuit->getConnectivityType()->getMmSyncId(),
+               "circuit_type_id" => $circuit->getConnectivityType()->getMmSyncId(),
                "phone_number" => $circuit->getNumber(),
                "status" => $circuit->isActive(),
                "activated_date" => $circuit->getActivatedAt() instanceof \DateTime ? $circuit->getActivatedAt()->format('Y-m-d H:i') : null,
