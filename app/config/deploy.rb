@@ -1,10 +1,10 @@
-set :application, "psdtg"
-set :user,        "lms"
-set :domain,      "lms.dnna.gr"
-set :deploy_to,   "/home/lms/capifony"
+set :application, "lms"
+set :user,        "root"
+set :domain,      "mmsch.teiath.gr/lms"
+set :deploy_to,   "/var/www/lms"
 set :app_path,    "app"
 
-set :repository,  "git@github.com:dnna/psdtg.git"
+set :repository,  "git@github.com:teiath/lms.git"
 set :scm,         :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `subversion`, `mercurial`, `perforce`, or `none`
 
