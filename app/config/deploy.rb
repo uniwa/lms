@@ -1,8 +1,9 @@
 set :application, "lms"
 set :user,        "root"
-set :domain,      "mmsch.teiath.gr/lms"
+set :domain,      "mmsch.teiath.gr"
 set :deploy_to,   "/var/www/lms"
 set :app_path,    "app"
+ssh_options[:port] = "599"
 
 set :repository,  "git@github.com:teiath/lms.git"
 set :scm,         :git
