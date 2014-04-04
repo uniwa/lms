@@ -28,7 +28,7 @@ set :shared_children, [app_path + "/logs", web_path + "/upload", web_path + "/ca
 
 set :writable_dirs, [app_path + "/logs", app_path + "/cache"]
 set :webserver_user,    "www-data"
-set :permission_method, :acl
+set :permission_method, :chmod
 set :use_set_permissions, true
 
 # Be more verbose by uncommenting the following line
