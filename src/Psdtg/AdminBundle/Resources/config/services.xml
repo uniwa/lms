@@ -51,9 +51,9 @@
             <call method="setSecurityContext">
                 <argument type="service" id="security.context" />
             </call>
-            <call method="setRequest">
+            <!--<call method="setRequest">
                 <argument type="service" id="request" />
-            </call>
+            </call>-->
        </service>
         <service id="sonata.admin.phonecircuits.kedo" class="Psdtg\AdminBundle\Admin\Kedo\PhoneCircuitAdmin">
            <tag name="sonata.admin"
@@ -64,9 +64,9 @@
            <argument />
            <argument>Psdtg\SiteBundle\Entity\Circuits\PhoneCircuit</argument>
            <argument>SonataAdminBundle:CRUD</argument>
-            <call method="setRequest">
+            <!--<call method="setRequest">
                 <argument type="service" id="request" />
-            </call>
+            </call>-->
        </service>
         <!-- NewCircuitRequest -->
         <service id="sonata.admin.newcircuitrequests.helpdesk" class="Psdtg\AdminBundle\Admin\Helpdesk\NewCircuitRequestAdmin">
