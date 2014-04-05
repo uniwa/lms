@@ -11,8 +11,8 @@
 {% endblock %}
 
 {% block logo %}
-    <a href="{{ url('sonata_admin_dashboard') }}" class="brand">
-        <img src="{{ asset(admin_pool.titlelogo) }}"  alt="{{ admin_pool.title }}" />
+    <a class="logo" href="{{ url('sonata_admin_dashboard') }}">
+        {#<img src="{{ asset(admin_pool.titlelogo) }}" alt="">#}
         {{ admin_pool.title }}
     </a>
     {#<form action="{{ url('sonata_admin_search') }}" method="GET"  class="navbar-search">
@@ -20,17 +20,21 @@
             <input type="text" name="q" value="{{ app.request.get('q') }}" class="input-large search-query" placeholder="{{ 'search_placeholder'|trans({}, 'SonataAdminBundle') }}"/>
         </div>
     </form>#}
-    <div style="float: right; text-align: center;">
+    {#<div style="float: right; text-align: center;">
         <div>
-            {{app.user.username}} {#| {{app.user.unit.name}}#} | {% if is_granted('ROLE_KEDO') %}{{'ROLE_KEDO'|trans({})}}{% elseif is_granted('ROLE_HELPDESK') %}{{'ROLE_HELPDESK'|trans({})}}{% else %}{{'ROLE_USER'|trans({})}}{% endif %}
+            {{app.user.username}} | {% if is_granted('ROLE_KEDO') %}{{'ROLE_KEDO'|trans({})}}{% elseif is_granted('ROLE_HELPDESK') %}{{'ROLE_HELPDESK'|trans({})}}{% else %}{{'ROLE_USER'|trans({})}}{% endif %}
         </div>
         <div>
             <a href="{{ url('fos_user_security_logout') }}" style="float: right;">
                 {{'Logout'|trans()}}
             </a>
         </div>
-    </div>
+    </div>#}
 {% endblock %}
+
+{#{% block sonata_top_nav_menu %}
+Εφαρμογή Διαχείρισης Τηλεπικοινωνιακών Κυκλωμάτων ΠΣΔ
+{% endblock %}#}
 
 {% block footer %}
 <script>
