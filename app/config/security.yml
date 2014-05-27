@@ -16,22 +16,21 @@ security:
 
     role_hierarchy:
         ROLE_USER:      ROLE_USER
-        ROLE_HELPDESK:  [ROLE_USER, ROLE_HELPDESK]
-        ROLE_KEDO:      [ROLE_USER, ROLE_KEDO]
 
     providers:
-      fr3d_ldapbundle:
-        id: fr3d_ldap.security.user.provider
       fos_userbundle:
-          id: fos_user.user_manager
+          id: psdtg.user_provider
 
     firewalls:
         main:
             pattern: ^/
-            fr3d_ldap:  ~
-            form_login:
-                provider: fr3d_ldapbundle
-                csrf_provider: form.csrf_provider
+            trusted_sso:
+              manager: admin_sso
+              login_action: PsdtgAdminBundle:Auth:login
+              logout_action: PsdtgAdminBundle:Auth:logout
+              create_users: true
+              created_users_roles: [ROLE_USER]
+              failure_path: /debug
             logout:       true
             anonymous:    true
 

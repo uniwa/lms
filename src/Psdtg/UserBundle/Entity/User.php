@@ -1,7 +1,6 @@
 <?php
 namespace Psdtg\UserBundle\Entity;
 
-use FR3D\LdapBundle\Model\LdapUserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OrderBy;
@@ -13,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="Users")
  * @ORM\Entity(repositoryClass="Psdtg\UserBundle\Entity\Repositories\UserRepository")
  */
-class User extends BaseUser implements LdapUserInterface
+class User extends BaseUser
 {
     /**
      * @ORM\Id
@@ -29,12 +28,6 @@ class User extends BaseUser implements LdapUserInterface
      *
      */
     protected $name;
-
-    /**
-     * Ldap Object Distinguished Name
-     * @var string $dn
-     */
-    private $dn;
 
     /**
      * @ORM\OneToOne(targetEntity="Psdtg\SiteBundle\Entity\Unit")
@@ -56,14 +49,6 @@ class User extends BaseUser implements LdapUserInterface
 
     public function setName($name) {
         $this->name = $name;
-    }
-
-    public function getDn() {
-        return $this->dn;
-    }
-
-    public function setDn($dn) {
-        $this->dn = $dn;
     }
 
     public function getUnit() {

@@ -4,6 +4,9 @@ imports:
     - { resource: '@PsdtgAdminBundle/Resources/config/services.xml' }
     - { resource: '@PsdtgAdminBundle/Resources/config/sonata.yml' }
 
+parameters:
+    be_simple.sso_auth.client.option.curlopt_ssl_verifypeer.value: FALSE
+
 framework:
     #esi:             ~
     translator:      { fallback: %locale% }
@@ -114,9 +117,10 @@ fos_user:
 services:
     cache:
         class: Doctrine\Common\Cache\ApcCache
-    psdtg.ldap.ldap_manager:
-        class: Psdtg\UserBundle\Extension\LdapManager
-        arguments: ["@fr3d_ldap.ldap_driver", "@fr3d_ldap.user_manager", %fr3d_ldap.ldap_manager.parameters%, "@service_container"]
+    psdtg.user_provider:
+       class: Psdtg\UserBundle\Model\UserProvider
+       public: false
+       parent: fos_user.user_provider.username
     psdtg.twig.extension:
         class: Psdtg\SiteBundle\Extension\TwigExtension
         tags:
@@ -235,33 +239,16 @@ stof_doctrine_extensions:
             loggable: true
             softdeleteable: true
 
-fr3d_ldap:
-    driver:
-        host:                %ldap_host%
-        port:                %ldap_port%    # Optional
-        #username:            uid=wfmtest2,ou=people,dc=sch,dc=gr    # WFM
-        username:            %ldap_username%    # LM
-        #password:            "dk4-@pgc"    # WFM
-        password:            %ldap_password%    # LM
-        #bindRequiredDn:       true   # Optional
-        baseDn:              %ldap_basedn%   # Optional
-        accountFilterFormat: (&(uid=%s)) # Optional. sprintf format %s will be the username
-        optReferrals:        false  # Optional
-        useSsl:              false   # Enable SSL negotiation. Optional
-        useStartTls:         false   # Enable TLS negotiation. Optional
-    user:
-        baseDn: %ldap_basedn%
-        filter: (&(ObjectClass=person))
-        attributes:          # Specify ldap attributes mapping [ldap attribute, user object method]
-           - { ldap_attr: uid,  user_method: setUsername } # Default
-           - { ldap_attr: cn,   user_method: setName }     # Optional
-           - { ldap_attr: mail,   user_method: setEmail }     # Optional
-           - { ldap_attr: memberof,   user_method: void }     # Optional
-    service:
-        ldap_manager: psdtg.ldap.ldap_manager
-#   service:
-#       user_manager: fos_user.user_manager          # Overrides default user manager
-#       ldap_manager: fr3d_ldap.ldap_manager.default # Overrides default ldap manager
+be_simple_sso_auth:
+    admin_sso:
+        protocol:
+            id: cas
+            version: 2
+        server:
+            id: cas
+            login_url: https://sso-test.sch.gr/login
+            logout_url: https://sso-test.sch.gr/logout
+            validation_url: https://sso-test.sch.gr/serviceValidate
 
 genemu_form:
     select2: ~

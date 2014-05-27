@@ -29,7 +29,7 @@
         "sonata-project/cache-bundle": "*",
         "sonata-project/intl-bundle": "*",
         "stof/doctrine-extensions-bundle": "*",
-        "fr3d/ldap-bundle": "2.0.*",
+        "besimple/sso-auth-bundle": "*",
         "ruudk/capifony-tools": "dev-master",
         "liuggio/excelbundle": "1.0.*"
     },

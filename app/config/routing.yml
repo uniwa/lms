@@ -22,6 +22,13 @@ fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
 
+login:
+    pattern: /login
+logout:
+    pattern: /logout
+login_check:
+    pattern: /login_check
+
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin
@@ -65,3 +72,7 @@ circuits:
 bandwidth_profiles:
     resource: Psdtg\AdminBundle\Controller\BandwidthProfileController
     type:     rest
+
+debug:
+    path:    /debug
+    defaults:   { _controller: PsdtgAdminBundle:Auth:debug }

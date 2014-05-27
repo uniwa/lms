@@ -23,6 +23,8 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            // BeSimple
+            new BeSimple\SsoAuthBundle\BeSimpleSsoAuthBundle(),
             // GenEmu
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             // User Bundle
@@ -38,13 +40,11 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\CacheBundle\SonataCacheBundle(),
-            new Sonata\jQueryBundle\SonatajQueryBundle(),
+            //new Sonata\jQueryBundle\SonatajQueryBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
             // Doctrine Extensions
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            // FR3D LDAP
-            new FR3D\LdapBundle\FR3DLdapBundle(),
             // Liuggio Excel Bundle
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
         );
