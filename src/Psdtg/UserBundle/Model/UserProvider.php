@@ -8,6 +8,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserProvider extends BaseUserProvider implements UserFactoryInterface
 {
+    protected $mmService;
+
+    public function setMmService($mmService) {
+        $this->mmService = $mmService;
+    }
+
     public function createUser($username, array $roles, array $attributes)
     {
         try {
@@ -29,12 +35,19 @@ class UserProvider extends BaseUserProvider implements UserFactoryInterface
         return $user;
     }
 
+    /*public function loadUserByUsername($username)
+    {
+        $user = parent::loadUserByUsername($username);
+        $this->userManager->deleteUser($user);
+        throw new UsernameNotFoundException();
+    }*/
+
     protected function getRoles(UserInterface $user, array $entry)
     {
         // If the user is has the eduPerson objectClass then they get ROLE_USER
         $kedo = false;
         if(isset($entry['memberof'])) {
-            $groups = explode(';', $entry['memberof'][0]);
+            $groups = explode(';', $entry['memberof']);
             if(in_array('lms', $groups)) {
                 $kedo = true;
             }
@@ -45,14 +58,13 @@ class UserProvider extends BaseUserProvider implements UserFactoryInterface
             $user->setRoles(array('ROLE_HELPDESK'));
         }
         // Set the unit
-        $mmservice = $this->container->get('psdtg.mm.service');
-        $unit = $mmservice->findOneUnitBy(array(
-            'ldapuid' => $entry['uid'][0],
+        /*$unit = $this->mmService->findOneUnitBy(array(
+            'ldapuid' => $entry['uid'],
         ));
         if(count($unit) > 0) {
             $user->setUnit($unit);
         } else {
             throw new \Exception('Δεν βρέθηκε η μονάδα (mm_id) του χρήστη');
-        }
+        }*/
     }
 }

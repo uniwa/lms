@@ -30,6 +30,7 @@
         "sonata-project/intl-bundle": "*",
         "stof/doctrine-extensions-bundle": "*",
         "besimple/sso-auth-bundle": "*",
+        "jasig/phpcas": "*",
         "ruudk/capifony-tools": "dev-master",
         "liuggio/excelbundle": "1.0.*"
     },

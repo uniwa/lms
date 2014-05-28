@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2ee280242841f4bcd27b765ab741cdd9",
+    "hash": "175de47b618c274d76e8677b31807dd1",
     "packages": [
         {
             "name": "besimple/sso-auth-bundle",
@@ -1187,6 +1187,54 @@
             "time": "2012-08-07 09:27:11"
         },
         {
+            "name": "jasig/phpcas",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Jasig/phpCAS.git",
+                "reference": "56721b8c572f35841f52a39d8fcd4390622cd19e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Jasig/phpCAS/zipball/56721b8c572f35841f52a39d8fcd4390622cd19e",
+                "reference": "56721b8c572f35841f52a39d8fcd4390622cd19e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7.10"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "source/"
+                ]
+            },
+            "notification-url": "http://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Joachim Fritschi",
+                    "homepage": "https://wiki.jasig.org/display/~fritschi"
+                },
+                {
+                    "name": "Adam Franco",
+                    "homepage": "https://wiki.jasig.org/display/~adamfranco"
+                }
+            ],
+            "description": "Provides a simple API for authenticating users against a CAS server",
+            "homepage": "https://wiki.jasig.org/display/CASC/phpCAS",
+            "keywords": [
+                "cas",
+                "jasig"
+            ],
+            "time": "2014-05-14 13:37:58"
+        },
+        {
             "name": "jdorn/sql-formatter",
             "version": "dev-master",
             "source": {
@@ -1991,12 +2039,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "93f8f3271fc20f2e09e79c80ffdc371114ad4f29"
+                "reference": "fd991850387b36a3c3f2c4860f0a3f86f4e33b52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/93f8f3271fc20f2e09e79c80ffdc371114ad4f29",
-                "reference": "93f8f3271fc20f2e09e79c80ffdc371114ad4f29",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/fd991850387b36a3c3f2c4860f0a3f86f4e33b52",
+                "reference": "fd991850387b36a3c3f2c4860f0a3f86f4e33b52",
                 "shasum": ""
             },
             "require": {
@@ -2032,7 +2080,7 @@
                     "Monolog\\": "src/Monolog"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2051,7 +2099,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-05-24 17:56:29"
+            "time": "2014-05-28 08:49:30"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -2708,12 +2756,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "9a0b1094ae52dff73af42aaa3303b77be36bb5c2"
+                "reference": "d72e256cdb36b0f8992e5b662ab38cd326673df8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/9a0b1094ae52dff73af42aaa3303b77be36bb5c2",
-                "reference": "9a0b1094ae52dff73af42aaa3303b77be36bb5c2",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/d72e256cdb36b0f8992e5b662ab38cd326673df8",
+                "reference": "d72e256cdb36b0f8992e5b662ab38cd326673df8",
                 "shasum": ""
             },
             "require": {
@@ -2742,7 +2790,7 @@
                     "Sonata\\CoreBundle\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2762,7 +2810,7 @@
             "keywords": [
                 "sonata"
             ],
-            "time": "2014-05-22 17:44:04"
+            "time": "2014-05-28 09:33:51"
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
@@ -3133,21 +3181,20 @@
         },
         {
             "name": "symfony/icu",
-            "version": "1.2.x-dev",
+            "version": "1.0.x-dev",
             "target-dir": "Symfony/Component/Icu",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Icu.git",
-                "reference": "98e197da54df1f966dd5e8a4992135703569c987"
+                "reference": "fdba214b1e087c149843bde976263c53ac10c975"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Icu/zipball/98e197da54df1f966dd5e8a4992135703569c987",
-                "reference": "98e197da54df1f966dd5e8a4992135703569c987",
+                "url": "https://api.github.com/repos/symfony/Icu/zipball/fdba214b1e087c149843bde976263c53ac10c975",
+                "reference": "fdba214b1e087c149843bde976263c53ac10c975",
                 "shasum": ""
             },
             "require": {
-                "lib-icu": ">=4.4",
                 "php": ">=5.3.3",
                 "symfony/intl": "~2.3"
             },
@@ -3157,7 +3204,7 @@
                     "Symfony\\Component\\Icu\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3177,7 +3224,7 @@
                 "icu",
                 "intl"
             ],
-            "time": "2013-10-04 10:06:38"
+            "time": "2013-10-04 09:12:07"
         },
         {
             "name": "symfony/monolog-bundle",
