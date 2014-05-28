@@ -8,4 +8,3 @@ vendor
 composer.phar
 *parameters.yml*
 /nbproject/private/
-/app/sessions/
