@@ -155,8 +155,8 @@ class MMService {
     }
 
     protected function queryMM($resource, $params = array()) {
-        $username = "mmsch";
-        $password = "mmsch";
+        $username = $this->container->getParameter('mmsch_username');
+        $password = $this->container->getParameter('mmsch_password');
         $server = 'http://mmsch.teiath.gr/ver4/api/'.$resource;
 
         $curl = curl_init ($server);
@@ -225,8 +225,8 @@ class MMService {
 
         $curl = curl_init("http://mmsch.teiath.gr/ver4/api/circuits");
 
-        $username = 'mmschadmin';
-        $password = 'mmschadmin';
+        $username = $this->container->getParameter('mmsch_username');
+        $password = $this->container->getParameter('mmsch_password');
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD,  $username.":".$password);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
@@ -263,8 +263,8 @@ class MMService {
 
         $curl = curl_init("http://mmsch.teiath.gr/ver4/api/circuit_types");
 
-        $username = 'mmschadmin';
-        $password = 'mmschadmin';
+        $username = $this->container->getParameter('mmsch_username');
+        $password = $this->container->getParameter('mmsch_password');
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD,  $username.":".$password);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
