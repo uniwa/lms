@@ -27,7 +27,7 @@ abstract class RequestAdmin extends Admin
      *
      * @return void
      */
-    protected function configureShowField(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
             ->add('id', 'string')

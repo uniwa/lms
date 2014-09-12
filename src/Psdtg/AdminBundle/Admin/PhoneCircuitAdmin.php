@@ -10,9 +10,9 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class PhoneCircuitAdmin extends CircuitAdmin
 {
-    protected function configureShowField(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $showMapper)
     {
-        parent::configureShowField($showMapper);
+        parent::configureShowFields($showMapper);
         $showMapper
             ->add('connectivityType.name', 'trans')
             ->add('number')

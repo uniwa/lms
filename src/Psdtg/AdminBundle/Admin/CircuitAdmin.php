@@ -27,7 +27,7 @@ class CircuitAdmin extends Admin
      *
      * @return void
      */
-    protected function configureShowField(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
             ->add('id', 'string')

@@ -11,9 +11,9 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 
 class NewCircuitRequestAdmin extends RequestAdmin
 {
-    protected function configureShowField(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $showMapper)
     {
-        parent::configureShowField($showMapper);
+        parent::configureShowFields($showMapper);
         $showMapper
             ->add('unit.mmId', 'string')
             ->add('unit.name')
