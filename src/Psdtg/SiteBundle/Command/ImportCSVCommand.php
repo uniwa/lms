@@ -60,6 +60,9 @@ class ImportCSVCommand extends ContainerAwareCommand
                 'PSTN PSTN' => 'pstn_dialup',
                 'PSTN ADSL' => 'pstn_adsl',
                 'PSTN ADSL' => 'pstn_adsl',
+                'ADSL' => 'pstn_adsl',
+                'PSTN' => 'pstn',
+                'ISDN' => 'pstn',
                 /*'WIRELESS',
                 'LL' => 'll',
                 'εκκρεμεί',
@@ -72,7 +75,7 @@ class ImportCSVCommand extends ContainerAwareCommand
                 continue;
             }
             $connectivityType = $em->getRepository('Psdtg\SiteBundle\Entity\Circuits\ConnectivityType')->findOneBy(array(
-                'name' => $map[$fields['type'].' '.$fields['service']]
+                'name' => $map[trim($fields['type'].' '.$fields['service'])]
             ));
             if(!isset($connectivityType)) {
                 throw new \Exception('Circuit type not found - database error');
